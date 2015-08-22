@@ -18,6 +18,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# FIXUPS
+# Reverse ID renaming for standalone, so that the Zotero WP plugins work.
+sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" install.rdf
+sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" resource/config.js
+sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" components/zotero-service.js
+
+
 CALLDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$CALLDIR/config.sh"
 
