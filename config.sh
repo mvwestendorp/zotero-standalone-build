@@ -1,6 +1,6 @@
 # Whether to build for various platforms
-BUILD_MAC=1
-BUILD_WIN32=1
+BUILD_MAC=0
+BUILD_WIN32=0
 BUILD_LINUX=1
 
 # Version of Gecko to build with

@@ -18,13 +18,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# FIXUPS
-# Reverse ID renaming for standalone, so that the Zotero WP plugins work.
-sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" install.rdf
-sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" resource/config.js
-sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" components/zotero-service.js
-
-
 CALLDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$CALLDIR/config.sh"
 
@@ -149,6 +142,12 @@ else
 	cp -RH "$CALLDIR/modules/zotero" "$BUILDDIR/zotero"
 	cd "$BUILDDIR/zotero"
 	
+    # FIXUPS
+    # Reverse ID renaming for standalone, so that the Zotero WP plugins work.
+    sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" install.rdf
+    sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" resource/config.js
+    sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" components/zotero-service.js
+
 	if [ -z "$VERSION" ]; then
 		VERSION="$DEFAULT_VERSION_PREFIX$REV"
 	fi
@@ -469,6 +468,16 @@ if [ $BUILD_LINUX == 1 ]; then
 		cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org"
 		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/install.rdf"
 		rm -rf "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/.git"
+
+        # Add Abbreviation Filter (abbrevs-filter)
+		cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/install.rdf"
+		rm -rf "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/.git"
+
+        # Add Jurisdiction Support (myles)
+		cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/myles@juris-m.github.io/install.rdf"
+		rm -rf "$APPDIR/extensions/myles@juris-m.github.io/.git"
 		
 		# Delete extraneous files
 		find "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;
