@@ -1,6 +1,7 @@
 [submodule "modules/zotero"]
 	path = modules/zotero
 	url = git://github.com/Juris-M/zotero.git
+	branch = jurism
 [submodule "modules/zotero-word-for-mac-integration"]
 	path = modules/zotero-word-for-mac-integration
 	url = git://github.com/zotero/zotero-word-for-mac-integration.git
@@ -12,7 +13,7 @@
 	url = git://github.com/zotero/zotero-libreoffice-integration.git
 [submodule "modules/abbrevs-filter"]
 	path = modules/abbrevs-filter
-	url = git://github.com/Juris-M/abbrevs-filter.git
+	url = git@github.com:Juris-M/abbrevs-filter.git
 [submodule "modules/myles"]
 	path = modules/myles
 	url = git@github.com:Juris-M/myles.git
