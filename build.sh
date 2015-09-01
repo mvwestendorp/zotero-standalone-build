@@ -133,6 +133,7 @@ if [ ! -z "$SYMLINK_DIR" ]; then
 	# Add to chrome manifest
 	echo "" >> "$BUILDDIR/zotero/chrome.manifest"
 	cat "$CALLDIR/assets/chrome.manifest" >> "$BUILDDIR/zotero/chrome.manifest"
+
 else
 	echo "Building from bundled submodule"
 	
@@ -142,12 +143,6 @@ else
 	cp -RH "$CALLDIR/modules/zotero" "$BUILDDIR/zotero"
 	cd "$BUILDDIR/zotero"
 	
-    # FIXUPS
-    # Reverse ID renaming for standalone, so that the Zotero WP plugins work.
-    sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" install.rdf
-    sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" resource/config.js
-    sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" components/zotero-service.js
-
 	if [ -z "$VERSION" ]; then
 		VERSION="$DEFAULT_VERSION_PREFIX$REV"
 	fi
@@ -220,6 +215,12 @@ else
 	rm -rf "$BUILDDIR/zotero/test"
 fi
 
+# FIXUPS
+# Reverse ID renaming for standalone, so that the Zotero WP plugins work.
+sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" "$BUILDDIR/zotero/install.rdf"
+sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" "$BUILDDIR/zotero/resource/config.js"
+sed -si "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" "$BUILDDIR/zotero/components/zotero-service.js"
+
 # Adjust connector pref
 perl -pi -e 's/pref\("extensions\.zotero\.httpServer\.enabled", false\);/pref("extensions.zotero.httpServer.enabled", true);/g' "$BUILDDIR/zotero/defaults/preferences/zotero.js"
 perl -pi -e 's/pref\("extensions\.zotero\.connector\.enabled", false\);/pref("extensions.zotero.connector.enabled", true);/g' "$BUILDDIR/zotero/defaults/preferences/zotero.js"
@@ -288,6 +289,16 @@ if [ $BUILD_MAC == 1 ]; then
 		rm -rf "$CONTENTSDIR/Resources/extensions/$ext/.git"
 	done
 	
+        # Add Abbreviation Filter (abbrevs-filter)
+		cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/install.rdf"
+		rm -rf "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/.git"
+
+        # Add Jurisdiction Support (myles)
+		cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/myles@juris-m.github.io/install.rdf"
+		rm -rf "$APPDIR/extensions/myles@juris-m.github.io/.git"
+		
 	# Delete extraneous files
 	find "$CONTENTSDIR" -depth -type d -name .git -exec rm -rf {} \;
 	find "$CONTENTSDIR" \( -name .DS_Store -or -name update.rdf \) -exec rm -f {} \;
@@ -355,6 +366,16 @@ if [ $BUILD_WIN32 == 1 ]; then
 		rm -rf "$APPDIR/extensions/$ext/.git"
 	done
 
+        # Add Abbreviation Filter (abbrevs-filter)
+		cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/install.rdf"
+		rm -rf "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/.git"
+
+        # Add Jurisdiction Support (myles)
+		cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/myles@juris-m.github.io/install.rdf"
+		rm -rf "$APPDIR/extensions/myles@juris-m.github.io/.git"
+		
 	# Remove unnecessary dlls
 	INTEGRATIONDIR="$APPDIR/extensions/zoteroWinWordIntegration@zotero.org/"
 	rm -rf "$INTEGRATIONDIR/"components-!($GECKO_SHORT_VERSION)
