@@ -215,15 +215,8 @@ else
 	rm -rf "$BUILDDIR/zotero/test"
 fi
 
-# FIXUPS
-# Reverse ID renaming for standalone, so that the Zotero WP plugins work.
-#cat "$BUILDDIR/zotero/install.rdf" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > frag.txt
-#mv frag.txt "$BUILDDIR/zotero/install.rdf"
-#cat "$BUILDDIR/zotero/resource/config.js" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > frag.txt
-#mv frag.txt "$BUILDDIR/zotero/resource/config.js"
-
-cat "$BUILDDIR/zotero/components/zotero-service.js" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > frag.txt
-mv frag.txt "$BUILDDIR/zotero/components/zotero-service.js"
+perl -pi -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" \
+	"$BUILDDIR/zotero/resource/config.js"
 
 # Adjust connector pref
 perl -pi -e 's/pref\("extensions\.zotero\.httpServer\.enabled", false\);/pref("extensions.zotero.httpServer.enabled", true);/g' "$BUILDDIR/zotero/defaults/preferences/zotero.js"
@@ -294,14 +287,14 @@ if [ $BUILD_MAC == 1 ]; then
 	done
 	
         # Add Abbreviation Filter (abbrevs-filter)
-		cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/install.rdf"
-		rm -rf "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/.git"
+		cp -RH "$CALLDIR/modules/abbrevs-filter" "$CONTENTSDIR/Resources/extensions/abbrevs-filter@juris-m.github.io"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$CONTENTSDIR/Resources/extensions/abbrevs-filter@juris-m.github.io/install.rdf"
+		rm -rf "$CONTENTSDIR/Resources/extensions/abbrevs-filter@juris-m.github.io/.git"
 
         # Add Jurisdiction Support (myles)
-		cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/myles@juris-m.github.io/install.rdf"
-		rm -rf "$APPDIR/extensions/myles@juris-m.github.io/.git"
+		cp -RH "$CALLDIR/modules/myles" "$CONTENTSDIR/Resources/extensions/myles@juris-m.github.io"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$CONTENTSDIR/Resources/extensions/myles@juris-m.github.io/install.rdf"
+		rm -rf "$CONTENTSDIR/Resources/extensions/myles@juris-m.github.io/.git"
 		
 	# Delete extraneous files
 	find "$CONTENTSDIR" -depth -type d -name .git -exec rm -rf {} \;
