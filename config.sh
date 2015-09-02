@@ -1,7 +1,7 @@
 # Whether to build for various platforms
-BUILD_MAC=0
+BUILD_MAC=1
 BUILD_WIN32=0
-BUILD_LINUX=1
+BUILD_LINUX=0
 
 # Version of Gecko to build with
 GECKO_VERSION="39.0"
@@ -36,7 +36,7 @@ DEFAULT_VERSION_PREFIX="4.0.999.SOURCE."
 VERSION_NUMERIC="4.0.999"
 
 # Directory for building
-BUILDDIR="/tmp/zotero-build-`uuidgen | head -c 8`"
+BUILDDIR="$CALLDIR/zotero-build-`uuidgen | head -c 8`"
 # Directory for unpacked binaries
 STAGEDIR="$CALLDIR/staging"
 # Directory for packed binaries
