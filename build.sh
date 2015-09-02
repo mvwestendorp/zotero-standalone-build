@@ -217,12 +217,12 @@ fi
 
 # FIXUPS
 # Reverse ID renaming for standalone, so that the Zotero WP plugins work.
-cat "$BUILDDIR/zotero/install.rdf" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > /tmp/frag.txt
-mv /tmp/frag.txt "$BUILDDIR/zotero/install.rdf"
-"$BUILDDIR/zotero/resource/config.js" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > /tmp/frag.txt
-mv /tmp/frag.txt "$BUILDDIR/zotero/resource/config.js"
-"$BUILDDIR/zotero/components/zotero-service.js" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > /tmp/frag.txt
-mv /tmp/frag.txt "$BUILDDIR/zotero/components/zotero-service.js"
+cat "$BUILDDIR/zotero/install.rdf" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > frag.txt
+mv frag.txt "$BUILDDIR/zotero/install.rdf"
+"$BUILDDIR/zotero/resource/config.js" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > frag.txt
+mv frag.txt "$BUILDDIR/zotero/resource/config.js"
+"$BUILDDIR/zotero/components/zotero-service.js" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > frag.txt
+mv frag.txt "$BUILDDIR/zotero/components/zotero-service.js"
 
 # Adjust connector pref
 perl -pi -e 's/pref\("extensions\.zotero\.httpServer\.enabled", false\);/pref("extensions.zotero.httpServer.enabled", true);/g' "$BUILDDIR/zotero/defaults/preferences/zotero.js"
