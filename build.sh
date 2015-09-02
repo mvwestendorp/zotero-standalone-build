@@ -217,11 +217,12 @@ fi
 
 # FIXUPS
 # Reverse ID renaming for standalone, so that the Zotero WP plugins work.
-cat "$BUILDDIR/zotero/install.rdf" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > frag.txt
-mv frag.txt "$BUILDDIR/zotero/install.rdf"
-"$BUILDDIR/zotero/resource/config.js" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > frag.txt
-mv frag.txt "$BUILDDIR/zotero/resource/config.js"
-"$BUILDDIR/zotero/components/zotero-service.js" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > frag.txt
+#cat "$BUILDDIR/zotero/install.rdf" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > frag.txt
+#mv frag.txt "$BUILDDIR/zotero/install.rdf"
+#cat "$BUILDDIR/zotero/resource/config.js" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > frag.txt
+#mv frag.txt "$BUILDDIR/zotero/resource/config.js"
+
+cat "$BUILDDIR/zotero/components/zotero-service.js" | sed -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/g" > frag.txt
 mv frag.txt "$BUILDDIR/zotero/components/zotero-service.js"
 
 # Adjust connector pref
