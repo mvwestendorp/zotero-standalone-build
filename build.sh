@@ -158,6 +158,9 @@ else
 	perl -pi -e "s/VERSION: *\'[^\"]*\'/VERSION: \'$VERSION\'/" \
 		"$BUILDDIR/zotero/resource/config.js"
 	
+	perl -pi -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" \
+	        "$BUILDDIR/zotero/resource/config.js"
+
 	# Zip chrome into JAR
 	cd "$BUILDDIR/zotero/chrome"
 	# Checkout failed -- bail
@@ -214,9 +217,6 @@ else
 	# Remove test directory
 	rm -rf "$BUILDDIR/zotero/test"
 fi
-
-perl -pi -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" \
-	"$BUILDDIR/zotero/resource/config.js"
 
 # Adjust connector pref
 perl -pi -e 's/pref\("extensions\.zotero\.httpServer\.enabled", false\);/pref("extensions.zotero.httpServer.enabled", true);/g' "$BUILDDIR/zotero/defaults/preferences/zotero.js"
