@@ -259,7 +259,7 @@ if [ $BUILD_MAC == 1 ]; then
 	cp -r "$MAC_RUNTIME_PATH/Contents/Resources/"!(application.ini|updater.ini|update-settings.ini|browser|precomplete|removed-files|webapprt*|*.icns|defaults|*.lproj) "$CONTENTSDIR/Resources"
 
 	# Use our own launcher
-	mv "$CONTENTSDIR/MacOS/firefox" "$CONTENTSDIR/MacOS/zotero-bin"
+	mv "$CONTENTSDIR/MacOS/firefox" "$CONTENTSDIR/MacOS/jurism-bin"
 	cp "$CALLDIR/mac/zotero" "$CONTENTSDIR/MacOS/zotero"
 	cp "$BUILDDIR/application.ini" "$CONTENTSDIR/Resources"
 	
@@ -308,7 +308,7 @@ if [ $BUILD_MAC == 1 ]; then
 	
 	# Sign
 	if [ $SIGN == 1 ]; then
-		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/zotero-bin"
+		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/jurism-bin"
 		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR"
 		/usr/bin/codesign --verify -vvvv "$APPDIR"
 	fi
