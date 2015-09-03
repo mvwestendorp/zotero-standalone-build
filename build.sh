@@ -342,7 +342,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 	cp -r "$WIN32_RUNTIME_PATH" "$APPDIR/xulrunner"
 	
 	cat "$CALLDIR/win/installer/updater_append.ini" >> "$APPDIR/updater.ini"
-	mv "$APPDIR/xulrunner/xulrunner-stub.exe" "$APPDIR/zotero.exe"
+	mv "$APPDIR/xulrunner/xulrunner-stub.exe" "$APPDIR/jurism.exe"
 	
 	# This used to be bug 722810, but that bug was actually fixed for Gecko 12.
 	# Then it was broken again. Now it seems okay...
@@ -393,7 +393,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 			INSTALLER_PATH="$DISTDIR/Zotero-${VERSION}_setup.exe"
 			
 			# Add icon to xulrunner-stub
-			"$CALLDIR/win/ReplaceVistaIcon/ReplaceVistaIcon.exe" "`cygpath -w \"$APPDIR/zotero.exe\"`" \
+			"$CALLDIR/win/ReplaceVistaIcon/ReplaceVistaIcon.exe" "`cygpath -w \"$APPDIR/jurism.exe\"`" \
 				"`cygpath -w \"$CALLDIR/assets/icons/default/main-window.ico\"`"
 			
 			echo 'Creating Windows installer'
@@ -406,10 +406,10 @@ if [ $BUILD_WIN32 == 1 ]; then
 			mkdir "$APPDIR/uninstall"
 			mv "$BUILDDIR/win_installer/helper.exe" "$APPDIR/uninstall"
 			
-			# Sign zotero.exe, dlls, updater, and uninstaller
+			# Sign jurism.exe, dlls, updater, and uninstaller
 			if [ $SIGN == 1 ]; then
 				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Zotero" \
-					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/zotero.exe\"`"
+					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/jurism.exe\"`"
 				for dll in "$APPDIR/"*.dll "$APPDIR/xulrunner/"*.dll; do
 					"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Zotero" \
 						/du "$SIGNATURE_URL" "`cygpath -w \"$dll\"`"
