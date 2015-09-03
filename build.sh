@@ -243,10 +243,10 @@ cd "$CALLDIR"
 
 # Mac
 if [ $BUILD_MAC == 1 ]; then
-	echo 'Building Zotero.app'
+	echo 'Building Jurism.app'
 		
 	# Set up directory structure
-	APPDIR="$STAGEDIR/Zotero.app"
+	APPDIR="$STAGEDIR/Jurism.app"
 	rm -rf "$APPDIR"
 	mkdir "$APPDIR"
 	chmod 755 "$APPDIR"
@@ -317,14 +317,14 @@ if [ $BUILD_MAC == 1 ]; then
 	if [ $PACKAGE == 1 ]; then
 		if [ $MAC_NATIVE == 1 ]; then
 			echo 'Creating Mac installer'
-			"$CALLDIR/mac/pkg-dmg" --source "$STAGEDIR/Zotero.app" \
+			"$CALLDIR/mac/pkg-dmg" --source "$STAGEDIR/Jurism.app" \
 				--target "$DISTDIR/Zotero-$VERSION.dmg" \
 				--sourcefile --volname Zotero --copy "$CALLDIR/mac/DSStore:/.DS_Store" \
 				--symlink /Applications:"/Drag Here to Install" > /dev/null
 		else
 			echo 'Not building on Mac; creating Mac distribution as a zip file'
 			rm -f "$DISTDIR/Zotero_mac.zip"
-			cd "$STAGEDIR" && zip -rqX "$DISTDIR/Zotero-$VERSION_mac.zip" Zotero.app
+			cd "$STAGEDIR" && zip -rqX "$DISTDIR/Zotero-$VERSION_mac.zip" Jurism.app
 		fi
 	fi
 fi
