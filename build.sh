@@ -243,10 +243,10 @@ cd "$CALLDIR"
 
 # Mac
 if [ $BUILD_MAC == 1 ]; then
-	echo 'Building Zotero.app'
+	echo 'Building Jurism.app'
 		
 	# Set up directory structure
-	APPDIR="$STAGEDIR/Zotero.app"
+	APPDIR="$STAGEDIR/Jurism.app"
 	rm -rf "$APPDIR"
 	mkdir "$APPDIR"
 	chmod 755 "$APPDIR"
@@ -259,7 +259,7 @@ if [ $BUILD_MAC == 1 ]; then
 	cp -r "$MAC_RUNTIME_PATH/Contents/Resources/"!(application.ini|updater.ini|update-settings.ini|browser|precomplete|removed-files|webapprt*|*.icns|defaults|*.lproj) "$CONTENTSDIR/Resources"
 
 	# Use our own launcher
-	mv "$CONTENTSDIR/MacOS/firefox" "$CONTENTSDIR/MacOS/zotero-bin"
+	mv "$CONTENTSDIR/MacOS/firefox" "$CONTENTSDIR/MacOS/jurism-bin"
 	cp "$CALLDIR/mac/zotero" "$CONTENTSDIR/MacOS/zotero"
 	cp "$BUILDDIR/application.ini" "$CONTENTSDIR/Resources"
 	
@@ -308,7 +308,7 @@ if [ $BUILD_MAC == 1 ]; then
 	
 	# Sign
 	if [ $SIGN == 1 ]; then
-		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/zotero-bin"
+		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/jurism-bin"
 		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR"
 		/usr/bin/codesign --verify -vvvv "$APPDIR"
 	fi
@@ -317,14 +317,14 @@ if [ $BUILD_MAC == 1 ]; then
 	if [ $PACKAGE == 1 ]; then
 		if [ $MAC_NATIVE == 1 ]; then
 			echo 'Creating Mac installer'
-			"$CALLDIR/mac/pkg-dmg" --source "$STAGEDIR/Zotero.app" \
+			"$CALLDIR/mac/pkg-dmg" --source "$STAGEDIR/Jurism.app" \
 				--target "$DISTDIR/Zotero-$VERSION.dmg" \
 				--sourcefile --volname Zotero --copy "$CALLDIR/mac/DSStore:/.DS_Store" \
 				--symlink /Applications:"/Drag Here to Install" > /dev/null
 		else
 			echo 'Not building on Mac; creating Mac distribution as a zip file'
 			rm -f "$DISTDIR/Zotero_mac.zip"
-			cd "$STAGEDIR" && zip -rqX "$DISTDIR/Zotero-$VERSION_mac.zip" Zotero.app
+			cd "$STAGEDIR" && zip -rqX "$DISTDIR/Zotero-$VERSION_mac.zip" Jurism.app
 		fi
 	fi
 fi
