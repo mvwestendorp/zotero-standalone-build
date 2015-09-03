@@ -260,7 +260,7 @@ if [ $BUILD_MAC == 1 ]; then
 
 	# Use our own launcher
 	mv "$CONTENTSDIR/MacOS/firefox" "$CONTENTSDIR/MacOS/jurism-bin"
-	cp "$CALLDIR/mac/zotero" "$CONTENTSDIR/MacOS/zotero"
+	cp "$CALLDIR/mac/jurism" "$CONTENTSDIR/MacOS/jurism"
 	cp "$BUILDDIR/application.ini" "$CONTENTSDIR/Resources"
 	
 	# Modify Info.plist
