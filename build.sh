@@ -158,7 +158,7 @@ else
 	perl -pi -e "s/VERSION: *\'[^\"]*\'/VERSION: \'$VERSION\'/" \
 		"$BUILDDIR/zotero/resource/config.js"
 	
-	perl -pi -e "s/juris-m@juris-m.github.io/zotero@chnm.gmu.edu/" \
+	perl -pi -e "s/juris\-m\@juris\-m\.github\.io/zotero\@chnm\.gmu\.edu/" \
 	        "$BUILDDIR/zotero/resource/config.js"
 
 	# Zip chrome into JAR
