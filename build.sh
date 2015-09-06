@@ -291,10 +291,20 @@ if [ $BUILD_MAC == 1 ]; then
 		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$CONTENTSDIR/Resources/extensions/abbrevs-filter@juris-m.github.io/install.rdf"
 		rm -rf "$CONTENTSDIR/Resources/extensions/abbrevs-filter@juris-m.github.io/.git"
 
-        # Add Jurisdiction Support (myles)
+        # Add jurisdiction support (myles)
 		cp -RH "$CALLDIR/modules/myles" "$CONTENTSDIR/Resources/extensions/myles@juris-m.github.io"
 		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$CONTENTSDIR/Resources/extensions/myles@juris-m.github.io/install.rdf"
 		rm -rf "$CONTENTSDIR/Resources/extensions/myles@juris-m.github.io/.git"
+		
+        # Add Bluebook signal helper (bluebook-signals-for-zotero)
+		cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$CONTENTSDIR/Resources/extensions/bluebook-signals-for-zotero@mystery-lab.com"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$CONTENTSDIR/Resources/extensions/bluebook-signals-for-zotero@mystery-lab.com/install.rdf"
+		rm -rf "$CONTENTSDIR/Resources/extensions/bluebook-signals-for-zotero@mystery-lab.com/.git"
+		
+        # Add ODF/RTF Scan (zotero-odf-scan)
+		cp -RH "$CALLDIR/modules/zotero-odf-scan/plugin" "$CONTENTSDIR/Resources/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$CONTENTSDIR/Resources/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/install.rdf"
+		#rm -rf "$CONTENTSDIR/Resources/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/.git"
 		
 	# Delete extraneous files
 	find "$CONTENTSDIR" -depth -type d -name .git -exec rm -rf {} \;
@@ -372,6 +382,16 @@ if [ $BUILD_WIN32 == 1 ]; then
 		cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
 		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/myles@juris-m.github.io/install.rdf"
 		rm -rf "$APPDIR/extensions/myles@juris-m.github.io/.git"
+		
+        # Add Bluebook signal helper (bluebook-signals-for-zotero)
+		cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/install.rdf"
+		rm -rf "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/.git"
+		
+        # Add ODF/RTF Scan (zotero-odf-scan)
+		cp -RH "$CALLDIR/modules/zotero-odf-scan/plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/install.rdf"
+		rm -rf "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/.git"
 		
 	# Remove unnecessary dlls
 	INTEGRATIONDIR="$APPDIR/extensions/zoteroWinWordIntegration@zotero.org/"
@@ -496,6 +516,16 @@ if [ $BUILD_LINUX == 1 ]; then
 		cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
 		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/myles@juris-m.github.io/install.rdf"
 		rm -rf "$APPDIR/extensions/myles@juris-m.github.io/.git"
+		
+        # Add Bluebook signal helper (bluebook-signals-for-zotero)
+		cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/install.rdf"
+		rm -rf "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/.git"
+		
+        # Add ODF/RTF Scan (zotero-odf-scan)
+		cp -RH "$CALLDIR/modules/zotero-odf-scan/plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/install.rdf"
+		rm -rf "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/.git"
 		
 		# Delete extraneous files
 		find "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;
