@@ -525,7 +525,7 @@ if [ $BUILD_LINUX == 1 ]; then
         # Add ODF/RTF Scan (zotero-odf-scan)
 		cp -RH "$CALLDIR/modules/zotero-odf-scan/plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/install.rdf"
-		rm -rf "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/.git"
+		#rm -rf "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/.git"
 		
 		# Delete extraneous files
 		find "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;
