@@ -17,3 +17,9 @@
 [submodule "modules/myles"]
 	path = modules/myles
 	url = git@github.com:Juris-M/myles.git
+[submodule "zotero-odf-scan"]
+    path = modules/zotero-odf-scan
+    url = git@github.com:Zotero-ODF-Scan/zotero-odf-scan.git
+[submodule "bluebook-signals-for-zotero"]
+    path = modules/bluebook-signals-for-zotero
+    url = git@github.com:Juris-M/bluebook-signals-for-zotero.git
