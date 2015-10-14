@@ -19,7 +19,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 CALLDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-. "$CALLDIR/config.sh"
+. "$CALLDIR/config-jurism.sh"
 
 [ "`uname`" != "Darwin" ]
 MAC_NATIVE=$?
