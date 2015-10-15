@@ -15,11 +15,11 @@
 !define GREVersion            2.0
 !define AB_CD                 "en-US"
 
-!define FileMainEXE           "jurism.exe"
+!define FileMainEXE           "zotero.exe"
 !define WindowClass           "ZoteroMessageWindow"
 !define AppRegName            "Zotero"
 
-!define BrandShortName        "Juris-M"
+!define BrandShortName        "Zotero"
 !define PreReleaseSuffix      ""
 !define BrandFullName         "${BrandFullNameInternal}${PreReleaseSuffix}"
 

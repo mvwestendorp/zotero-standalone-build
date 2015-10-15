@@ -1,11 +1,11 @@
 # Whether to build for various platforms
 BUILD_MAC=0
-BUILD_WIN32=0
-BUILD_LINUX=1
+BUILD_WIN32=1
+BUILD_LINUX=0
 
 # Version of Gecko to build with
-GECKO_VERSION="39.0"
-GECKO_SHORT_VERSION="39.0"
+GECKO_VERSION="41.0"
+GECKO_SHORT_VERSION="41.0"
 
 # Paths to Gecko runtimes
 MAC_RUNTIME_PATH="`pwd`/xulrunner/Firefox.app"
@@ -14,7 +14,7 @@ LINUX_i686_RUNTIME_PATH="`pwd`/xulrunner/xulrunner_linux-i686"
 LINUX_x86_64_RUNTIME_PATH="`pwd`/xulrunner/xulrunner_linux-x86_64"
 
 # Whether to sign builds
-SIGN=1
+SIGN=0
 
 # OS X Developer ID certificate information
 DEVELOPER_ID=c8a15a3bc9eaaabc112e83b2f885609e535d07f0
