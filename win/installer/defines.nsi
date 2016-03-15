@@ -8,14 +8,14 @@
 # with the taskbar. ExplicitAppUserModelID registration when the app launches is
 # handled in widget/src/windows/WinTaskbar.cpp.
 
-!define AppVendor             "Zotero"
+!define AppVendor             "Juris-M"
 !define AppName               "Standalone"
 !define AppVersion            "{{VERSION}}"
 !define AppUserModelID        "${AppVendor}.${AppName}.${AppVersion}"
 !define GREVersion            2.0
 !define AB_CD                 "en-US"
 
-!define FileMainEXE           "zotero.exe"
+!define FileMainEXE           "jurism.exe"
 !define WindowClass           "ZoteroMessageWindow"
 !define AppRegName            "Zotero"
 
