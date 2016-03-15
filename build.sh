@@ -547,4 +547,4 @@ if [ $BUILD_LINUX == 1 ]; then
 	done
 fi
 
-rm -rf $BUILDDIR
+#rm -rf $BUILDDIR
