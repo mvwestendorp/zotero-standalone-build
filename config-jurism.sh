@@ -1,11 +1,11 @@
 # Whether to build for various platforms
 BUILD_MAC=0
-BUILD_WIN32=1
-BUILD_LINUX=0
+BUILD_WIN32=0
+BUILD_LINUX=1
 
 # Version of Gecko to build with
-GECKO_VERSION="41.0"
-GECKO_SHORT_VERSION="41.0"
+GECKO_VERSION="39.0"
+GECKO_SHORT_VERSION="39.0"
 
 # Paths to Gecko runtimes
 MAC_RUNTIME_PATH="`pwd`/xulrunner/Firefox.app"
