@@ -32,9 +32,9 @@ while getopts "p:" opt; do
 			for i in `seq 0 1 $((${#OPTARG}-1))`
 			do
 				case ${OPTARG:i:1} in
-					m) BUILD_MAC=1;;
-					w) BUILD_WIN32=1;;
-					l) BUILD_LINUX=1;;
+					m) BUILD_MAC=1;GECKO_VERSION="40.0";GECKO_SHORT_VERSION="40.0";;
+					w) BUILD_WIN32=1;GECKO_VERSION="40.0";GECKO_SHORT_VERSION="40.0";;
+					l) BUILD_LINUX=1;GECKO_VERSION="39.0";GECKO_SHORT_VERSION="39.0";;
 					*)
 						echo "$0: Invalid platform option ${OPTARG:i:1}"
 						usage
@@ -45,6 +45,11 @@ while getopts "p:" opt; do
 	esac
 	shift $((OPTIND-1)); OPTIND=1
 done
+
+if [ ${BUILD_LINUX} -eq 0 -a ${BUILD_MAC} -eq 0 -a ${BUILD_WIN32} -eq 0 ]; then
+    echo "Usage: fetch_xulrunner.sh -p <l|m|w>"
+    exit 1
+fi
 
 rm -rf xulrunner
 mkdir xulrunner

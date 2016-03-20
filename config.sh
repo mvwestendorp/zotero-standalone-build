@@ -1,9 +1,11 @@
 # Whether to build for various platforms
 BUILD_MAC=0
 BUILD_WIN32=0
-BUILD_LINUX=1
+BUILD_LINUX=0
 
 # Version of Gecko to build with
+# Overridden by parameter choice in fetch_xulrunner.sh and build.sh
+# Must be so, because only 40 works on Mac
 GECKO_VERSION="39.0"
 GECKO_SHORT_VERSION="39.0"
 

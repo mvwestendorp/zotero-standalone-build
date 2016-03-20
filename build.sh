@@ -19,7 +19,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 CALLDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-. "$CALLDIR/config-jurism.sh"
+. "$CALLDIR/config.sh"
 
 [ "`uname`" != "Darwin" ]
 MAC_NATIVE=$?
@@ -34,7 +34,7 @@ Options
  -s DIR              build symlinked to Zotero checkout DIR (implies -d)
  -v VERSION          use version VERSION
  -c CHANNEL          use update channel CHANNEL
- -d                  don't package; only build binaries in staging/ directory
+ -d                  don\'t package; only build binaries in staging/ directory
 DONE
 	exit 1
 }
@@ -49,9 +49,9 @@ while getopts "p:s:v:c:d" opt; do
 			for i in `seq 0 1 $((${#OPTARG}-1))`
 			do
 				case ${OPTARG:i:1} in
-					m) BUILD_MAC=1;;
-					w) BUILD_WIN32=1;;
-					l) BUILD_LINUX=1;;
+					m) BUILD_MAC=1;GECKO_VERSION="40.0";GECKO_SHORT_VERSION="40.0";;
+					w) BUILD_WIN32=1;GECKO_VERSION="40.0";GECKO_SHORT_VERSION="40.0";;
+					l) BUILD_LINUX=1;GECKO_VERSION="39.0";GECKO_SHORT_VERSION="39.0";;
 					*)
 						echo "$0: Invalid platform option ${OPTARG:i:1}"
 						usage
@@ -79,6 +79,11 @@ while getopts "p:s:v:c:d" opt; do
 	shift $((OPTIND-1)); OPTIND=1
 done
 
+if [ ${BUILD_LINUX} -eq 0 -a ${BUILD_MAC} -eq 0 -a ${BUILD_WIN32} -eq 0 ]; then
+    echo "Usage: build.sh -p <l|m|w>"
+    exit 1
+fi
+
 if [ ! -z $1 ]; then
 	usage
 fi
@@ -95,7 +100,7 @@ mkdir "$DISTDIR"
 if [ -z "$UPDATE_CHANNEL" ]; then UPDATE_CHANNEL="default"; fi
 
 if [ ! -z "$SYMLINK_DIR" ]; then
-	echo "Building Zotero from $SYMLINK_DIR"
+	echo "Building Jurism from $SYMLINK_DIR"
 	
 	cp -RH "$SYMLINK_DIR" "$BUILDDIR/zotero"
 	cd "$BUILDDIR/zotero"
@@ -137,7 +142,7 @@ if [ ! -z "$SYMLINK_DIR" ]; then
 else
 	echo "Building from bundled submodule"
 	
-	# Copy Zotero directory
+	# Copy Jurism directory
 	cd "$CALLDIR/modules/zotero"
 	REV=`git log -n 1 --pretty='format:%h'`
 	cp -RH "$CALLDIR/modules/zotero" "$BUILDDIR/zotero"
@@ -158,9 +163,6 @@ else
 	perl -pi -e "s/VERSION: *\'[^\"]*\'/VERSION: \'$VERSION\'/" \
 		"$BUILDDIR/zotero/resource/config.js"
 	
-	perl -pi -e "s/juris\-m\@juris\-m\.github\.io/zotero\@chnm\.gmu\.edu/" \
-	        "$BUILDDIR/zotero/resource/config.js"
-
 	# Zip chrome into JAR
 	cd "$BUILDDIR/zotero/chrome"
 	# Checkout failed -- bail
@@ -328,23 +330,23 @@ if [ $BUILD_MAC == 1 ]; then
 		if [ $MAC_NATIVE == 1 ]; then
 			echo 'Creating Mac installer'
 			"$CALLDIR/mac/pkg-dmg" --source "$STAGEDIR/Jurism.app" \
-				--target "$DISTDIR/Zotero-$VERSION.dmg" \
-				--sourcefile --volname Zotero --copy "$CALLDIR/mac/DSStore:/.DS_Store" \
+				--target "$DISTDIR/Jurism-$VERSION.dmg" \
+				--sourcefile --volname Jurism --copy "$CALLDIR/mac/DSStore:/.DS_Store" \
 				--symlink /Applications:"/Drag Here to Install" > /dev/null
 		else
 			echo 'Not building on Mac; creating Mac distribution as a zip file'
-			rm -f "$DISTDIR/Zotero_mac.zip"
-			cd "$STAGEDIR" && zip -rqX "$DISTDIR/Zotero-$VERSION_mac.zip" Jurism.app
+			rm -f "$DISTDIR/Jurism_mac.zip"
+			cd "$STAGEDIR" && zip -rqX "$DISTDIR/Jurism-$VERSION_mac.zip" Jurism.app
 		fi
 	fi
 fi
 
 # Win32
 if [ $BUILD_WIN32 == 1 ]; then
-	echo 'Building Zotero_win32'
+	echo 'Building Jurism_win32'
 	
 	# Set up directory
-	APPDIR="$STAGEDIR/Zotero_win32"
+	APPDIR="$STAGEDIR/Jurism_win32"
 	mkdir "$APPDIR"
 	
 	# Merge xulrunner and relevant assets
@@ -373,25 +375,25 @@ if [ $BUILD_WIN32 == 1 ]; then
 		rm -rf "$APPDIR/extensions/$ext/.git"
 	done
 
-        # Add Abbreviation Filter (abbrevs-filter)
-		cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/install.rdf"
-		rm -rf "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/.git"
+    # Add Abbreviation Filter (abbrevs-filter)
+	cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
+	perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/install.rdf"
+	rm -rf "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/.git"
 
-        # Add Jurisdiction Support (myles)
-		cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/myles@juris-m.github.io/install.rdf"
-		rm -rf "$APPDIR/extensions/myles@juris-m.github.io/.git"
-		
-        # Add Bluebook signal helper (bluebook-signals-for-zotero)
-		cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/install.rdf"
-		rm -rf "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/.git"
-		
-        # Add ODF/RTF Scan (zotero-odf-scan)
-		cp -RH "$CALLDIR/modules/zotero-odf-scan/plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/install.rdf"
-		rm -rf "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/.git"
+    # Add Jurisdiction Support (myles)
+	cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
+	perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/myles@juris-m.github.io/install.rdf"
+	rm -rf "$APPDIR/extensions/myles@juris-m.github.io/.git"
+	
+    # Add Bluebook signal helper (bluebook-signals-for-zotero)
+	cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com"
+	perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/install.rdf"
+	rm -rf "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/.git"
+	
+    # Add ODF/RTF Scan (zotero-odf-scan)
+	cp -RH "$CALLDIR/modules/zotero-odf-scan/plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+	perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/install.rdf"
+	rm -rf "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/.git"
 		
 	# Remove unnecessary dlls
 	INTEGRATIONDIR="$APPDIR/extensions/zoteroWinWordIntegration@zotero.org/"
@@ -410,7 +412,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 	
 	if [ $PACKAGE == 1 ]; then
 		if [ $WIN_NATIVE == 1 ]; then
-			INSTALLER_PATH="$DISTDIR/Zotero-${VERSION}_setup.exe"
+			INSTALLER_PATH="$DISTDIR/Jurism-${VERSION}_setup.exe"
 			
 			# Add icon to xulrunner-stub
 			"$CALLDIR/win/ReplaceVistaIcon/ReplaceVistaIcon.exe" "`cygpath -w \"$APPDIR/jurism.exe\"`" \
@@ -428,15 +430,15 @@ if [ $BUILD_WIN32 == 1 ]; then
 			
 			# Sign jurism.exe, dlls, updater, and uninstaller
 			if [ $SIGN == 1 ]; then
-				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Zotero" \
+				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Jurism" \
 					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/jurism.exe\"`"
 				for dll in "$APPDIR/"*.dll "$APPDIR/xulrunner/"*.dll; do
-					"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Zotero" \
+					"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Jurism" \
 						/du "$SIGNATURE_URL" "`cygpath -w \"$dll\"`"
 				done
-				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Zotero Updater" \
+				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Jurism Updater" \
 					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/xulrunner/updater.exe\"`"
-				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Zotero Uninstaller" \
+				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Jurism Uninstaller" \
 					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/uninstall/helper.exe\"`"
 			fi
 			
@@ -449,7 +451,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 			"`cygpath -u \"$MAKENSISU\"`" /V1 "`cygpath -w \"$BUILDDIR/win_installer/installer.nsi\"`"
 			mv "$BUILDDIR/win_installer/setup.exe" "$INSTALLERSTAGEDIR"
 			if [ $SIGN == 1 ]; then
-				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Zotero Setup" \
+				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Jurism Setup" \
 					/du "$SIGNATURE_URL" "`cygpath -w \"$INSTALLERSTAGEDIR/setup.exe\"`"
 			fi
 			
@@ -465,9 +467,9 @@ if [ $BUILD_WIN32 == 1 ]; then
 			cat "$BUILDDIR/7zSD.sfx" "$CALLDIR/win/installer/app.tag" \
 				"$BUILDDIR/app_win32.7z" > "$INSTALLER_PATH"
 			
-			# Sign Zotero_setup.exe
+			# Sign Jurism_setup.exe
 			if [ $SIGN == 1 ]; then
-				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Zotero Setup" \
+				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Jurism Setup" \
 					/du "$SIGNATURE_URL" "`cygpath -w \"$INSTALLER_PATH\"`"
 			fi
 			
@@ -475,7 +477,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 		else
 			echo 'Not building on Windows; only building zip file'
 		fi
-		cd "$STAGEDIR" && zip -rqX "$DISTDIR/Zotero-${VERSION}_win32.zip" Zotero_win32
+		cd "$STAGEDIR" && zip -rqX "$DISTDIR/Jurism-${VERSION}_win32.zip" Jurism_win32
 	fi
 fi
 
@@ -485,8 +487,8 @@ if [ $BUILD_LINUX == 1 ]; then
 		RUNTIME_PATH=`eval echo '$LINUX_'$arch'_RUNTIME_PATH'`
 		
 		# Set up directory
-		echo 'Building Zotero_linux-'$arch
-		APPDIR="$STAGEDIR/Zotero_linux-$arch"
+		echo 'Building Jurism_linux-'$arch
+		APPDIR="$STAGEDIR/Jurism_linux-$arch"
 		rm -rf "$APPDIR"
 		mkdir "$APPDIR"
 		
@@ -540,9 +542,9 @@ if [ $BUILD_LINUX == 1 ]; then
 		
 		if [ $PACKAGE == 1 ]; then
 			# Create tar
-			rm -f "$DISTDIR/Zotero-${VERSION}_linux-$arch.tar.bz2"
+			rm -f "$DISTDIR/Jurism-${VERSION}_linux-$arch.tar.bz2"
 			cd "$STAGEDIR"
-			tar -cjf "$DISTDIR/Zotero-${VERSION}_linux-$arch.tar.bz2" "Zotero_linux-$arch"
+			tar -cjf "$DISTDIR/Jurism-${VERSION}_linux-$arch.tar.bz2" "Jurism_linux-$arch"
 		fi
 	done
 fi
