@@ -505,8 +505,8 @@ if [ $BUILD_LINUX == 1 ]; then
 		
 		# Add word processor plug-ins
 		mkdir "$APPDIR/extensions"
-		cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/install.rdf"
+		cp -RH "$CALLDIR/modules/jurism-libreoffice-integration" "$APPDIR/extensions/jurismOpenOfficeIntegration@zotero.org"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/jurismOpenOfficeIntegration@zotero.org/install.rdf"
 		rm -rf "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/.git"
 
         # Add Abbreviation Filter (abbrevs-filter)
