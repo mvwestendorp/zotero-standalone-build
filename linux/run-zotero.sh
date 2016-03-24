@@ -39,7 +39,7 @@ cmdname=`basename "$0"`
 CALLDIR="$( cd "$( dirname "$0" )" && pwd )"
 MOZ_DIST_BIN="$CALLDIR"/xulrunner
 MOZ_DEFAULT_NAME="$CALLDIR/${cmdname}-bin"
-MOZ_APPRUNNER_NAME="$CALLDIR/zotero"
+MOZ_APPRUNNER_NAME="$CALLDIR/jurism"
 MOZ_PROGRAM=""
 
 exitcode=1

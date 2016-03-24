@@ -88,6 +88,8 @@ if [ ! -z $1 ]; then
 	usage
 fi
 
+. grab_xpis.sh "${BUILD_LINUX}${BUILD_MAC}${BUILD_WIN32}"
+
 BUILDID=`date +%Y%m%d`
 
 shopt -s extglob
@@ -143,89 +145,92 @@ else
 	echo "Building from bundled submodule"
 	
 	# Copy Jurism directory
-	cd "$CALLDIR/modules/zotero"
+	cd "$CALLDIR/modules/jurism"
 	REV=`git log -n 1 --pretty='format:%h'`
-	cp -RH "$CALLDIR/modules/zotero" "$BUILDDIR/zotero"
-	cd "$BUILDDIR/zotero"
+	cp -RH "$CALLDIR/modules/jurism" "$BUILDDIR/jurism"
+	cd "$BUILDDIR/jurism"
 	
 	if [ -z "$VERSION" ]; then
 		VERSION="$DEFAULT_VERSION_PREFIX$REV"
 	fi
 	
 	# Copy branding
-	cp -R "$CALLDIR/assets/branding" "$BUILDDIR/zotero/chrome/branding"
+	cp -R "$CALLDIR/assets/branding" "$BUILDDIR/jurism/chrome/branding"
 	
 	# Delete files that shouldn't be distributed
-	find "$BUILDDIR/zotero/chrome" -depth -type d -name .git -exec rm -rf {} \;
-	find "$BUILDDIR/zotero/chrome" -name .DS_Store -exec rm -f {} \;
+    # JURISM: these deletes have no effect for jurism build
+	find "$BUILDDIR/jurism/chrome" -depth -type d -name .git -exec rm -rf {} \;
+	find "$BUILDDIR/jurism/chrome" -name .DS_Store -exec rm -f {} \;
 	
 	# Set version
 	perl -pi -e "s/VERSION: *\'[^\"]*\'/VERSION: \'$VERSION\'/" \
-		"$BUILDDIR/zotero/resource/config.js"
+		"$BUILDDIR/jurism/resource/config.js"
 	
 	# Zip chrome into JAR
-	cd "$BUILDDIR/zotero/chrome"
+	cd "$BUILDDIR/jurism/chrome"
 	# Checkout failed -- bail
 	if [ $? -eq 1 ]; then
 		exit;
 	fi
 	
 	# Build translators.zip
-	echo "Building translators.zip"
-	cd "$BUILDDIR/zotero/translators"
-	mkdir output
-	counter=0;
-	for file in *.js; do
-		newfile=$counter.js;
-		id=`grep -m 1 '"translatorID" *: *"' "$file" | perl -pe 's/.*"translatorID"\s*:\s*"(.*)".*/\1/'`
-		label=`grep -m 1 '"label" *: *"' "$file" | perl -pe 's/.*"label"\s*:\s*"(.*)".*/\1/'`
-		mtime=`grep -m 1 '"lastUpdated" *: *"' "$file" | perl -pe 's/.*"lastUpdated"\s*:\s*"(.*)".*/\1/'`
-		echo $newfile,$id,$label,$mtime >> ../translators.index
-		cp "$file" output/$newfile;
-		counter=$(($counter+1))
-	done;
-	cd output
-	zip -q ../../translators.zip *
-	cd ../..
-	
+    # JURISM: translator zip already built in distro XPI that we fetched
+	#echo "Building translators.zip"
+	#cd "$BUILDDIR/jurism/translators"
+	#mkdir output
+	#counter=0;
+	#for file in *.js; do
+	#	newfile=$counter.js;
+	#	id=`grep -m 1 '"translatorID" *: *"' "$file" | perl -pe 's/.*"translatorID"\s*:\s*"(.*)".*/\1/'`
+	#	label=`grep -m 1 '"label" *: *"' "$file" | perl -pe 's/.*"label"\s*:\s*"(.*)".*/\1/'`
+	#	mtime=`grep -m 1 '"lastUpdated" *: *"' "$file" | perl -pe 's/.*"lastUpdated"\s*:\s*"(.*)".*/\1/'`
+	#	echo $newfile,$id,$label,$mtime >> ../translators.index
+	#	cp "$file" output/$newfile;
+	#	counter=$(($counter+1))
+	#done;
+	#cd output
+	#zip -q ../../translators.zip *
+	#cd ../..
+	#
 	# Delete translators directory except for deleted.txt
-	mv translators/deleted.txt deleted.txt
-	rm -rf translators
-	
+	#mv translators/deleted.txt deleted.txt
+	#rm -rf translators
+	#
 	# Build styles.zip with default styles
-	if [ -d styles ]; then
-		echo "Building styles.zip"
-		
-		cd styles
-		zip -q ../styles.zip *.csl
-		cd ..
-		rm -rf styles
-	fi
+	#if [ -d styles ]; then
+	#	echo "Building styles.zip"
+	#	
+	#	cd styles
+	#	zip -q ../styles.zip *.csl
+	#	cd ..
+	#	rm -rf styles
+	#fi
 
-	# Build zotero.jar
-	cd "$BUILDDIR/zotero"
-	zip -r -q zotero.jar chrome deleted.txt resource styles.zip translators.index translators.zip
+	# Build jurism.jar
+	cd "$BUILDDIR/jurism"
+	zip -r -q jurism.jar chrome deleted.txt resource styles.zip translators.index translators.zip
 	rm -rf "chrome/"* install.rdf deleted.txt resource styles.zip translators.index translators.zip
 	
 	# Adjust chrome.manifest
-	echo "" >> "$BUILDDIR/zotero/chrome.manifest"
-	cat "$CALLDIR/assets/chrome.manifest" >> "$BUILDDIR/zotero/chrome.manifest"
+	echo "" >> "$BUILDDIR/jurism/chrome.manifest"
+	cat "$CALLDIR/assets/chrome.manifest" >> "$BUILDDIR/jurism/chrome.manifest"
 	
 	# Copy updater.ini
-	cp "$CALLDIR/assets/updater.ini" "$BUILDDIR/zotero"
+	cp "$CALLDIR/assets/updater.ini" "$BUILDDIR/jurism"
 	
-	perl -pi -e 's^(chrome|resource)/^jar:zotero.jar\!/$1/^g' "$BUILDDIR/zotero/chrome.manifest"
+	perl -pi -e 's^(chrome|resource)/^jar:jurism.jar\!/$1/^g' "$BUILDDIR/jurism/chrome.manifest"
 
 	# Remove test directory
-	rm -rf "$BUILDDIR/zotero/test"
+    # JURISM: no effect in jurism build based on distro XPI
+	rm -rf "$BUILDDIR/jurism/test"
 fi
 
 # Adjust connector pref
-perl -pi -e 's/pref\("extensions\.zotero\.httpServer\.enabled", false\);/pref("extensions.zotero.httpServer.enabled", true);/g' "$BUILDDIR/zotero/defaults/preferences/zotero.js"
-perl -pi -e 's/pref\("extensions\.zotero\.connector\.enabled", false\);/pref("extensions.zotero.connector.enabled", true);/g' "$BUILDDIR/zotero/defaults/preferences/zotero.js"
+perl -pi -e 's/pref\("extensions\.zotero\.httpServer\.enabled", false\);/pref("extensions.zotero.httpServer.enabled", true);/g' "$BUILDDIR/jurism/defaults/preferences/zotero.js"
+perl -pi -e 's/pref\("extensions\.zotero\.connector\.enabled", false\);/pref("extensions.zotero.connector.enabled", true);/g' "$BUILDDIR/jurism/defaults/preferences/zotero.js"
 
 # Copy icons
-cp -r "$CALLDIR/assets/icons" "$BUILDDIR/zotero/chrome/icons"
+cp -r "$CALLDIR/assets/icons" "$BUILDDIR/jurism/chrome/icons"
 
 # Copy application.ini and modify
 cp "$CALLDIR/assets/application.ini" "$BUILDDIR/application.ini"
@@ -233,9 +238,9 @@ perl -pi -e "s/{{VERSION}}/$VERSION/" "$BUILDDIR/application.ini"
 perl -pi -e "s/{{BUILDID}}/$BUILDID/" "$BUILDDIR/application.ini"
 
 # Copy prefs.js and modify
-cp "$CALLDIR/assets/prefs.js" "$BUILDDIR/zotero/defaults/preferences"
-perl -pi -e 's/pref\("app\.update\.channel", "[^"]*"\);/pref\("app\.update\.channel", "'"$UPDATE_CHANNEL"'");/' "$BUILDDIR/zotero/defaults/preferences/prefs.js"
-perl -pi -e 's/%GECKO_VERSION%/'"$GECKO_VERSION"'/g' "$BUILDDIR/zotero/defaults/preferences/prefs.js"
+cp "$CALLDIR/assets/prefs.js" "$BUILDDIR/jurism/defaults/preferences"
+perl -pi -e 's/pref\("app\.update\.channel", "[^"]*"\);/pref\("app\.update\.channel", "'"$UPDATE_CHANNEL"'");/' "$BUILDDIR/jurism/defaults/preferences/prefs.js"
+perl -pi -e 's/%GECKO_VERSION%/'"$GECKO_VERSION"'/g' "$BUILDDIR/jurism/defaults/preferences/prefs.js"
 
 # Delete .DS_Store, .git, and tests
 find "$BUILDDIR" -depth -type d -name .git -exec rm -rf {} \;
@@ -493,40 +498,40 @@ if [ $BUILD_LINUX == 1 ]; then
 		mkdir "$APPDIR"
 		
 		# Merge xulrunner and relevant assets
-		cp -R "$BUILDDIR/zotero/"* "$BUILDDIR/application.ini" "$APPDIR"
+		cp -R "$BUILDDIR/jurism/"* "$BUILDDIR/application.ini" "$APPDIR"
 		cp -r "$RUNTIME_PATH" "$APPDIR/xulrunner"
 		rm "$APPDIR/xulrunner/xulrunner-stub"
-		cp "$CALLDIR/linux/xulrunner-stub-$arch" "$APPDIR/zotero"
-		chmod 755 "$APPDIR/zotero"
+		cp "$CALLDIR/linux/xulrunner-stub-$arch" "$APPDIR/jurism"
+		chmod 755 "$APPDIR/jurism"
 	
 		# Add Unix-specific Standalone assets
 		cd "$CALLDIR/assets/unix"
-		zip -0 -r -q "$APPDIR/zotero.jar" *
+		zip -0 -r -q "$APPDIR/jurism.jar" *
 		
 		# Add word processor plug-ins
 		mkdir "$APPDIR/extensions"
-		cp -RH "$CALLDIR/modules/jurism-libreoffice-integration" "$APPDIR/extensions/jurismOpenOfficeIntegration@zotero.org"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/jurismOpenOfficeIntegration@zotero.org/install.rdf"
-		rm -rf "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/.git"
+		cp -RH "$CALLDIR/modules/jurism-libreoffice-integration" "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
+		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io/install.rdf"
+		rm -rf "$APPDIR/extensions/zoteroOpenOfficeIntegration@juris-m.github.io/.git"
 
         # Add Abbreviation Filter (abbrevs-filter)
 		cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/install.rdf"
-		rm -rf "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/.git"
+		#perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/install.rdf"
+		#rm -rf "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/.git"
 
         # Add Jurisdiction Support (myles)
 		cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/myles@juris-m.github.io/install.rdf"
-		rm -rf "$APPDIR/extensions/myles@juris-m.github.io/.git"
+		#perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/myles@juris-m.github.io/install.rdf"
+		#rm -rf "$APPDIR/extensions/myles@juris-m.github.io/.git"
 		
         # Add Bluebook signal helper (bluebook-signals-for-zotero)
 		cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/install.rdf"
-		rm -rf "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/.git"
+		#perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/install.rdf"
+		#rm -rf "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/.git"
 		
         # Add ODF/RTF Scan (zotero-odf-scan)
-		cp -RH "$CALLDIR/modules/zotero-odf-scan/plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/install.rdf"
+		#cp -RH "$CALLDIR/modules/zotero-odf-scan/plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+		#perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/install.rdf"
 		#rm -rf "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/.git"
 		
 		# Delete extraneous files
@@ -549,4 +554,4 @@ if [ $BUILD_LINUX == 1 ]; then
 	done
 fi
 
-#rm -rf $BUILDDIR
+rm -rf $BUILDDIR
