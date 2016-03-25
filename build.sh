@@ -30,17 +30,20 @@ function usage {
 	cat >&2 <<DONE
 Usage: $0 [-p PLATFORMS] [-s DIR] [-v VERSION] [-c CHANNEL] [-d]
 Options
- -p PLATFORMS        build for platforms PLATFORMS (m=Mac, w=Windows, l=Linux)
- -s DIR              build symlinked to Zotero checkout DIR (implies -d)
- -v VERSION          use version VERSION
- -c CHANNEL          use update channel CHANNEL
- -d                  don\'t package; only build binaries in staging/ directory
+ -p PLATFORMS    *    build for platforms PLATFORMS (m=Mac, w=Windows, l=Linux)
+ -s DIR               build symlinked to Zotero checkout DIR (implies -d)
+ -v VERSION      *    use version VERSION
+ -c CHANNEL           use update channel CHANNEL
+ -d                   don\'t package; only build binaries in staging/ directory
+ -x XPI source   *    local, remote, or none
+
+(options marked with * are not optional)
 DONE
 	exit 1
 }
 
 PACKAGE=1
-while getopts "p:s:v:c:d" opt; do
+while getopts "p:s:v:c:x:d" opt; do
 	case $opt in
 		p)
 			BUILD_MAC=0
@@ -69,6 +72,9 @@ while getopts "p:s:v:c:d" opt; do
 		c)
 			UPDATE_CHANNEL="$OPTARG"
 			;;
+		x)
+			XPI_SOURCE="$OPTARG"
+			;;
 		d)
 			PACKAGE=0
 			;;
@@ -80,15 +86,26 @@ while getopts "p:s:v:c:d" opt; do
 done
 
 if [ ${BUILD_LINUX} -eq 0 -a ${BUILD_MAC} -eq 0 -a ${BUILD_WIN32} -eq 0 ]; then
-    echo "Usage: build.sh -p <l|m|w>"
-    exit 1
+    echo ONE
+    usage
 fi
 
+if [ "${VERSION}" == "" ]; then
+    echo TWO
+    usage
+fi
+
+if [ "${XPI_SOURCE}" != "local" -a "${XPI_SOURCE}" != "remote" -a "${XPI_SOURCE}" != "none" ]; then
+    echo "(${XPI_SOURCE})"
+    usage
+fi 
+
 if [ ! -z $1 ]; then
+    echo FOUR
 	usage
 fi
 
-. grab_xpis.sh "${BUILD_LINUX}${BUILD_MAC}${BUILD_WIN32}"
+. grab_xpis.sh "${BUILD_LINUX}${BUILD_MAC}${BUILD_WIN32}" "${XPI_SOURCE}"
 
 BUILDID=`date +%Y%m%d`
 
@@ -173,39 +190,6 @@ else
 		exit;
 	fi
 	
-	# Build translators.zip
-    # JURISM: translator zip already built in distro XPI that we fetched
-	#echo "Building translators.zip"
-	#cd "$BUILDDIR/jurism/translators"
-	#mkdir output
-	#counter=0;
-	#for file in *.js; do
-	#	newfile=$counter.js;
-	#	id=`grep -m 1 '"translatorID" *: *"' "$file" | perl -pe 's/.*"translatorID"\s*:\s*"(.*)".*/\1/'`
-	#	label=`grep -m 1 '"label" *: *"' "$file" | perl -pe 's/.*"label"\s*:\s*"(.*)".*/\1/'`
-	#	mtime=`grep -m 1 '"lastUpdated" *: *"' "$file" | perl -pe 's/.*"lastUpdated"\s*:\s*"(.*)".*/\1/'`
-	#	echo $newfile,$id,$label,$mtime >> ../translators.index
-	#	cp "$file" output/$newfile;
-	#	counter=$(($counter+1))
-	#done;
-	#cd output
-	#zip -q ../../translators.zip *
-	#cd ../..
-	#
-	# Delete translators directory except for deleted.txt
-	#mv translators/deleted.txt deleted.txt
-	#rm -rf translators
-	#
-	# Build styles.zip with default styles
-	#if [ -d styles ]; then
-	#	echo "Building styles.zip"
-	#	
-	#	cd styles
-	#	zip -q ../styles.zip *.csl
-	#	cd ..
-	#	rm -rf styles
-	#fi
-
 	# Build jurism.jar
 	cd "$BUILDDIR/jurism"
 	zip -r -q jurism.jar chrome deleted.txt resource styles.zip translators.index translators.zip
@@ -244,6 +228,7 @@ perl -pi -e 's/%GECKO_VERSION%/'"$GECKO_VERSION"'/g' "$BUILDDIR/jurism/defaults/
 
 # Delete .DS_Store, .git, and tests
 find "$BUILDDIR" -depth -type d -name .git -exec rm -rf {} \;
+find "$BUILDDIR" -depth -type d -name .gitignore -exec rm -rf {} \;
 find "$BUILDDIR" -name .DS_Store -exec rm -f {} \;
 
 cd "$CALLDIR"
@@ -282,37 +267,26 @@ if [ $BUILD_MAC == 1 ]; then
 	
 	# Add Mac-specific Standalone assets
 	cd "$CALLDIR/assets/mac"
-	zip -r -q "$CONTENTSDIR/Resources/zotero.jar" *
+	zip -r -q "$CONTENTSDIR/Resources/jurism.jar" *
 	
 	# Add word processor plug-ins
 	mkdir "$CONTENTSDIR/Resources/extensions"
-	cp -RH "$CALLDIR/modules/zotero-word-for-mac-integration" "$CONTENTSDIR/Resources/extensions/zoteroMacWordIntegration@zotero.org"
-	cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$CONTENTSDIR/Resources/extensions/zoteroOpenOfficeIntegration@zotero.org"
-	for ext in "zoteroMacWordIntegration@zotero.org" "zoteroOpenOfficeIntegration@zotero.org"; do
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$CONTENTSDIR/Resources/extensions/$ext/install.rdf"
-		rm -rf "$CONTENTSDIR/Resources/extensions/$ext/.git"
-	done
+	cp -RH "$CALLDIR/modules/zotero-word-for-mac-integration" "$CONTENTSDIR/Resources/extensions/jurismMacWordIntegration@juris-m.github.io"
+	cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$CONTENTSDIR/Resources/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
 	
-        # Add Abbreviation Filter (abbrevs-filter)
-		cp -RH "$CALLDIR/modules/abbrevs-filter" "$CONTENTSDIR/Resources/extensions/abbrevs-filter@juris-m.github.io"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$CONTENTSDIR/Resources/extensions/abbrevs-filter@juris-m.github.io/install.rdf"
-		rm -rf "$CONTENTSDIR/Resources/extensions/abbrevs-filter@juris-m.github.io/.git"
-
-        # Add jurisdiction support (myles)
-		cp -RH "$CALLDIR/modules/myles" "$CONTENTSDIR/Resources/extensions/myles@juris-m.github.io"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$CONTENTSDIR/Resources/extensions/myles@juris-m.github.io/install.rdf"
-		rm -rf "$CONTENTSDIR/Resources/extensions/myles@juris-m.github.io/.git"
-		
-        # Add Bluebook signal helper (bluebook-signals-for-zotero)
-		cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$CONTENTSDIR/Resources/extensions/bluebook-signals-for-zotero@mystery-lab.com"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$CONTENTSDIR/Resources/extensions/bluebook-signals-for-zotero@mystery-lab.com/install.rdf"
-		rm -rf "$CONTENTSDIR/Resources/extensions/bluebook-signals-for-zotero@mystery-lab.com/.git"
-		
-        # Add ODF/RTF Scan (zotero-odf-scan)
-		cp -RH "$CALLDIR/modules/zotero-odf-scan/plugin" "$CONTENTSDIR/Resources/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$CONTENTSDIR/Resources/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/install.rdf"
-		#rm -rf "$CONTENTSDIR/Resources/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/.git"
-		
+    # Add Abbreviation Filter (abbrevs-filter)
+	cp -RH "$CALLDIR/modules/abbrevs-filter" "$CONTENTSDIR/Resources/extensions/abbrevs-filter@juris-m.github.io"
+    
+    # Add jurisdiction support (myles)
+	cp -RH "$CALLDIR/modules/myles" "$CONTENTSDIR/Resources/extensions/myles@juris-m.github.io"
+	
+    # Add Bluebook signal helper (bluebook-signals-for-zotero)
+	cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$CONTENTSDIR/Resources/extensions/bluebook-signals-for-zotero@mystery-lab.com"
+	
+    # XXX RESTORE
+    # Add ODF/RTF Scan (zotero-odf-scan)
+	#cp -RH "$CALLDIR/modules/zotero-odf-scan/plugin" "$CONTENTSDIR/Resources/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+	
 	# Delete extraneous files
 	find "$CONTENTSDIR" -depth -type d -name .git -exec rm -rf {} \;
 	find "$CONTENTSDIR" \( -name .DS_Store -or -name update.rdf \) -exec rm -f {} \;
@@ -324,11 +298,12 @@ if [ $BUILD_MAC == 1 ]; then
 	touch "$CONTENTSDIR/Resources/precomplete"
 	
 	# Sign
-	if [ $SIGN == 1 ]; then
-		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/jurism-bin"
-		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR"
-		/usr/bin/codesign --verify -vvvv "$APPDIR"
-	fi
+    # When I have a hundred bucks to spare, this can happen.
+	#if [ $SIGN == 1 ]; then
+	#	/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/jurism-bin"
+	#	/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR"
+	#	/usr/bin/codesign --verify -vvvv "$APPDIR"
+	#fi
 	
 	# Build disk image
 	if [ $PACKAGE == 1 ]; then
@@ -355,7 +330,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 	mkdir "$APPDIR"
 	
 	# Merge xulrunner and relevant assets
-	cp -R "$BUILDDIR/zotero/"* "$BUILDDIR/application.ini" "$APPDIR"
+	cp -R "$BUILDDIR/jurism/"* "$BUILDDIR/application.ini" "$APPDIR"
 	cp -r "$WIN32_RUNTIME_PATH" "$APPDIR/xulrunner"
 	
 	cat "$CALLDIR/win/installer/updater_append.ini" >> "$APPDIR/updater.ini"
@@ -373,32 +348,21 @@ if [ $BUILD_WIN32 == 1 ]; then
 	
 	# Add word processor plug-ins
 	mkdir "$APPDIR/extensions"
-	cp -RH "$CALLDIR/modules/zotero-word-for-windows-integration" "$APPDIR/extensions/zoteroWinWordIntegration@zotero.org"
-	cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org"
-	for ext in "zoteroWinWordIntegration@zotero.org" "zoteroOpenOfficeIntegration@zotero.org"; do
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/$ext/install.rdf"
-		rm -rf "$APPDIR/extensions/$ext/.git"
-	done
+	cp -RH "$CALLDIR/modules/zotero-word-for-windows-integration" "$APPDIR/extensions/jurismWinWordIntegration@juris-m.github.io"
+	cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
 
     # Add Abbreviation Filter (abbrevs-filter)
 	cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
-	perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/install.rdf"
-	rm -rf "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/.git"
 
     # Add Jurisdiction Support (myles)
 	cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
-	perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/myles@juris-m.github.io/install.rdf"
-	rm -rf "$APPDIR/extensions/myles@juris-m.github.io/.git"
 	
     # Add Bluebook signal helper (bluebook-signals-for-zotero)
 	cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com"
-	perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/install.rdf"
-	rm -rf "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/.git"
 	
+    ## RESTORE
     # Add ODF/RTF Scan (zotero-odf-scan)
-	cp -RH "$CALLDIR/modules/zotero-odf-scan/plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
-	perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/install.rdf"
-	rm -rf "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/.git"
+	#cp -RH "$CALLDIR/modules/zotero-odf-scan" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
 	# Remove unnecessary dlls
 	INTEGRATIONDIR="$APPDIR/extensions/zoteroWinWordIntegration@zotero.org/"
@@ -511,28 +475,19 @@ if [ $BUILD_LINUX == 1 ]; then
 		# Add word processor plug-ins
 		mkdir "$APPDIR/extensions"
 		cp -RH "$CALLDIR/modules/jurism-libreoffice-integration" "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
-		perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io/install.rdf"
-		rm -rf "$APPDIR/extensions/zoteroOpenOfficeIntegration@juris-m.github.io/.git"
 
         # Add Abbreviation Filter (abbrevs-filter)
 		cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
-		#perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/install.rdf"
-		#rm -rf "$APPDIR/extensions/abbrevs-filter@juris-m.github.io/.git"
 
         # Add Jurisdiction Support (myles)
 		cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
-		#perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/myles@juris-m.github.io/install.rdf"
-		#rm -rf "$APPDIR/extensions/myles@juris-m.github.io/.git"
 		
         # Add Bluebook signal helper (bluebook-signals-for-zotero)
 		cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com"
-		#perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/install.rdf"
-		#rm -rf "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com/.git"
 		
+        ## RESTORE
         # Add ODF/RTF Scan (zotero-odf-scan)
-		#cp -RH "$CALLDIR/modules/zotero-odf-scan/plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
-		#perl -pi -e 's/SOURCE<\/em:version>/SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/install.rdf"
-		#rm -rf "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com/.git"
+		#cp -RH "$CALLDIR/modules/zotero-odf-scan" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
 		# Delete extraneous files
 		find "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;
