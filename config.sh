@@ -30,7 +30,7 @@ EXE7ZIP='C:\Program Files\7-Zip\7z.exe'
 # Paths for Windows installer build only necessary for signed binaries
 #SIGNTOOL='C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\signtool.exe'
 SIGNTOOL='C:\Program Files (x86)\Windows Kits\8.0\bin\x86\signtool.exe'
-SIGNATURE_URL='https://www.zotero.org/'
+SIGNATURE_URL='https://juris-m.github.io/'
 
 # If version is not specified on the command line, version is this prefix followed by the revision
 DEFAULT_VERSION_PREFIX="4.0.999.SOURCE."
@@ -45,4 +45,4 @@ STAGEDIR="$CALLDIR/staging"
 DISTDIR="$CALLDIR/dist"
 
 # Repository URL
-URL="git://github.com/zotero/zotero.git"
+URL="git://github.com/juris-m/zotero.git"
