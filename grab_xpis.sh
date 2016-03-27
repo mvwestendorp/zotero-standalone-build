@@ -79,7 +79,7 @@ EOF
             rm "${FILENAME}"
             cd ../../..
         else
-            URL=$(curl -s "https://juris-m.github.io/${f}/update.rdf" | grep -o ".*<em:updateLink>.*<\/em:updateLink>.*" | sed -e "s/\(.*<em:updateLink>\|<\/em:updateLink>.*\)//g")
+            URL=$(curl -s "https://juris-m.github.io/${f}/update.rdf" | grep -o ".*<em:updateLink>.*<\/em:updateLink>.*" | sed -e "s/.*<em:updateLink>//g") | sed -e "s/<\/em:updateLink>.*//g")
             cd "zotero-standalone-build/modules/${LOCAL_DIR}"
             echo "  ${URL} -> ${f}.xpi"
             curl -s -o "${f}.xpi" -L "${URL}"
