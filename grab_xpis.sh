@@ -51,10 +51,10 @@ jurism-libreoffice-integration
 jurism-word-for-mac-integration
 jurism-word-for-windows-integration
 myles
+zotero-odf-scan-plugin
 EOF
 )"
 
-    # zotero-odf-scan
 
     for f in $dirnames; do
         if [ "${f}" == "zotero" ]; then

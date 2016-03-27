@@ -285,7 +285,7 @@ if [ $BUILD_MAC == 1 ]; then
 	
     # XXX RESTORE
     # Add ODF/RTF Scan (zotero-odf-scan)
-	#cp -RH "$CALLDIR/modules/zotero-odf-scan/plugin" "$CONTENTSDIR/Resources/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+	#cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$CONTENTSDIR/Resources/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 	
 	# Delete extraneous files
 	find "$CONTENTSDIR" -depth -type d -name .git -exec rm -rf {} \;
@@ -362,7 +362,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 	
     ## RESTORE
     # Add ODF/RTF Scan (zotero-odf-scan)
-	#cp -RH "$CALLDIR/modules/zotero-odf-scan" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+	#cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
 	# Remove unnecessary dlls
 	INTEGRATIONDIR="$APPDIR/extensions/zoteroWinWordIntegration@zotero.org/"
@@ -487,7 +487,7 @@ if [ $BUILD_LINUX == 1 ]; then
 		
         ## RESTORE
         # Add ODF/RTF Scan (zotero-odf-scan)
-		#cp -RH "$CALLDIR/modules/zotero-odf-scan" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+		#cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
 		# Delete extraneous files
 		find "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;
