@@ -365,7 +365,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 	#cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
 	# Remove unnecessary dlls
-	INTEGRATIONDIR="$APPDIR/extensions/zoteroWinWordIntegration@zotero.org/"
+	INTEGRATIONDIR="$APPDIR/extensions/jurismWinWordIntegration@juris-m.github.io/"
 	rm -rf "$INTEGRATIONDIR/"components-!($GECKO_SHORT_VERSION)
 
 	# Fix chrome.manifest
