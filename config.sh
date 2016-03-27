@@ -16,7 +16,7 @@ LINUX_i686_RUNTIME_PATH="`pwd`/xulrunner/xulrunner_linux-i686"
 LINUX_x86_64_RUNTIME_PATH="`pwd`/xulrunner/xulrunner_linux-x86_64"
 
 # Whether to sign builds
-SIGN=1
+SIGN=0
 
 # OS X Developer ID certificate information
 DEVELOPER_ID=c8a15a3bc9eaaabc112e83b2f885609e535d07f0
