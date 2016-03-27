@@ -51,12 +51,13 @@ jurism-libreoffice-integration
 jurism-word-for-mac-integration
 jurism-word-for-windows-integration
 myles
-zotero-odf-scan-plugin
 EOF
 )"
 
+#zotero-odf-scan-plugin
 
     for f in $dirnames; do
+        echo "${f}"
         if [ "${f}" == "zotero" ]; then
             LOCAL_DIR="jurism"
         else
@@ -65,11 +66,10 @@ EOF
         if [ ! -d "zotero-standalone-build/modules/${LOCAL_DIR}" ]; then
             mkdir "zotero-standalone-build/modules/${LOCAL_DIR}"
         fi
-        rm -fR "zotero-standalone-build/modules/${LOCAL_DIR}"/*
+        #rm -fR "zotero-standalone-build/modules/${LOCAL_DIR}"/*
         if [ "${WHENCE}" == "local" ]; then
             LATEST=$(find "${LOCAL_DIR}"/releases -type f -name '*.xpi' -printf '%AY%Am%Ad%AH%AI%AM%AS %h/%f\n' | grep -v 'beta' | sort -r | head -1 | cut -d\  -f 2)
             FILENAME="$(basename "${LATEST}")"
-            echo "${FILENAME}"
             DIRNAME="$(dirname "${LATEST}")"
             cp "${DIRNAME}/${FILENAME}" "zotero-standalone-build/modules/${LOCAL_DIR}"
             cd "zotero-standalone-build/modules/${LOCAL_DIR}"
@@ -78,10 +78,8 @@ EOF
             cd ../../..
         else
             URL=$(curl -s "https://juris-m.github.io/${f}/update.rdf" | grep -o ".*<em:updateLink>.*<\/em:updateLink>.*" | sed -e "s/\(.*<em:updateLink>\|<\/em:updateLink>.*\)//g")
-            cd "zotero-standalone-build/modules/${f}"
-            echo "${f}.xpi"
-            echo "  ${URL}"
-            echo "  $(pwd)"
+            cd "zotero-standalone-build/modules/${LOCAL_DIR}"
+            echo "  ${URL} -> ${f}.xpi"
             curl -s -o "${f}.xpi" -L "${URL}"
             unzip "${f}.xpi"
             rm "${f}.xpi"
