@@ -271,8 +271,8 @@ if [ $BUILD_MAC == 1 ]; then
 	
 	# Add word processor plug-ins
 	mkdir "$CONTENTSDIR/Resources/extensions"
-	cp -RH "$CALLDIR/modules/zotero-word-for-mac-integration" "$CONTENTSDIR/Resources/extensions/jurismMacWordIntegration@juris-m.github.io"
-	cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$CONTENTSDIR/Resources/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
+	cp -RH "$CALLDIR/modules/jurism-word-for-mac-integration" "$CONTENTSDIR/Resources/extensions/jurismMacWordIntegration@juris-m.github.io"
+	cp -RH "$CALLDIR/modules/jurism-libreoffice-integration" "$CONTENTSDIR/Resources/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
 	
     # Add Abbreviation Filter (abbrevs-filter)
 	cp -RH "$CALLDIR/modules/abbrevs-filter" "$CONTENTSDIR/Resources/extensions/abbrevs-filter@juris-m.github.io"
@@ -348,8 +348,8 @@ if [ $BUILD_WIN32 == 1 ]; then
 	
 	# Add word processor plug-ins
 	mkdir "$APPDIR/extensions"
-	cp -RH "$CALLDIR/modules/zotero-word-for-windows-integration" "$APPDIR/extensions/jurismWinWordIntegration@juris-m.github.io"
-	cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
+	cp -RH "$CALLDIR/modules/jurism-word-for-windows-integration" "$APPDIR/extensions/jurismWinWordIntegration@juris-m.github.io"
+	cp -RH "$CALLDIR/modules/jurism-libreoffice-integration" "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
 
     # Add Abbreviation Filter (abbrevs-filter)
 	cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
