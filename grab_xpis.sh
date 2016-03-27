@@ -43,6 +43,8 @@ if [ "${WHENCE}" != "none" ]; then
     fi
     rm -fR "zotero-standalone-build/modules"/*
 
+
+
     dirnames="$(cat <<-EOF
 zotero
 abbrevs-filter
