@@ -384,7 +384,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 	cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
     # Add ZotFile (zotfile-for-jurism)
-	cp -RH "$CALLDIR/modules/zotfile" "$CONTENTSDIR/Resources/extensions/zotfile@juris-m.github.io"
+	cp -RH "$CALLDIR/modules/zotfile" "$APPDIR/extensions/zotfile@juris-m.github.io"
 	
 	# Remove unnecessary dlls
 	INTEGRATIONDIR="$APPDIR/extensions/jurismWinWordIntegration@juris-m.github.io/"
@@ -511,7 +511,7 @@ if [ $BUILD_LINUX == 1 ]; then
 		cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
         # Add ZotFile (zotfile-for-jurism)
-	    cp -RH "$CALLDIR/modules/zotfile" "$CONTENTSDIR/Resources/extensions/zotfile@juris-m.github.io"
+	    cp -RH "$CALLDIR/modules/zotfile" "$APPDIR/extensions/zotfile@juris-m.github.io"
 	
 		# Delete extraneous files
 		find "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;
