@@ -43,17 +43,16 @@ DONE
 }
 
 function seq () {
-  if [ "$1" -gt "$2" ] ; then
-    for ((i=$1; i<=$2; i++))
+  if [ "$1" -lt "$2" ] ; then
+    for ((i="$1"; i<"$2"; i++))
       do echo $i
     done
   else
-    for ((i=$1; i>=$2; i--))
+    for ((i="$1"; i>"$2"; i--))
       do echo $i
     done
   fi
 }
-
 
 PACKAGE=1
 while getopts "p:s:v:c:x:d" opt; do
@@ -117,6 +116,14 @@ if [ ! -z $1 ]; then
     echo FOUR
 	usage
 fi
+
+echo "BUILD_LINUX=${BUILD_LINUX}"
+echo "BUILD_MAC=${BUILD_MAC}"
+echo "BUILD_WIN32=${BUILD_WIN32}"
+echo "XPI_SOURCE=${XPI_SOURCE}"
+echo "VERSION=${VERSION}"
+
+exit 0
 
 . grab_xpis.sh "${BUILD_LINUX}${BUILD_MAC}${BUILD_WIN32}" "${XPI_SOURCE}"
 
