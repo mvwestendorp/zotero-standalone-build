@@ -123,8 +123,6 @@ echo "BUILD_WIN32=${BUILD_WIN32}"
 echo "XPI_SOURCE=${XPI_SOURCE}"
 echo "VERSION=${VERSION}"
 
-exit 0
-
 . grab_xpis.sh "${BUILD_LINUX}${BUILD_MAC}${BUILD_WIN32}" "${XPI_SOURCE}"
 
 BUILDID=`date +%Y%m%d`
