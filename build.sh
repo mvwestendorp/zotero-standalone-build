@@ -301,9 +301,11 @@ if [ $BUILD_MAC == 1 ]; then
     # Add Bluebook signal helper (bluebook-signals-for-zotero)
 	cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$CONTENTSDIR/Resources/extensions/bluebook-signals-for-zotero@mystery-lab.com"
 	
-    # XXX RESTORE
     # Add ODF/RTF Scan (zotero-odf-scan)
-	#cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$CONTENTSDIR/Resources/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+	cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$CONTENTSDIR/Resources/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+	
+    # Add ZotFile (zotfile-for-jurism)
+	cp -RH "$CALLDIR/modules/zotfile" "$CONTENTSDIR/Resources/extensions/zotfile@juris-m.github.io"
 	
 	# Delete extraneous files
 	find "$CONTENTSDIR" -depth -type d -name .git -exec rm -rf {} \;
@@ -378,10 +380,12 @@ if [ $BUILD_WIN32 == 1 ]; then
     # Add Bluebook signal helper (bluebook-signals-for-zotero)
 	cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com"
 	
-    ## RESTORE
     # Add ODF/RTF Scan (zotero-odf-scan)
-	#cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+	cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
+    # Add ZotFile (zotfile-for-jurism)
+	cp -RH "$CALLDIR/modules/zotfile" "$CONTENTSDIR/Resources/extensions/zotfile@juris-m.github.io"
+	
 	# Remove unnecessary dlls
 	INTEGRATIONDIR="$APPDIR/extensions/jurismWinWordIntegration@juris-m.github.io/"
 	rm -rf "$INTEGRATIONDIR/"components-!($GECKO_SHORT_VERSION)
@@ -503,10 +507,12 @@ if [ $BUILD_LINUX == 1 ]; then
         # Add Bluebook signal helper (bluebook-signals-for-zotero)
 		cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com"
 		
-        ## RESTORE
         # Add ODF/RTF Scan (zotero-odf-scan)
-		#cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+		cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
+        # Add ZotFile (zotfile-for-jurism)
+	    cp -RH "$CALLDIR/modules/zotfile" "$CONTENTSDIR/Resources/extensions/zotfile@juris-m.github.io"
+	
 		# Delete extraneous files
 		find "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;
 		find "$APPDIR" \( -name .DS_Store -or -name update.rdf \) -exec rm -f {} \;
