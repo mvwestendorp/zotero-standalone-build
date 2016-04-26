@@ -2,4 +2,4 @@
 # performing a build. To generate a fresh commit for
 # tagging purposes, the build version is refresh in this
 # file on each release.
-4.0.29.8m66
+4.0.29.8m69
