@@ -32,7 +32,7 @@ Usage: $0 [-p PLATFORMS] [-s DIR] [-v VERSION] [-c CHANNEL] [-d]
 Options
  -p PLATFORMS    *    build for platforms PLATFORMS (m=Mac, w=Windows, l=Linux)
  -s DIR               build symlinked to Zotero checkout DIR (implies -d)
- -v VERSION      *    use version VERSION
+ -v VERSION      *    use version VERSION (with leading "v")
  -c CHANNEL           use update channel CHANNEL
  -d                   don\'t package; only build binaries in staging/ directory
  -x XPI source   *    local, remote, or none
@@ -330,13 +330,13 @@ if [ $BUILD_MAC == 1 ]; then
 		if [ $MAC_NATIVE == 1 ]; then
 			echo 'Creating Mac installer'
 			"$CALLDIR/mac/pkg-dmg" --source "$STAGEDIR/Jurism.app" \
-				--target "$DISTDIR/Jurism-$VERSION.dmg" \
+				--target "$DISTDIR/jurism-for-mac-all-$VERSION.dmg" \
 				--sourcefile --volname Jurism --copy "$CALLDIR/mac/DSStore:/.DS_Store" \
 				--symlink /Applications:"/Drag Here to Install" > /dev/null
 		else
 			echo 'Not building on Mac; creating Mac distribution as a zip file'
 			rm -f "$DISTDIR/Jurism_mac.zip"
-			cd "$STAGEDIR" && zip -rqX "$DISTDIR/Jurism-$VERSION_mac.zip" Jurism.app
+			cd "$STAGEDIR" && zip -rqX "$DISTDIR/jurism-for-mac-all-$VERSION.zip" Jurism.app
 		fi
 	fi
 fi
@@ -403,7 +403,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 	
 	if [ $PACKAGE == 1 ]; then
 		if [ $WIN_NATIVE == 1 ]; then
-			INSTALLER_PATH="$DISTDIR/Jurism-${VERSION}_setup.exe"
+			INSTALLER_PATH="$DISTDIR/jurism-for-windows-all-${VERSION}_setup.exe"
 			
 			# Add icon to xulrunner-stub
 			"$CALLDIR/win/ReplaceVistaIcon/ReplaceVistaIcon.exe" "`cygpath -w \"$APPDIR/jurism.exe\"`" \
@@ -468,13 +468,18 @@ if [ $BUILD_WIN32 == 1 ]; then
 		else
 			echo 'Not building on Windows; only building zip file'
 		fi
-		cd "$STAGEDIR" && zip -rqX "$DISTDIR/Jurism-${VERSION}_win32.zip" Jurism_win32
+		cd "$STAGEDIR" && zip -rqX "$DISTDIR/jurism-for-windows-all-${VERSION}.zip" Jurism_win32
 	fi
 fi
 
 # Linux
 if [ $BUILD_LINUX == 1 ]; then
 	for arch in "i686" "x86_64"; do
+		if [ "${arch}" == "i686" ]; then
+			description="32bit"
+		else
+			description="64bit"
+		fi
 		RUNTIME_PATH=`eval echo '$LINUX_'$arch'_RUNTIME_PATH'`
 		
 		# Set up directory
@@ -526,9 +531,9 @@ if [ $BUILD_LINUX == 1 ]; then
 		
 		if [ $PACKAGE == 1 ]; then
 			# Create tar
-			rm -f "$DISTDIR/Jurism-${VERSION}_linux-$arch.tar.bz2"
+			rm -f "$DISTDIR/jurism-for-linux-${description}-${VERSION}.tar.bz2"
 			cd "$STAGEDIR"
-			tar -cjf "$DISTDIR/Jurism-${VERSION}_linux-$arch.tar.bz2" "Jurism_linux-$arch"
+			tar -cjf "$DISTDIR/jurism-for-linux-${description}-${VERSION}.tar.bz2" "Jurism_linux-$arch"
 		fi
 	done
 fi
