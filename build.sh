@@ -281,7 +281,7 @@ if [ $BUILD_MAC == 1 ]; then
 	rm -f "$CONTENTSDIR/Info.plist.bak"
 	
 	# Add components
-	cp -R "$BUILDDIR/zotero/"* "$CONTENTSDIR/Resources"
+	cp -R "$BUILDDIR/jurism/"* "$CONTENTSDIR/Resources"
 	
 	# Add Mac-specific Standalone assets
 	cd "$CALLDIR/assets/mac"
