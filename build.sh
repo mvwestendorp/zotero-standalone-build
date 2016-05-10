@@ -117,6 +117,8 @@ if [ ! -z $1 ]; then
 	usage
 fi
 
+VERSION=$(echo "${VERSION}" | sed -e "s/v\(.*\)/\1/")
+
 echo "BUILD_LINUX=${BUILD_LINUX}"
 echo "BUILD_MAC=${BUILD_MAC}"
 echo "BUILD_WIN32=${BUILD_WIN32}"
