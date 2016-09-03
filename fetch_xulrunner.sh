@@ -33,7 +33,7 @@ while getopts "p:" opt; do
 			do
 				case ${OPTARG:i:1} in
 					m) BUILD_MAC=1;GECKO_VERSION="40.0";GECKO_SHORT_VERSION="40.0";;
-					w) BUILD_WIN32=1;GECKO_VERSION="40.0";GECKO_SHORT_VERSION="40.0";;
+					w) BUILD_WIN32=1;GECKO_VERSION="39.0";GECKO_SHORT_VERSION="39.0";;
 					l) BUILD_LINUX=1;GECKO_VERSION="39.0";GECKO_SHORT_VERSION="39.0";;
 					*)
 						echo "$0: Invalid platform option ${OPTARG:i:1}"
