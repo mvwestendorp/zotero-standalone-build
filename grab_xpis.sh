@@ -85,7 +85,7 @@ EOF
             cd "zotero-standalone-build/modules/${LOCAL_DIR}"
             echo "  ${URL} -> ${f}.xpi"
             curl -s -o "${f}.xpi" -L "${URL}"
-            unzip "${f}.xpi"
+            unzip -q "${f}.xpi"
             rm "${f}.xpi"
             cd ../../..
         fi
