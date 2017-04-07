@@ -8,7 +8,7 @@
 
 # BrandFullNameInternal is used for some registry and file system values
 # instead of BrandFullName and typically should not be modified.
-!define BrandFullNameInternal "Juris-M Standalone"
-!define CompanyName           "Juris-M Project"
-!define URLInfoAbout          "https://juris-m.github.io"
-!define URLUpdateInfo         "https://juris-m.github.io/downloads"
+!define BrandFullNameInternal "Zotero Standalone"
+!define CompanyName           "zotero.org"
+!define URLInfoAbout          "http://www.zotero.org"
+!define URLUpdateInfo         "http://www.zotero.org/standalone"
