@@ -54,7 +54,6 @@ jurism-word-for-mac-integration
 jurism-word-for-windows-integration
 myles
 zotero-odf-scan-plugin
-zotfile
 EOF
 )"
 
@@ -71,7 +70,8 @@ EOF
         fi
         #rm -fR "zotero-standalone-build/modules/${LOCAL_DIR}"/*
         if [ "${WHENCE}" == "local" ]; then
-            LATEST=$(find "${LOCAL_DIR}"/releases -type f -name '*.xpi' -printf '%AY%Am%Ad%AH%AI%AM%AS %h/%f\n' | grep -v 'beta' | sort -r | head -1 | cut -d\  -f 2)
+            #LATEST=$(find "${LOCAL_DIR}"/releases -type f -name '*.xpi' -printf '%AY%Am%Ad%AH%AI%AM%AS %h/%f\n' | grep -v 'beta' | sort -r | head -1 | cut -d\  -f 2)
+            LATEST=$(find "${LOCAL_DIR}"/releases -type f -name '*.xpi' -printf '%AY%Am%Ad%AH%AI%AM%AS %h/%f\n' | sort -r | head -1 | cut -d\  -f 2)
             FILENAME="$(basename "${LATEST}")"
             DIRNAME="$(dirname "${LATEST}")"
             cp "${DIRNAME}/${FILENAME}" "zotero-standalone-build/modules/${LOCAL_DIR}"
