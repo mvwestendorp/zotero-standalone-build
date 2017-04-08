@@ -151,10 +151,10 @@ echo "VERSION=${VERSION}"
 # Force this one.
 SOURCE_DIR=/home/bennett/JM/jurism
 
-BUILDID=`date +%Y%m%d`
+BUILD_ID=`date +%Y%m%d`
 
 shopt -s extglob
-mkdir -p "$BUILD_DIR/zotero"
+mkdir -p "$BUILD_DIR/jurism"
 rm -rf "$STAGE_DIR"
 mkdir "$STAGE_DIR"
 rm -rf "$DIST_DIR"
@@ -191,7 +191,7 @@ rm -rf META-INF
 cp -R "$CALLDIR/assets/branding" "$BUILD_DIR/jurism/chrome/branding"
 
 # Add to chrome manifest
-echo "" >> "$BUILD_DIR/zotero/chrome.manifest"
+echo "" >> "$BUILD_DIR/jurism/chrome.manifest"
 cat "$CALLDIR/assets/chrome.manifest" >> "$BUILD_DIR/jurism/chrome.manifest"
 
 # Copy Error Console files
@@ -257,7 +257,7 @@ if [ $BUILD_MAC == 1 ]; then
 	echo 'Building Jurism.app'
 		
 	# Set up directory structure
-	APPDIR="$STAGEDIR/Jurism.app"
+	APPDIR="$STAGE_DIR/Jurism.app"
 	rm -rf "$APPDIR"
 	mkdir "$APPDIR"
 	chmod 755 "$APPDIR"
@@ -275,7 +275,7 @@ if [ $BUILD_MAC == 1 ]; then
 	# Use our own launcher
 	mv "$CONTENTSDIR/MacOS/firefox" "$CONTENTSDIR/MacOS/jurism-bin"
 	cp "$CALLDIR/mac/zotero" "$CONTENTSDIR/MacOS/jurism"
-	cp "$BUILDDIR/application.ini" "$CONTENTSDIR/Resources"
+	cp "$BUILD_DIR/application.ini" "$CONTENTSDIR/Resources"
 	
 	cd "$CONTENTSDIR/MacOS"
 	tar -xjf "$CALLDIR/mac/updater.tar.bz2"
@@ -288,7 +288,7 @@ if [ $BUILD_MAC == 1 ]; then
 	rm -f "$CONTENTSDIR/Info.plist.bak"
 	
 	# Add components
-	cp -R "$BUILDDIR/jurism/"* "$CONTENTSDIR/Resources"
+	cp -R "$BUILD_DIR/jurism/"* "$CONTENTSDIR/Resources"
 	
 	# Add Mac-specific Standalone assets
 	cd "$CALLDIR/assets/mac"
@@ -340,14 +340,14 @@ if [ $BUILD_MAC == 1 ]; then
 	if [ $PACKAGE == 1 ]; then
 		if [ $MAC_NATIVE == 1 ]; then
 			echo 'Creating Mac installer'
-			"$CALLDIR/mac/pkg-dmg" --source "$STAGEDIR/Jurism.app" \
-				--target "$DISTDIR/jurism-for-mac-all-$VERSION.dmg" \
+			"$CALLDIR/mac/pkg-dmg" --source "$STAGE_DIR/Jurism.app" \
+				--target "$DIST_DIR/jurism-for-mac-all-$VERSION.dmg" \
 				--sourcefile --volname Jurism --copy "$CALLDIR/mac/DSStore:/.DS_Store" \
 				--symlink /Applications:"/Drag Here to Install" > /dev/null
 		else
 			echo 'Not building on Mac; creating Mac distribution as a zip file'
-			rm -f "$DISTDIR/Jurism_mac.zip"
-			cd "$STAGEDIR" && zip -rqX "$DISTDIR/jurism-for-mac-all-$VERSION.zip" Jurism.app
+			rm -f "$DIST_DIR/Jurism_mac.zip"
+			cd "$STAGE_DIR" && zip -rqX "$DIST_DIR/jurism-for-mac-all-$VERSION.zip" Jurism.app
 		fi
 	fi
 fi
@@ -357,7 +357,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 	echo 'Building Jurism_win32'
 	
 	# Set up directory
-	APPDIR="$STAGEDIR/Jurism_win32"
+	APPDIR="$STAGE_DIR/Jurism_win32"
 	rm -rf "$APPDIR"
 	mkdir "$APPDIR"
 	
@@ -498,12 +498,12 @@ if [ $BUILD_LINUX == 1 ]; then
 		
 		# Set up directory
 		echo 'Building Jurism_linux-'$arch
-		APPDIR="$STAGEDIR/Jurism_linux-$arch"
+		APPDIR="$STAGE_DIR/Jurism_linux-$arch"
 		rm -rf "$APPDIR"
 		mkdir "$APPDIR"
 		
 		# Merge xulrunner and relevant assets
-		cp -R "$BUILDDIR/jurism/"* "$BUILDDIR/application.ini" "$APPDIR"
+		cp -R "$BUILD_DIR/jurism/"* "$BUILDDIR/application.ini" "$APPDIR"
 		cp -r "$RUNTIME_PATH" "$APPDIR/xulrunner"
 		rm "$APPDIR/xulrunner/xulrunner-stub"
 		cp "$CALLDIR/linux/xulrunner-stub-$arch" "$APPDIR/jurism"
@@ -545,11 +545,11 @@ if [ $BUILD_LINUX == 1 ]; then
 		
 		if [ $PACKAGE == 1 ]; then
 			# Create tar
-			rm -f "$DISTDIR/jurism-for-linux-${description}-${VERSION}.tar.bz2"
-			cd "$STAGEDIR"
-			tar -cjf "$DISTDIR/jurism-for-linux-${description}-${VERSION}.tar.bz2" "Jurism_linux-$arch"
+			rm -f "$DIST_DIR/jurism-for-linux-${description}-${VERSION}.tar.bz2"
+			cd "$STAGE_DIR"
+			tar -cjf "$DIST_DIR/jurism-for-linux-${description}-${VERSION}.tar.bz2" "Jurism_linux-$arch"
 		fi
 	done
 fi
 
-rm -rf $BUILDDIR
+rm -rf $BUILD_DIR
