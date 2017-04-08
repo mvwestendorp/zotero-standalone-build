@@ -32,6 +32,9 @@ else
 	WIN_NATIVE=0
 fi
 
+DEVTOOLS=0
+PACKAGE=1
+
 function usage {
 	cat >&2 <<DONE
 Usage: $0 [-p PLATFORMS] [-s DIR] [-v VERSION] [-c CHANNEL] [-d]
@@ -216,7 +219,7 @@ perl -pi -e 's^(chrome|resource)/^jar:jurism.jar\!/$1/^g' "$BUILD_DIR/jurism/chr
 
 # Adjust connector pref
 perl -pi -e 's/pref\("extensions\.zotero\.httpServer\.enabled", false\);/pref("extensions.zotero.httpServer.enabled", true);/g' "$BUILD_DIR/jurism/defaults/preferences/zotero.js"
-perl -pi -e 's/pref\("extensions\.zotero\.connector\.enabled", false\);/pref("extensions.zotero.connector.enabled", true);/g' "$BUILD_DIR/zotero/defaults/preferences/zotero.js"
+perl -pi -e 's/pref\("extensions\.zotero\.connector\.enabled", false\);/pref("extensions.zotero.connector.enabled", true);/g' "$BUILD_DIR/jurism/defaults/preferences/zotero.js"
 
 # Copy icons
 cp -r "$CALLDIR/assets/icons" "$BUILD_DIR/jurism/chrome/icons"
@@ -479,7 +482,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 		else
 			echo 'Not building on Windows; only building zip file'
 		fi
-		cd "$STAGE_DIR" && zip -rqX "$DIST_DIR/jurism-for-windows-all-${VERSION}_win32.zip" Zotero_win32
+		cd "$STAGE_DIR" && zip -rqX "$DIST_DIR/jurism-for-windows-all-${VERSION}_win32.zip" Jurism_win32
 	fi
 fi
 
