@@ -53,7 +53,8 @@ DONE
 
 BUILD_DIR=`mktemp -d`
 function cleanup {
-	rm -rf $BUILD_DIR
+	#rm -rf $BUILD_DIR
+	echo "NOT DELETING $BUILD_DIR"
 }
 trap cleanup EXIT
 
@@ -146,10 +147,7 @@ echo "BUILD_WIN32=${BUILD_WIN32}"
 echo "XPI_SOURCE=${XPI_SOURCE}"
 echo "VERSION=${VERSION}"
 
-. grab_xpis.sh "${BUILD_LINUX}${BUILD_MAC}${BUILD_WIN32}" "${XPI_SOURCE}"
-
-# Force this one.
-SOURCE_DIR=/home/bennett/JM/jurism
+. grab_xpis.sh "${BUILD_LINUX}${BUILD_MAC}${BUILD_WIN32}" "${XPI_SOURCE}" "$CALLDIR" "$BUILD_DIR"
 
 BUILD_ID=`date +%Y%m%d`
 
@@ -164,15 +162,6 @@ mkdir "$DIST_DIR"
 echo $BUILD_ID > "$DIST_DIR/build_id"
 
 if [ -z "$UPDATE_CHANNEL" ]; then UPDATE_CHANNEL="default"; fi
-
-if [ -n "$ZIP_FILE" ]; then
-	ZIP_FILE="`abspath $ZIP_FILE`"
-	echo "Building from $ZIP_FILE"
-	unzip -q $ZIP_FILE -d "$BUILD_DIR/jurism"
-else
-	# TODO: Could probably just mv instead, at least if these repos are merged
-	rsync -a "$SOURCE_DIR/" "$BUILD_DIR/jurism/"
-fi
 
 cd "$BUILD_DIR/jurism"
 
