@@ -1,4 +1,4 @@
 ;!@Install@!UTF-8!
-Title="Zotero Standalone"
+Title="Juris-M Standalone"
 RunProgram="setup.exe"
 ;!@InstallEnd@!
