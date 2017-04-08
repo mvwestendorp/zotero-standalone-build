@@ -15,7 +15,7 @@
 !define GREVersion            2.0
 !define AB_CD                 "en-US"
 
-!define FileMainEXE           "zotero.exe"
+!define FileMainEXE           "jurism.exe"
 !define WindowClass           "ZoteroMessageWindow"
 !define AppRegName            "Zotero"
 
