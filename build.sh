@@ -365,14 +365,14 @@ if [ $BUILD_WIN32 == 1 ]; then
 	mkdir "$APPDIR/xulrunner"
 	cp -R "$WIN32_RUNTIME_PATH"/!(api-ms*.dll|application.ini|browser|defaults|devtools-files|crashreporter*|firefox.exe|maintenanceservice*|precomplete|removed-files|uninstall|update*) "$APPDIR/xulrunner"
 	
-	# Copy zotero.exe, which is xulrunner-stub from https://github.com/duanyao/xulrunner-stub
+	# Copy jurism.exe AKA zotero.exe, which is xulrunner-stub from https://github.com/duanyao/xulrunner-stub
 	# modified with ReplaceVistaIcon.exe and edited with Resource Hacker
 	#
-	#   "$CALLDIR/win/ReplaceVistaIcon/ReplaceVistaIcon.exe" \
-	#       "`cygpath -w \"$APPDIR/zotero.exe\"`" \
-	#       "`cygpath -w \"$CALLDIR/assets/icons/default/main-window.ico\"`"
+	   "$CALLDIR/win/ReplaceVistaIcon/ReplaceVistaIcon.exe" \
+	       "`cygpath -w \"$CALLDIR/win/jurism.exe\"`" \
+	       "`cygpath -w \"$CALLDIR/assets/icons/default/main-window.ico\"`"
 	#
-	cp "$CALLDIR/win/zotero.exe" "$APPDIR"
+	cp "$CALLDIR/win/jurism.exe" "$APPDIR"
 	
 	# Use our own updater, because Mozilla's requires updates signed by Mozilla
 	cp "$CALLDIR/win/updater.exe" "$APPDIR/xulrunner"
@@ -433,17 +433,17 @@ if [ $BUILD_WIN32 == 1 ]; then
 			mkdir "$APPDIR/uninstall"
 			mv "$BUILD_DIR/win_installer/helper.exe" "$APPDIR/uninstall"
 			
-			# Sign zotero.exe, dlls, updater, and uninstaller
+			# Sign jurism.exe, dlls, updater, and uninstaller
 			if [ $SIGN == 1 ]; then
-				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Zotero" \
-					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/zotero.exe\"`"
+				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Jurism" \
+					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/jurism.exe\"`"
 				for dll in "$APPDIR/"*.dll "$APPDIR/xulrunner/"*.dll; do
-					"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Zotero" \
+					"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Jurism" \
 						/du "$SIGNATURE_URL" "`cygpath -w \"$dll\"`"
 				done
-				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Zotero Updater" \
+				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Jurism Updater" \
 					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/xulrunner/updater.exe\"`"
-				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Zotero Uninstaller" \
+				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Jurism Uninstaller" \
 					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/uninstall/helper.exe\"`"
 			fi
 			
@@ -456,7 +456,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 			"`cygpath -u \"$MAKENSISU\"`" /V1 "`cygpath -w \"$BUILD_DIR/win_installer/installer.nsi\"`"
 			mv "$BUILD_DIR/win_installer/setup.exe" "$INSTALLER_STAGE_DIR"
 			if [ $SIGN == 1 ]; then
-				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Zotero Setup" \
+				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Jurism Setup" \
 					/du "$SIGNATURE_URL" "`cygpath -w \"$INSTALLER_STAGE_DIR/setup.exe\"`"
 			fi
 			
@@ -474,7 +474,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 			
 			# Sign Zotero_setup.exe
 			if [ $SIGN == 1 ]; then
-				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Zotero Setup" \
+				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Jurism Setup" \
 					/du "$SIGNATURE_URL" "`cygpath -w \"$INSTALLER_PATH\"`"
 			fi
 			
