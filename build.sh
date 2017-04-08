@@ -51,7 +51,7 @@ DONE
 	exit 1
 }
 
-BUILD_DIR=`mktemp -d`
+BUILD_DIR=`mktemp -d /tmp/tmp.XXXX`
 function cleanup {
 	#rm -rf $BUILD_DIR
 	echo "NOT DELETING $BUILD_DIR"
