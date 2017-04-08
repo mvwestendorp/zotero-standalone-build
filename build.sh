@@ -21,10 +21,16 @@
 CALLDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$CALLDIR/config.sh"
 
-[ "`uname`" != "Darwin" ]
-MAC_NATIVE=$?
-[ "`uname -o 2> /dev/null`" != "Cygwin" ]
-WIN_NATIVE=$?
+if [ "`uname`" = "Darwin" ]; then
+	MAC_NATIVE=1
+else
+	MAC_NATIVE=0
+fi
+if [ "`uname -o 2> /dev/null`" = "Cygwin" ]; then
+	WIN_NATIVE=1
+else
+	WIN_NATIVE=0
+fi
 
 function usage {
 	cat >&2 <<DONE
@@ -40,6 +46,16 @@ Options
 (options marked with * are not optional)
 DONE
 	exit 1
+}
+
+BUILD_DIR=`mktemp -d`
+function cleanup {
+	rm -rf $BUILD_DIR
+}
+trap cleanup EXIT
+
+function abspath {
+	echo $(cd $(dirname $1); pwd)/$(basename $1);
 }
 
 function seq () {
@@ -98,12 +114,13 @@ while getopts "p:s:v:c:x:d" opt; do
 done
 
 if [ ${BUILD_LINUX} -eq 0 -a ${BUILD_MAC} -eq 0 -a ${BUILD_WIN32} -eq 0 ]; then
-    echo ONE
+    echo "Must set the platform (-p) option"
     usage
 fi
 
+# Must set the version (-v) option
 if [ "${VERSION}" == "" ]; then
-    echo TWO
+    echo "Must set the version (-v) option"
     usage
 fi
 
@@ -112,6 +129,7 @@ if [ "${XPI_SOURCE}" != "local" -a "${XPI_SOURCE}" != "remote" -a "${XPI_SOURCE}
     usage
 fi 
 
+# Not sure what this protects against.
 if [ ! -z $1 ]; then
     echo FOUR
 	usage
@@ -127,129 +145,107 @@ echo "VERSION=${VERSION}"
 
 . grab_xpis.sh "${BUILD_LINUX}${BUILD_MAC}${BUILD_WIN32}" "${XPI_SOURCE}"
 
+# Force this one.
+SOURCE_DIR=/home/bennett/JM/jurism
+
 BUILDID=`date +%Y%m%d`
 
 shopt -s extglob
-mkdir "$BUILDDIR"
-rm -rf "$STAGEDIR"
-mkdir "$STAGEDIR"
-rm -rf "$DISTDIR"
-mkdir "$DISTDIR"
+mkdir -p "$BUILD_DIR/zotero"
+rm -rf "$STAGE_DIR"
+mkdir "$STAGE_DIR"
+rm -rf "$DIST_DIR"
+mkdir "$DIST_DIR"
+
+# Save build id, which is needed for updates manifest
+echo $BUILD_ID > "$DIST_DIR/build_id"
 
 if [ -z "$UPDATE_CHANNEL" ]; then UPDATE_CHANNEL="default"; fi
 
-if [ ! -z "$SYMLINK_DIR" ]; then
-	echo "Building Jurism from $SYMLINK_DIR"
-	
-	cp -RH "$SYMLINK_DIR" "$BUILDDIR/zotero"
-	cd "$BUILDDIR/zotero"
-	if [ $? != 0 ]; then
-		exit
-	fi
-	REV=`git log -n 1 --pretty='format:%h'`
-	VERSION="$DEFAULT_VERSION_PREFIX$REV"
-	find . -depth -type d -name .git -exec rm -rf {} \;
-	
-	# Windows can't actually symlink; copy instead, with a note
-	if [ "$WIN_NATIVE" == 1 ]; then
-		echo "Windows host detected; copying files instead of symlinking"
-		
-		# Copy branding
-		cp -R "$CALLDIR/assets/branding" "$BUILDDIR/zotero/chrome/branding"
-		find "$BUILDDIR/zotero/chrome/branding" -depth -type d -name .git -exec rm -rf {} \;
-		find "$BUILDDIR/zotero/chrome/branding" -name .DS_Store -exec rm -f {} \;
-	else	
-		# Symlink chrome dirs
-		rm -rf "$BUILDDIR/zotero/chrome/"*
-		for i in `ls $SYMLINK_DIR/chrome`; do
-			ln -s "$SYMLINK_DIR/chrome/$i" "$BUILDDIR/zotero/chrome/$i"
-		done
-		
-		# Symlink translators and styles
-		rm -rf "$BUILDDIR/zotero/translators" "$BUILDDIR/zotero/styles"
-		ln -s "$SYMLINK_DIR/translators" "$BUILDDIR/zotero/translators"
-		ln -s "$SYMLINK_DIR/styles" "$BUILDDIR/zotero/styles"
-		
-		# Symlink branding
-		ln -s "$CALLDIR/assets/branding" "$BUILDDIR/zotero/chrome/branding"
-	fi
-	
-	# Add to chrome manifest
-	echo "" >> "$BUILDDIR/zotero/chrome.manifest"
-	cat "$CALLDIR/assets/chrome.manifest" >> "$BUILDDIR/zotero/chrome.manifest"
-
+if [ -n "$ZIP_FILE" ]; then
+	ZIP_FILE="`abspath $ZIP_FILE`"
+	echo "Building from $ZIP_FILE"
+	unzip -q $ZIP_FILE -d "$BUILD_DIR/jurism"
 else
-	echo "Building from bundled submodule"
-	
-	# Copy Jurism directory
-	cd "$CALLDIR/modules/jurism"
-	REV=`git log -n 1 --pretty='format:%h'`
-	cp -RH "$CALLDIR/modules/jurism" "$BUILDDIR/jurism"
-	cd "$BUILDDIR/jurism"
-	
-	if [ -z "$VERSION" ]; then
-		VERSION="$DEFAULT_VERSION_PREFIX$REV"
-	fi
-	
-	# Copy branding
-	cp -R "$CALLDIR/assets/branding" "$BUILDDIR/jurism/chrome/branding"
-	
-	# Delete files that shouldn't be distributed
-    # JURISM: these deletes have no effect for jurism build
-	find "$BUILDDIR/jurism/chrome" -depth -type d -name .git -exec rm -rf {} \;
-	find "$BUILDDIR/jurism/chrome" -name .DS_Store -exec rm -f {} \;
-	
-	# Set version
-	perl -pi -e "s/VERSION: *\'[^\"]*\'/VERSION: \'$VERSION\'/" \
-		"$BUILDDIR/jurism/resource/config.js"
-	
-	# Zip chrome into JAR
-	cd "$BUILDDIR/jurism/chrome"
-	# Checkout failed -- bail
-	if [ $? -eq 1 ]; then
-		exit;
-	fi
-	
-	# Build jurism.jar
-	cd "$BUILDDIR/jurism"
-	zip -r -q jurism.jar chrome deleted.txt resource styles.zip translators.index translators.zip
-	rm -rf "chrome/"* install.rdf deleted.txt resource styles.zip translators.index translators.zip
-	
-	# Adjust chrome.manifest
-	echo "" >> "$BUILDDIR/jurism/chrome.manifest"
-	cat "$CALLDIR/assets/chrome.manifest" >> "$BUILDDIR/jurism/chrome.manifest"
-	
-	# Copy updater.ini
-	cp "$CALLDIR/assets/updater.ini" "$BUILDDIR/jurism"
-	
-	perl -pi -e 's^(chrome|resource)/^jar:jurism.jar\!/$1/^g' "$BUILDDIR/jurism/chrome.manifest"
-
-	# Remove test directory
-    # JURISM: no effect in jurism build based on distro XPI
-	rm -rf "$BUILDDIR/jurism/test"
+	# TODO: Could probably just mv instead, at least if these repos are merged
+	rsync -a "$SOURCE_DIR/" "$BUILD_DIR/jurism/"
 fi
 
+cd "$BUILD_DIR/jurism"
+
+# Upstream Zotero code to extract version number from install.rdf
+# omitted here.
+
+rm install.rdf
+
+echo
+echo "Version: $VERSION"
+
+# Delete Mozilla signing info if present
+rm -rf META-INF
+
+# Copy branding
+cp -R "$CALLDIR/assets/branding" "$BUILD_DIR/jurism/chrome/branding"
+
+# Add to chrome manifest
+echo "" >> "$BUILD_DIR/zotero/chrome.manifest"
+cat "$CALLDIR/assets/chrome.manifest" >> "$BUILD_DIR/jurism/chrome.manifest"
+
+# Copy Error Console files
+cp "$CALLDIR/assets/console/jsconsole-clhandler.js" "$BUILD_DIR/jurism/components/"
+echo >> "$BUILD_DIR/jurism/chrome.manifest"
+cat "$CALLDIR/assets/console/jsconsole-clhandler.manifest" >> "$BUILD_DIR/jurism/chrome.manifest"
+cp -R "$CALLDIR/assets/console/content" "$BUILD_DIR/jurism/chrome/console"
+cp -R "$CALLDIR/assets/console/skin/osx" "$BUILD_DIR/jurism/chrome/console/skin"
+cp -R "$CALLDIR/assets/console/locale/en-US" "$BUILD_DIR/jurism/chrome/console/locale"
+cat "$CALLDIR/assets/console/jsconsole.manifest" >> "$BUILD_DIR/jurism/chrome.manifest"
+
+# Delete files that shouldn't be distributed
+find "$BUILD_DIR/jurism/chrome" -name .DS_Store -exec rm -f {} \;
+
+# Zip chrome into JAR
+cd "$BUILD_DIR/jurism"
+zip -r -q jurism.jar chrome deleted.txt resource styles.zip translators.index translators.zip styles translators.json translators
+rm -rf "chrome/"* install.rdf deleted.txt resource styles.zip translators.index translators.zip styles translators.json translators
+
+# Copy updater.ini
+cp "$CALLDIR/assets/updater.ini" "$BUILD_DIR/jurism"
+
+# Adjust chrome.manifest
+perl -pi -e 's^(chrome|resource)/^jar:jurism.jar\!/$1/^g' "$BUILD_DIR/jurism/chrome.manifest"
+
 # Adjust connector pref
-perl -pi -e 's/pref\("extensions\.zotero\.httpServer\.enabled", false\);/pref("extensions.zotero.httpServer.enabled", true);/g' "$BUILDDIR/jurism/defaults/preferences/zotero.js"
-perl -pi -e 's/pref\("extensions\.zotero\.connector\.enabled", false\);/pref("extensions.zotero.connector.enabled", true);/g' "$BUILDDIR/jurism/defaults/preferences/zotero.js"
+perl -pi -e 's/pref\("extensions\.zotero\.httpServer\.enabled", false\);/pref("extensions.zotero.httpServer.enabled", true);/g' "$BUILD_DIR/jurism/defaults/preferences/zotero.js"
+perl -pi -e 's/pref\("extensions\.zotero\.connector\.enabled", false\);/pref("extensions.zotero.connector.enabled", true);/g' "$BUILD_DIR/zotero/defaults/preferences/zotero.js"
 
 # Copy icons
-cp -r "$CALLDIR/assets/icons" "$BUILDDIR/jurism/chrome/icons"
+cp -r "$CALLDIR/assets/icons" "$BUILD_DIR/jurism/chrome/icons"
 
 # Copy application.ini and modify
-cp "$CALLDIR/assets/application.ini" "$BUILDDIR/application.ini"
-perl -pi -e "s/{{VERSION}}/$VERSION/" "$BUILDDIR/application.ini"
-perl -pi -e "s/{{BUILDID}}/$BUILDID/" "$BUILDDIR/application.ini"
+cp "$CALLDIR/assets/application.ini" "$BUILD_DIR/application.ini"
+perl -pi -e "s/\{\{VERSION}}/$VERSION/" "$BUILD_DIR/application.ini"
+perl -pi -e "s/\{\{BUILDID}}/$BUILD_ID/" "$BUILD_DIR/application.ini"
 
 # Copy prefs.js and modify
-cp "$CALLDIR/assets/prefs.js" "$BUILDDIR/jurism/defaults/preferences"
-perl -pi -e 's/pref\("app\.update\.channel", "[^"]*"\);/pref\("app\.update\.channel", "'"$UPDATE_CHANNEL"'");/' "$BUILDDIR/jurism/defaults/preferences/prefs.js"
-perl -pi -e 's/%GECKO_VERSION%/'"$GECKO_VERSION"'/g' "$BUILDDIR/jurism/defaults/preferences/prefs.js"
+cp "$CALLDIR/assets/prefs.js" "$BUILD_DIR/jurism/defaults/preferences"
+perl -pi -e 's/pref\("app\.update\.channel", "[^"]*"\);/pref\("app\.update\.channel", "'"$UPDATE_CHANNEL"'");/' "$BUILD_DIR/jurism/defaults/preferences/prefs.js"
+perl -pi -e 's/%GECKO_VERSION%/'"$GECKO_VERSION"'/g' "$BUILD_DIR/jurism/defaults/preferences/prefs.js"
 
-# Delete .DS_Store, .git, and tests
-find "$BUILDDIR" -depth -type d -name .git -exec rm -rf {} \;
-find "$BUILDDIR" -depth -type d -name .gitignore -exec rm -rf {} \;
-find "$BUILDDIR" -name .DS_Store -exec rm -f {} \;
+# Add devtools manifest and pref
+if [ $DEVTOOLS -eq 1 ]; then
+	cat "$CALLDIR/assets/devtools.manifest" >> "$BUILD_DIR/jurism/chrome.manifest"
+	echo 'pref("devtools.debugger.remote-enabled", true);' >> "$BUILD_DIR/jurism/defaults/preferences/prefs.js"
+	echo 'pref("devtools.debugger.remote-port", 6100);' >> "$BUILD_DIR/jurism/defaults/preferences/prefs.js"
+	echo 'pref("devtools.debugger.prompt-connection", false);' >> "$BUILD_DIR/jurism/defaults/preferences/prefs.js"
+fi
+
+echo -n "Channel: "
+grep app.update.channel "$BUILD_DIR/jurism/defaults/preferences/prefs.js"
+echo
+
+# Remove unnecessary files
+find "$BUILD_DIR" -name .DS_Store -exec rm -f {} \;
+rm -rf "$BUILD_DIR/jurism/test"
 
 cd "$CALLDIR"
 
@@ -265,6 +261,9 @@ if [ $BUILD_MAC == 1 ]; then
 	cp -r "$CALLDIR/mac/Contents" "$APPDIR"
 	CONTENTSDIR="$APPDIR/Contents"
 	
+	# Modify platform-specific prefs
+	perl -pi -e 's/pref\("browser\.preferences\.instantApply", false\);/pref\("browser\.preferences\.instantApply", true);/' "$BUILD_DIR/jurism/defaults/preferences/prefs.js"
+	
 	# Merge relevant assets from Firefox
 	mkdir "$CONTENTSDIR/MacOS"
 	cp -r "$MAC_RUNTIME_PATH/Contents/MacOS/"!(firefox-bin|crashreporter.app) "$CONTENTSDIR/MacOS"
@@ -272,8 +271,11 @@ if [ $BUILD_MAC == 1 ]; then
 
 	# Use our own launcher
 	mv "$CONTENTSDIR/MacOS/firefox" "$CONTENTSDIR/MacOS/jurism-bin"
-	cp "$CALLDIR/mac/jurism" "$CONTENTSDIR/MacOS/jurism"
+	cp "$CALLDIR/mac/zotero" "$CONTENTSDIR/MacOS/jurism"
 	cp "$BUILDDIR/application.ini" "$CONTENTSDIR/Resources"
+	
+	cd "$CONTENTSDIR/MacOS"
+	tar -xjf "$CALLDIR/mac/updater.tar.bz2"
 	
 	# Modify Info.plist
 	perl -pi -e "s/{{VERSION}}/$VERSION/" "$CONTENTSDIR/Info.plist"
@@ -288,6 +290,12 @@ if [ $BUILD_MAC == 1 ]; then
 	# Add Mac-specific Standalone assets
 	cd "$CALLDIR/assets/mac"
 	zip -r -q "$CONTENTSDIR/Resources/jurism.jar" *
+	
+	# Add devtools
+	if [ $DEVTOOLS -eq 1 ]; then
+		cp -r "$MAC_RUNTIME_PATH"/Contents/Resources/devtools-files/chrome/* "$CONTENTSDIR/Resources/chrome/"
+		cp "$MAC_RUNTIME_PATH/Contents/Resources/devtools-files/components/interfaces.xpt" "$CONTENTSDIR/Resources/components/"
+	fi
 	
 	# Add word processor plug-ins
 	mkdir "$CONTENTSDIR/Resources/extensions"
@@ -306,9 +314,6 @@ if [ $BUILD_MAC == 1 ]; then
     # Add ODF/RTF Scan (zotero-odf-scan)
 	cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$CONTENTSDIR/Resources/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 	
-    # Add ZotFile (zotfile-for-jurism)
-	cp -RH "$CALLDIR/modules/zotfile" "$CONTENTSDIR/Resources/extensions/zotfile@juris-m.github.io"
-	
 	# Delete extraneous files
 	find "$CONTENTSDIR" -depth -type d -name .git -exec rm -rf {} \;
 	find "$CONTENTSDIR" \( -name .DS_Store -or -name update.rdf \) -exec rm -f {} \;
@@ -320,12 +325,13 @@ if [ $BUILD_MAC == 1 ]; then
 	touch "$CONTENTSDIR/Resources/precomplete"
 	
 	# Sign
-    # When I have a hundred bucks to spare, this can happen.
-	#if [ $SIGN == 1 ]; then
-	#	/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/jurism-bin"
-	#	/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR"
-	#	/usr/bin/codesign --verify -vvvv "$APPDIR"
-	#fi
+	if [ $SIGN == 1 ]; then
+		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/updater.app/Contents/MacOS/org.mozilla.updater"
+		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/updater.app"
+		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/zotero-bin"
+		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR"
+		/usr/bin/codesign --verify -vvvv "$APPDIR"
+	fi
 	
 	# Build disk image
 	if [ $PACKAGE == 1 ]; then
@@ -349,24 +355,43 @@ if [ $BUILD_WIN32 == 1 ]; then
 	
 	# Set up directory
 	APPDIR="$STAGEDIR/Jurism_win32"
+	rm -rf "$APPDIR"
 	mkdir "$APPDIR"
 	
-	# Merge xulrunner and relevant assets
-	cp -R "$BUILDDIR/jurism/"* "$BUILDDIR/application.ini" "$APPDIR"
-	cp -r "$WIN32_RUNTIME_PATH" "$APPDIR/xulrunner"
+	# Copy relevant assets from Firefox
+	mkdir "$APPDIR/xulrunner"
+	cp -R "$WIN32_RUNTIME_PATH"/!(api-ms*.dll|application.ini|browser|defaults|devtools-files|crashreporter*|firefox.exe|maintenanceservice*|precomplete|removed-files|uninstall|update*) "$APPDIR/xulrunner"
 	
-	cat "$CALLDIR/win/installer/updater_append.ini" >> "$APPDIR/updater.ini"
-	mv "$APPDIR/xulrunner/xulrunner-stub.exe" "$APPDIR/jurism.exe"
+	# Copy zotero.exe, which is xulrunner-stub from https://github.com/duanyao/xulrunner-stub
+	# modified with ReplaceVistaIcon.exe and edited with Resource Hacker
+	#
+	#   "$CALLDIR/win/ReplaceVistaIcon/ReplaceVistaIcon.exe" \
+	#       "`cygpath -w \"$APPDIR/zotero.exe\"`" \
+	#       "`cygpath -w \"$CALLDIR/assets/icons/default/main-window.ico\"`"
+	#
+	cp "$CALLDIR/win/zotero.exe" "$APPDIR"
 	
-	# This used to be bug 722810, but that bug was actually fixed for Gecko 12.
-	# Then it was broken again. Now it seems okay...
-	# cp "$WIN32_RUNTIME_PATH/msvcp120.dll" \
-	#    "$WIN32_RUNTIME_PATH/msvcr120.dll" \
-	#    "$APPDIR/"
+	# Use our own updater, because Mozilla's requires updates signed by Mozilla
+	cp "$CALLDIR/win/updater.exe" "$APPDIR/xulrunner"
+	cat "$CALLDIR/win/installer/updater_append.ini" >> "$APPDIR/xulrunner/updater.ini"
+	
+	# Copy files to root as required by xulrunner-stub
+	cp "$WIN32_RUNTIME_PATH/mozglue.dll" \
+		"$WIN32_RUNTIME_PATH/msvcp120.dll" \
+		"$WIN32_RUNTIME_PATH/msvcr120.dll" \
+		"$APPDIR/"
+	
+	cp -R "$BUILD_DIR/jurism/"* "$BUILD_DIR/application.ini" "$APPDIR"
 	
 	# Add Windows-specific Standalone assets
 	cd "$CALLDIR/assets/win"
-	zip -r -q "$APPDIR/zotero.jar" *
+	zip -r -q "$APPDIR/jurism.jar" *
+	
+	# Add devtools
+	if [ $DEVTOOLS -eq 1 ]; then
+		cp -r "$WIN32_RUNTIME_PATH"/devtools-files/chrome/* "$APPDIR/chrome/"
+		cp "$WIN32_RUNTIME_PATH/devtools-files/components/interfaces.xpt" "$APPDIR/components/"
+	fi
 	
 	# Add word processor plug-ins
 	mkdir "$APPDIR/extensions"
@@ -385,84 +410,68 @@ if [ $BUILD_WIN32 == 1 ]; then
     # Add ODF/RTF Scan (zotero-odf-scan)
 	cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
-    # Add ZotFile (zotfile-for-jurism)
-	cp -RH "$CALLDIR/modules/zotfile" "$APPDIR/extensions/zotfile@juris-m.github.io"
-	
-	# Remove unnecessary dlls
-	INTEGRATIONDIR="$APPDIR/extensions/jurismWinWordIntegration@juris-m.github.io/"
-	rm -rf "$INTEGRATIONDIR/"components-!($GECKO_SHORT_VERSION)
-
-	# Fix chrome.manifest
-	perl -pi -e 's/^binary-component.*(?:\n|$)//sg' "$INTEGRATIONDIR/chrome.manifest"
-	echo "binary-component components-$GECKO_SHORT_VERSION/zoteroWinWordIntegration.dll" >> "$INTEGRATIONDIR/chrome.manifest"
-	
 	# Delete extraneous files
-	rm "$APPDIR/xulrunner/js.exe" "$APPDIR/xulrunner/redit.exe"
 	find "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;
-	find "$APPDIR" \( -name .DS_Store -or -name update.rdf \) -exec rm -f {} \;
+	find "$APPDIR" \( -name .DS_Store -or -name '.git*' -or -name '.travis.yml' -or -name update.rdf -or -name '*.bak' \) -exec rm -f {} \;
 	find "$APPDIR/extensions" -depth -type d -name build -exec rm -rf {} \;
 	find "$APPDIR" \( -name '*.exe' -or -name '*.dll' \) -exec chmod 755 {} \;
-	
+
 	if [ $PACKAGE == 1 ]; then
 		if [ $WIN_NATIVE == 1 ]; then
-			INSTALLER_PATH="$DISTDIR/jurism-for-windows-all-${VERSION}_setup.exe"
-			
-			# Add icon to xulrunner-stub
-			"$CALLDIR/win/ReplaceVistaIcon/ReplaceVistaIcon.exe" "`cygpath -w \"$APPDIR/jurism.exe\"`" \
-				"`cygpath -w \"$CALLDIR/assets/icons/default/main-window.ico\"`"
+			INSTALLER_PATH="$DIST_DIR/jurism-for-windows-all-${VERSION}_setup.exe"
 			
 			echo 'Creating Windows installer'
 			# Copy installer files
-			cp -r "$CALLDIR/win/installer" "$BUILDDIR/win_installer"
+			cp -r "$CALLDIR/win/installer" "$BUILD_DIR/win_installer"
 			
 			# Build and sign uninstaller
-			perl -pi -e "s/{{VERSION}}/$VERSION/" "$BUILDDIR/win_installer/defines.nsi"
-			"`cygpath -u \"$MAKENSISU\"`" /V1 "`cygpath -w \"$BUILDDIR/win_installer/uninstaller.nsi\"`"
+			perl -pi -e "s/\{\{VERSION}}/$VERSION/" "$BUILD_DIR/win_installer/defines.nsi"
+			"`cygpath -u \"$MAKENSISU\"`" /V1 "`cygpath -w \"$BUILD_DIR/win_installer/uninstaller.nsi\"`"
 			mkdir "$APPDIR/uninstall"
-			mv "$BUILDDIR/win_installer/helper.exe" "$APPDIR/uninstall"
+			mv "$BUILD_DIR/win_installer/helper.exe" "$APPDIR/uninstall"
 			
-			# Sign jurism.exe, dlls, updater, and uninstaller
+			# Sign zotero.exe, dlls, updater, and uninstaller
 			if [ $SIGN == 1 ]; then
-				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Jurism" \
-					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/jurism.exe\"`"
+				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Zotero" \
+					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/zotero.exe\"`"
 				for dll in "$APPDIR/"*.dll "$APPDIR/xulrunner/"*.dll; do
-					"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Jurism" \
+					"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Zotero" \
 						/du "$SIGNATURE_URL" "`cygpath -w \"$dll\"`"
 				done
-				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Jurism Updater" \
+				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Zotero Updater" \
 					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/xulrunner/updater.exe\"`"
-				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Jurism Uninstaller" \
+				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Zotero Uninstaller" \
 					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/uninstall/helper.exe\"`"
 			fi
 			
 			# Stage installer
-			INSTALLERSTAGEDIR="$BUILDDIR/win_installer/staging"
-			mkdir "$INSTALLERSTAGEDIR"
-			cp -R "$APPDIR" "$INSTALLERSTAGEDIR/core"
+			INSTALLER_STAGE_DIR="$BUILD_DIR/win_installer/staging"
+			mkdir "$INSTALLER_STAGE_DIR"
+			cp -R "$APPDIR" "$INSTALLER_STAGE_DIR/core"
 			
 			# Build and sign setup.exe
-			"`cygpath -u \"$MAKENSISU\"`" /V1 "`cygpath -w \"$BUILDDIR/win_installer/installer.nsi\"`"
-			mv "$BUILDDIR/win_installer/setup.exe" "$INSTALLERSTAGEDIR"
+			"`cygpath -u \"$MAKENSISU\"`" /V1 "`cygpath -w \"$BUILD_DIR/win_installer/installer.nsi\"`"
+			mv "$BUILD_DIR/win_installer/setup.exe" "$INSTALLER_STAGE_DIR"
 			if [ $SIGN == 1 ]; then
-				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Jurism Setup" \
-					/du "$SIGNATURE_URL" "`cygpath -w \"$INSTALLERSTAGEDIR/setup.exe\"`"
+				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Zotero Setup" \
+					/du "$SIGNATURE_URL" "`cygpath -w \"$INSTALLER_STAGE_DIR/setup.exe\"`"
 			fi
 			
 			# Compress application
-			cd "$INSTALLERSTAGEDIR" && "`cygpath -u \"$EXE7ZIP\"`" a -r -t7z "`cygpath -w \"$BUILDDIR/app_win32.7z\"`" \
+			cd "$INSTALLER_STAGE_DIR" && 7z a -r -t7z "`cygpath -w \"$BUILD_DIR/app_win32.7z\"`" \
 				-mx -m0=BCJ2 -m1=LZMA:d24 -m2=LZMA:d19 -m3=LZMA:d19  -mb0:1 -mb0s1:2 -mb0s2:3 > /dev/null
 				
 			# Compress 7zSD.sfx
-			"`cygpath -u \"$UPX\"`" --best -o "`cygpath -w \"$BUILDDIR/7zSD.sfx\"`" \
+			upx --best -o "`cygpath -w \"$BUILD_DIR/7zSD.sfx\"`" \
 				"`cygpath -w \"$CALLDIR/win/installer/7zstub/firefox/7zSD.sfx\"`" > /dev/null
 			
 			# Combine 7zSD.sfx and app.tag into setup.exe
-			cat "$BUILDDIR/7zSD.sfx" "$CALLDIR/win/installer/app.tag" \
-				"$BUILDDIR/app_win32.7z" > "$INSTALLER_PATH"
+			cat "$BUILD_DIR/7zSD.sfx" "$CALLDIR/win/installer/app.tag" \
+				"$BUILD_DIR/app_win32.7z" > "$INSTALLER_PATH"
 			
-			# Sign Jurism_setup.exe
+			# Sign Zotero_setup.exe
 			if [ $SIGN == 1 ]; then
-				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Jurism Setup" \
+				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Zotero Setup" \
 					/du "$SIGNATURE_URL" "`cygpath -w \"$INSTALLER_PATH\"`"
 			fi
 			
@@ -470,7 +479,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 		else
 			echo 'Not building on Windows; only building zip file'
 		fi
-		cd "$STAGEDIR" && zip -rqX "$DISTDIR/jurism-for-windows-all-${VERSION}.zip" Jurism_win32
+		cd "$STAGE_DIR" && zip -rqX "$DIST_DIR/jurism-for-windows-all-${VERSION}_win32.zip" Zotero_win32
 	fi
 fi
 
