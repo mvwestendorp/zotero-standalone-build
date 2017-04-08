@@ -46,7 +46,6 @@ if [ "${WHENCE}" != "none" ]; then
 
 
     dirnames="$(cat <<-EOF
-zotero
 abbrevs-filter
 bluebook-signals-for-zotero
 jurism-libreoffice-integration
