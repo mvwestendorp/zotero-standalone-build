@@ -161,33 +161,33 @@
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
-	<string>jurism</string>
+	<string>zotero</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Juris-M {{VERSION}}, © 2006-2015 Contributors</string>
+	<string>Zotero {{VERSION}}, © 2006-2011 Contributors</string>
 	<key>CFBundleIconFile</key>
-	<string>jurism</string>
+	<string>zotero</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.jurism.jurism</string>
+	<string>org.zotero.zotero</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Juris-M</string>
+	<string>Zotero</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>{{VERSION}}</string>
 	<key>CFBundleSignature</key>
-	<string>JUSM</string>
+	<string>ZOTR</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<!--<key>CFBundleURLIconFile</key>
 			<string>document.icns</string>-->
 			<key>CFBundleURLName</key>
-			<string>jurism URL</string>
+			<string>zotero URL</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>jurism</string>
+				<string>zotero</string>
 			</array>
 		</dict>
 	</array>
