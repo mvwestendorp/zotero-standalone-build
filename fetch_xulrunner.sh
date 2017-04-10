@@ -19,6 +19,18 @@ set -euo pipefail
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+function seq () {
+  if [ "$1" -lt "$2" ] ; then
+    for ((i="$1"; i<"$2"; i++))
+      do echo $i
+    done
+  else
+    for ((i="$1"; i>"$2"; i--))
+      do echo $i
+    done
+  fi
+}
+
 CALLDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$CALLDIR/config.sh"
 DOWNLOAD_URL="https://ftp.mozilla.org/pub/firefox/releases/$GECKO_VERSION"

@@ -51,7 +51,7 @@ DONE
 	exit 1
 }
 
-BUILD_DIR=`mktemp -d`
+BUILD_DIR=`mktemp -d /tmp/tmp.XXXX`
 function cleanup {
 	#rm -rf $BUILD_DIR
 	echo "NOT DELETING $BUILD_DIR"
@@ -263,7 +263,7 @@ if [ $BUILD_MAC == 1 ]; then
 
 	# Use our own launcher
 	mv "$CONTENTSDIR/MacOS/firefox" "$CONTENTSDIR/MacOS/jurism-bin"
-	cp "$CALLDIR/mac/zotero" "$CONTENTSDIR/MacOS/jurism"
+	cp "$CALLDIR/mac/jurism" "$CONTENTSDIR/MacOS/jurism"
 	cp "$BUILD_DIR/application.ini" "$CONTENTSDIR/Resources"
 	
 	cd "$CONTENTSDIR/MacOS"
@@ -324,7 +324,7 @@ if [ $BUILD_MAC == 1 ]; then
 		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR"
 		/usr/bin/codesign --verify -vvvv "$APPDIR"
 	fi
-	
+
 	# Build disk image
 	if [ $PACKAGE == 1 ]; then
 		if [ $MAC_NATIVE == 1 ]; then

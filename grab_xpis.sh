@@ -16,7 +16,13 @@ if [ "" == "$4" ]; then
 	exit 1
 fi
 
-
+gnufind() {
+  if hash gfind 2>/dev/null; then
+    gfind "$@"
+  else
+    find "$@"
+  fi
+}
 
 MODE="unknown"
 
@@ -85,7 +91,7 @@ CONTAINER_DIR=$(dirname "$CALLDIR")
         #rm -fR "zotero-standalone-build/modules/${LOCAL_DIR}"/*
         if [ "${WHENCE}" == "local" ]; then
             #LATEST=$(find "$CONTAINER_DIR/${LOCAL_DIR}"/releases -type f -name '*.xpi' -printf '%AY%Am%Ad%AH%AI%AM%AS %h/%f\n' | grep -v 'beta' | sort -r | head -1 | cut -d\  -f 2)
-            LATEST=$(find "$CONTAINER_DIR/${LOCAL_DIR}"/releases -type f -name '*.xpi' -printf '%AY%Am%Ad%AH%AI%AM%AS %h/%f\n' | sort -r | head -1 | cut -d\  -f 2)
+            LATEST=$(gnufind "$CONTAINER_DIR/${LOCAL_DIR}"/releases -type f -name '*.xpi' -printf '%AY%Am%Ad%AH%AI%AM%AS %h/%f\n' | sort -r | head -1 | cut -d\  -f 2)
 	    if [ "${LOCAL_DIR}" == "jurism" ]; then
 		ZIP_FILE="$LATEST"
 		echo "Building Jurism from $ZIP_FILE"
