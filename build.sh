@@ -357,9 +357,9 @@ if [ $BUILD_WIN32 == 1 ]; then
 	# Copy jurism.exe AKA zotero.exe, which is xulrunner-stub from https://github.com/duanyao/xulrunner-stub
 	# modified with ReplaceVistaIcon.exe and edited with Resource Hacker
 	#
-xx	   "$CALLDIR/win/ReplaceVistaIcon/ReplaceVistaIcon.exe" \
-xx	       "`cygpath -w \"$CALLDIR/win/jurism.exe\"`" \
-xx	       "`cygpath -w \"$CALLDIR/assets/icons/default/main-window.ico\"`"
+	   "$CALLDIR/win/ReplaceVistaIcon/ReplaceVistaIcon.exe" \
+	       "`cygpath -w \"$CALLDIR/win/jurism.exe\"`" \
+	       "`cygpath -w \"$CALLDIR/assets/icons/default/main-window.ico\"`"
 	#
 	cp "$CALLDIR/win/jurism.exe" "$APPDIR"
 	
