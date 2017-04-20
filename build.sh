@@ -478,11 +478,6 @@ fi
 # Linux
 if [ $BUILD_LINUX == 1 ]; then
 	for arch in "i686" "x86_64"; do
-		if [ "${arch}" == "i686" ]; then
-			description="32bit"
-		else
-			description="64bit"
-		fi
 		RUNTIME_PATH=`eval echo '$LINUX_'$arch'_RUNTIME_PATH'`
 		
 		# Set up directory
@@ -491,16 +486,38 @@ if [ $BUILD_LINUX == 1 ]; then
 		rm -rf "$APPDIR"
 		mkdir "$APPDIR"
 		
-		# Merge xulrunner and relevant assets
-		cp -R "$BUILD_DIR/jurism/"* "$BUILDDIR/application.ini" "$APPDIR"
-		cp -r "$RUNTIME_PATH" "$APPDIR/xulrunner"
-		rm "$APPDIR/xulrunner/xulrunner-stub"
-		cp "$CALLDIR/linux/xulrunner-stub-$arch" "$APPDIR/jurism"
-		chmod 755 "$APPDIR/jurism"
-	
+		# Merge relevant assets from Firefox
+		cp -r "$RUNTIME_PATH/"!(application.ini|browser|defaults|crashreporter|crashreporter.ini|firefox-bin|precomplete|removed-files|run-mozilla.sh|update-settings.ini|updater|updater.ini) "$APPDIR"
+		
+		# Use our own launcher that calls the original Firefox executable with -app
+		mv "$APPDIR"/firefox "$APPDIR"/jurism-bin
+		cp "$CALLDIR/linux/jurism" "$APPDIR"/jurism
+		
+		# Copy Ubuntu launcher files
+		cp "$CALLDIR/linux/jurism.desktop" "$APPDIR"
+		cp "$CALLDIR/linux/set_launcher_icon" "$APPDIR"
+		
+		# Use our own updater, because Mozilla's requires updates signed by Mozilla
+		cp "$CALLDIR/linux/updater-$arch" "$APPDIR"/updater
+		
+		cp -R "$BUILD_DIR/jurism/"* "$BUILD_DIR/application.ini" "$APPDIR"
+		
+		# Modify platform-specific prefs
+		perl -pi -e 's/pref\("browser\.preferences\.instantApply", false\);/pref\("browser\.preferences\.instantApply", true);/' "$BUILD_DIR/jurism/defaults/preferences/prefs.js"
+		
 		# Add Unix-specific Standalone assets
 		cd "$CALLDIR/assets/unix"
 		zip -0 -r -q "$APPDIR/jurism.jar" *
+		
+		# Add word processor plug-ins
+		#mkdir "$APPDIR/extensions"
+		#cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org"
+		#perl -pi -e 's/\.SOURCE<\/em:version>/.SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/install.rdf"
+		#echo
+		#echo -n "$ext Version: "
+		#perl -ne 'print and last if s/.*<em:version>(.*)<\/em:version>.*/\1/;' "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/install.rdf"
+		#echo
+		#rm -rf "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/.git"
 		
 		# Add word processor plug-ins
 		mkdir "$APPDIR/extensions"
@@ -518,25 +535,19 @@ if [ $BUILD_LINUX == 1 ]; then
         # Add ODF/RTF Scan (zotero-odf-scan)
 		cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
-        # Add ZotFile (zotfile-for-jurism)
-	    cp -RH "$CALLDIR/modules/zotfile" "$APPDIR/extensions/zotfile@juris-m.github.io"
-	
 		# Delete extraneous files
 		find "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;
 		find "$APPDIR" \( -name .DS_Store -or -name update.rdf \) -exec rm -f {} \;
 		find "$APPDIR/extensions" -depth -type d -name build -exec rm -rf {} \;
 		
 		# Add run-zotero.sh
-		cp "$CALLDIR/linux/run-zotero.sh" "$APPDIR/run-zotero.sh"
-		
-		# Move icons, so that updater.png doesn't fail
-		mv "$APPDIR/xulrunner/icons" "$APPDIR/icons"
+		#cp "$CALLDIR/linux/run-jurism.sh" "$APPDIR/run-jurism.sh"
 		
 		if [ $PACKAGE == 1 ]; then
 			# Create tar
-			rm -f "$DIST_DIR/jurism-for-linux-${description}-${VERSION}.tar.bz2"
+			rm -f "$DIST_DIR/Jurism-${VERSION}_linux-$arch.tar.bz2"
 			cd "$STAGE_DIR"
-			tar -cjf "$DIST_DIR/jurism-for-linux-${description}-${VERSION}.tar.bz2" "Jurism_linux-$arch"
+			tar -cjf "$DIST_DIR/Jurism-${VERSION}_linux-$arch.tar.bz2" "Jurism_linux-$arch"
 		fi
 	done
 fi
