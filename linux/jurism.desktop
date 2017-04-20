@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Jurism
+Exec=bash -c "`dirname %k`/jurism"
+Icon=jurism.ico
+Type=Application
+Terminal=false
