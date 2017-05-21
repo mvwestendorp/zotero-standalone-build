@@ -37,13 +37,14 @@ PACKAGE=1
 
 function usage {
 	cat >&2 <<DONE
-Usage: $0 [-p PLATFORMS] [-s DIR] [-v VERSION] [-c CHANNEL] [-d]
+Usage: $0 [-p PLATFORMS] [-s DIR] [-v VERSION] [-c CHANNEL] [-d] [-t]
 Options
  -p PLATFORMS    *    build for platforms PLATFORMS (m=Mac, w=Windows, l=Linux)
  -s DIR               build symlinked to Zotero checkout DIR (implies -d)
  -v VERSION      *    use version VERSION (with leading "v")
  -c CHANNEL           use update channel CHANNEL
  -d                   don\'t package; only build binaries in staging/ directory
+ -t                   build with debugging support
  -x XPI source   *    local, remote, or none
 
 (options marked with * are not optional)
@@ -75,7 +76,7 @@ function seq () {
 }
 
 PACKAGE=1
-while getopts "p:s:v:c:x:d" opt; do
+while getopts "p:s:v:c:x:dt" opt; do
 	case $opt in
 		p)
 			BUILD_MAC=0
@@ -109,6 +110,9 @@ while getopts "p:s:v:c:x:d" opt; do
 			;;
 		d)
 			PACKAGE=0
+			;;
+		t)
+			DEVTOOLS=1
 			;;
 		*)
 			usage
@@ -160,6 +164,14 @@ mkdir "$DIST_DIR"
 
 # Save build id, which is needed for updates manifest
 echo $BUILD_ID > "$DIST_DIR/build_id"
+
+# Add devtools manifest and pref
+if [ $DEVTOOLS -eq 1 ]; then
+	cat "$CALLDIR/assets/devtools.manifest" >> "$BUILD_DIR/jurism/chrome.manifest"
+	echo 'pref("devtools.debugger.remote-enabled", true);' >> "$BUILD_DIR/jurism/defaults/preferences/prefs.js"
+	echo 'pref("devtools.debugger.remote-port", 6100);' >> "$BUILD_DIR/jurism/defaults/preferences/prefs.js"
+	echo 'pref("devtools.debugger.prompt-connection", false);' >> "$BUILD_DIR/jurism/defaults/preferences/prefs.js"
+fi
 
 if [ -z "$UPDATE_CHANNEL" ]; then UPDATE_CHANNEL="default"; fi
 
@@ -509,6 +521,12 @@ if [ $BUILD_LINUX == 1 ]; then
 		cd "$CALLDIR/assets/unix"
 		zip -0 -r -q "$APPDIR/jurism.jar" *
 		
+		# Add devtools
+		if [ $DEVTOOLS -eq 1 ]; then
+			cp -r "$RUNTIME_PATH"/devtools-files/chrome/* "$APPDIR/chrome/"
+			cp "$RUNTIME_PATH/devtools-files/components/interfaces.xpt" "$APPDIR/components/"
+		fi
+        
 		# Add word processor plug-ins
 		#mkdir "$APPDIR/extensions"
 		#cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org"
