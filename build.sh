@@ -205,7 +205,7 @@ cp -R "$CALLDIR/assets/console/locale/en-US" "$BUILD_DIR/jurism/chrome/console/l
 cat "$CALLDIR/assets/console/jsconsole.manifest" >> "$BUILD_DIR/jurism/chrome.manifest"
 
 # Delete files that shouldn't be distributed
-find "$BUILD_DIR/jurism/chrome" -name .DS_Store -exec rm -f {} \;
+gfind "$BUILD_DIR/jurism/chrome" -name .DS_Store -exec rm -f {} \;
 
 # Zip chrome into JAR
 cd "$BUILD_DIR/jurism"
@@ -248,7 +248,7 @@ grep app.update.channel "$BUILD_DIR/jurism/defaults/preferences/prefs.js"
 echo
 
 # Remove unnecessary files
-find "$BUILD_DIR" -name .DS_Store -exec rm -f {} \;
+gfind "$BUILD_DIR" -name .DS_Store -exec rm -f {} \;
 rm -rf "$BUILD_DIR/jurism/test"
 
 cd "$CALLDIR"
@@ -319,9 +319,9 @@ if [ $BUILD_MAC == 1 ]; then
 	cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$CONTENTSDIR/Resources/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 	
 	# Delete extraneous files
-	find "$CONTENTSDIR" -depth -type d -name .git -exec rm -rf {} \;
-	find "$CONTENTSDIR" \( -name .DS_Store -or -name update.rdf \) -exec rm -f {} \;
-	find "$CONTENTSDIR/Resources/extensions" -depth -type d -name build -exec rm -rf {} \;
+	gfind "$CONTENTSDIR" -depth -type d -name .git -exec rm -rf {} \;
+	gfind "$CONTENTSDIR" \( -name .DS_Store -or -name update.rdf \) -exec rm -f {} \;
+	gfind "$CONTENTSDIR/Resources/extensions" -depth -type d -name build -exec rm -rf {} \;
 
 	# Copy over removed-files and make a precomplete file since it
 	# needs to be stable for the signature
@@ -415,10 +415,10 @@ if [ $BUILD_WIN32 == 1 ]; then
 	cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
 	# Delete extraneous files
-	find "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;
-	find "$APPDIR" \( -name .DS_Store -or -name '.git*' -or -name '.travis.yml' -or -name update.rdf -or -name '*.bak' \) -exec rm -f {} \;
-	find "$APPDIR/extensions" -depth -type d -name build -exec rm -rf {} \;
-	find "$APPDIR" \( -name '*.exe' -or -name '*.dll' \) -exec chmod 755 {} \;
+	gfind "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;
+	gfind "$APPDIR" \( -name .DS_Store -or -name '.git*' -or -name '.travis.yml' -or -name update.rdf -or -name '*.bak' \) -exec rm -f {} \;
+	gfind "$APPDIR/extensions" -depth -type d -name build -exec rm -rf {} \;
+	gfind "$APPDIR" \( -name '*.exe' -or -name '*.dll' \) -exec chmod 755 {} \;
 
 	if [ $PACKAGE == 1 ]; then
 		if [ $WIN_NATIVE == 1 ]; then
@@ -554,9 +554,9 @@ if [ $BUILD_LINUX == 1 ]; then
 		cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
 		# Delete extraneous files
-		find "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;
-		find "$APPDIR" \( -name .DS_Store -or -name update.rdf \) -exec rm -f {} \;
-		find "$APPDIR/extensions" -depth -type d -name build -exec rm -rf {} \;
+		gfind "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;
+		gfind "$APPDIR" \( -name .DS_Store -or -name update.rdf \) -exec rm -f {} \;
+		gfind "$APPDIR/extensions" -depth -type d -name build -exec rm -rf {} \;
 		
 		# Add run-zotero.sh
 		#cp "$CALLDIR/linux/run-jurism.sh" "$APPDIR/run-jurism.sh"
