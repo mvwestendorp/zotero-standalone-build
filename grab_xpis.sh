@@ -1,6 +1,10 @@
+
 #!/bin/bash
 
 # Fetch most recent local XPIs
+
+set -e
+
 
 CALLDIR="$3"
 if [ "" == "$3" ]; then
@@ -16,13 +20,14 @@ if [ "" == "$4" ]; then
 	exit 1
 fi
 
-gnufind() {
-  if hash gfind 2>/dev/null; then
-    gfind "$@"
-  else
-    find "$@"
-  fi
-}
+set +e
+gfind --version > /dev/null 2<&1
+if [ $? -gt 0 ]; then
+    GFIND="find"
+else
+    GFIND="gfind"
+fi
+set -e
 
 MODE="unknown"
 
@@ -84,25 +89,25 @@ CONTAINER_DIR=$(dirname "$CALLDIR")
             LOCAL_DIR="jurism"
         else
             LOCAL_DIR="${f}"
-	    if [ ! -d "$CALLDIR/modules/${LOCAL_DIR}" ]; then
-	        mkdir "$CALLDIR/modules/${LOCAL_DIR}"
+	        if [ ! -d "$CALLDIR/modules/${LOCAL_DIR}" ]; then
+	            mkdir "$CALLDIR/modules/${LOCAL_DIR}"
        	    fi
         fi
         #rm -fR "zotero-standalone-build/modules/${LOCAL_DIR}"/*
         if [ "${WHENCE}" == "local" ]; then
             #LATEST=$(find "$CONTAINER_DIR/${LOCAL_DIR}"/releases -type f -name '*.xpi' -printf '%AY%Am%Ad%AH%AI%AM%AS %h/%f\n' | grep -v 'beta' | sort -r | head -1 | cut -d\  -f 2)
-            LATEST=$(gnufind "$CONTAINER_DIR/${LOCAL_DIR}"/releases -type f -name '*.xpi' -printf '%AY%Am%Ad%AH%AI%AM%AS %h/%f\n' | sort -r | head -1 | cut -d\  -f 2)
-	    if [ "${LOCAL_DIR}" == "jurism" ]; then
-		ZIP_FILE="$LATEST"
-		echo "Building Jurism from $ZIP_FILE"
-                unzip -q $ZIP_FILE -d "$BUILD_DIR/jurism"
+            if [ "${LOCAL_DIR}" == "jurism" ]; then
+	        LATEST="${CONTAINER_DIR}/zotero-build/xpi/build/zotero-build.xpi"
+		echo "Building Jurism from ${LATEST}"
+                unzip -q "${LATEST}" -d "$BUILD_DIR/jurism"
 	    else
+	        LATEST=$(${GFIND} "$CONTAINER_DIR/${LOCAL_DIR}"/releases -type f -name '*.xpi' -printf '%AY%Am%Ad%AH%AI%AM%AS %h/%f\n' | sort -r | head -1 | cut -d\  -f 2);
                 unzip -q "${LATEST}" -d "$CALLDIR/modules/$LOCAL_DIR/"
             fi
         else
             echo "Sorry, -x local is the only functional source parameter."
             exit 1
-	    echo "https://juris-m.github.io/${f}/update.rdf"
+	        echo "https://juris-m.github.io/${f}/update.rdf"
             URL=$(curl -s "https://juris-m.github.io/${f}/update.rdf" | grep -o ".*<em:updateLink>.*<\/em:updateLink>.*" | sed -e "s/.*<em:updateLink>//g" | sed -e "s/<\/em:updateLink>.*//g")
             cd "zotero-standalone-build/modules/${LOCAL_DIR}"
             echo "  ${URL} -> ${f}.xpi"
