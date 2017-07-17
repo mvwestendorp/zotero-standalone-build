@@ -38,10 +38,6 @@ pref("network.protocol-handler.expose.https", true);
 pref("offline.autoDetect", false);
 pref("network.manage-offline-status", false);
 
-// Disable graphics acceleration
-pref("layers.acceleration.disabled", true);
-pref("gfx.direct2d.disabled", true);
-
 // Without this, we will throw up dialogs if asked to translate strange pages
 pref("browser.xul.error_pages.enabled", true);
 
@@ -61,11 +57,23 @@ pref("extensions.getAddons.cache.enabled", false);
 //pref("extensions.getAddons.search.url", "https://services.addons.mozilla.org/%LOCALE%/%APP%/api/%API_VERSION%/search/%TERMS%/all/%MAX_RESULTS%/%OS%/%VERSION%?src=thunderbird");
 //pref("extensions.webservice.discoverURL", "https://www.zotero.org/support/plugins");
 
+// Disable add-on signature checking with unbranded Firefox build
+pref("xpinstall.signatures.required", false);
+
 // Allow installing XPIs from any host
 pref("xpinstall.whitelist.required", false);
 
 // Disable places
 pref("places.history.enabled", false);
+
+// Probably not used, but prevent an error in the console
+pref("app.support.baseURL", "https://www.zotero.org/support/");
+
+// Disable Telemetry and Health Report
+pref("toolkit.telemetry.unified", false);
+pref("toolkit.telemetry.enabled", false);
+pref("datareporting.healthreport.service.enabled", false);
+pref("datareporting.policy.dataSubmissionEnabled", false);
 
 // Preferences to allow updating add-ons from AMO
 // TODO: Does this work for Standalone, or do we need to pretend to be Firefox?
@@ -153,3 +161,6 @@ pref("app.update.channel", "default");
 
 // This should probably not be a preference that's used in toolkit....
 pref("browser.preferences.instantApply", false);
+
+// Whether to show the Error Console option in the Tools menu
+pref("devtools.errorconsole.enabled", false);

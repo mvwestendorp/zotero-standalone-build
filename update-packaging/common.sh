@@ -54,7 +54,8 @@ make_add_instruction() {
     forced=
   fi
 
-  is_extension=$(echo "$f" | grep -c 'distribution/extensions/.*/')
+  # Changed by Zotero for -e
+  is_extension=$(echo "$f" | grep -c 'distribution/extensions/.*/') || true
   if [ $is_extension = "1" ]; then
     # Use the subdirectory of the extensions folder as the file to test
     # before performing this add instruction.
@@ -109,7 +110,7 @@ make_patch_instruction() {
   filev2="$2"
   filev3="$3"
 
-  is_extension=$(echo "$f" | grep -c 'distribution/extensions/.*/')
+  is_extension=$(echo "$f" | grep -c 'distribution/extensions/.*/') || true
   if [ $is_extension = "1" ]; then
     # Use the subdirectory of the extensions folder as the file to test
     # before performing this add instruction.
@@ -135,6 +136,10 @@ append_remove_instructions() {
     listfile="$dir/Contents/Resources/removed-files"
   fi
   if [ -n "$listfile" ]; then
+    # Changed by Zotero: Use subshell and disable filename globbing to prevent bash from expanding
+    # entries in removed-files with paths from the root (e.g., 'xulrunner/*')
+    (
+    set -f
     # Map spaces to pipes so that we correctly handle filenames with spaces.
     files=($(cat "$listfile" | tr " " "|"  | sort -r))
     num_files=${#files[*]}
@@ -165,6 +170,7 @@ append_remove_instructions() {
         fi
       fi
     done
+    )
   fi
 }
 
@@ -183,7 +189,9 @@ list_files() {
     | sort -r > "temp-filelist"
   while read file; do
     eval "${1}[$count]=\"$file\""
-    (( count++ ))
+    # Changed for Zotero to avoid eval as 1
+    #(( count++ ))
+    (( ++count ))
   done < "temp-filelist"
   rm "temp-filelist"
 }
@@ -199,7 +207,9 @@ list_dirs() {
     | sort -r > "temp-dirlist"
   while read dir; do
     eval "${1}[$count]=\"$dir\""
-    (( count++ ))
+    # Changed for Zotero
+    #(( count++ ))
+    (( ++count ))
   done < "temp-dirlist"
   rm "temp-dirlist"
 }

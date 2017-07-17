@@ -8,6 +8,8 @@
 # Author: Darin Fisher
 #
 
+set -eo pipefail
+
 . $(dirname "$0")/common.sh
 
 # -----------------------------------------------------------------------------
@@ -87,8 +89,10 @@ done
 
 # -----------------------------------------------------------------------------
 
+set +e
 let arg_start=$OPTIND-1
 shift $arg_start
+set -e
 
 archive="$1"
 olddir="$2"
@@ -230,7 +234,9 @@ for ((i=0; $i<$num_oldfiles; i=$i+1)); do
     # remove instructions are added after add / patch instructions for
     # consistency with make_incremental_updates.py
     remove_array[$num_removes]=$f
-    (( num_removes++ ))
+    # Changed by Zotero for -e
+    #(( num_removes++ ))
+    (( ++num_removes ))
   fi
 done
 
@@ -305,8 +311,11 @@ if [[ -n $MOZ_CHANNEL_ID ]]
 then
   mar_command="$mar_command -H $MOZ_CHANNEL_ID"
 fi
-mar_command="$mar_command -C \"$workdir\" -c output.mar"
+# Changed for Zotero -- -C is unreliable
+pushd $workdir > /dev/null
+mar_command="$mar_command -c output.mar"
 eval "$mar_command $archivefiles"
+popd > /dev/null
 mv -f "$workdir/output.mar" "$archive"
 
 # cleanup

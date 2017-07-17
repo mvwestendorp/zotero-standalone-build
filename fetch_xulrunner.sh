@@ -19,21 +19,8 @@ set -euo pipefail
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-function seq () {
-  if [ "$1" -lt "$2" ] ; then
-    for ((i="$1"; i<"$2"; i++))
-      do echo $i
-    done
-  else
-    for ((i="$1"; i>"$2"; i--))
-      do echo $i
-    done
-  fi
-}
-
 CALLDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$CALLDIR/config.sh"
-DOWNLOAD_URL="https://ftp.mozilla.org/pub/firefox/releases/$GECKO_VERSION"
 
 function usage {
 	cat >&2 <<DONE
@@ -120,11 +107,12 @@ function extract_devtools {
 	set -e
 }
 
-rm -rf xulrunner
-mkdir xulrunner
+mkdir -p xulrunner
 cd xulrunner
 
 if [ $BUILD_MAC == 1 ]; then
+	GECKO_VERSION="$GECKO_VERSION_MAC"
+	DOWNLOAD_URL="https://ftp.mozilla.org/pub/firefox/releases/$GECKO_VERSION"
 	rm -rf Firefox.app
 	
 	curl -O "$DOWNLOAD_URL/mac/en-US/Firefox%20$GECKO_VERSION.dmg"
@@ -144,6 +132,9 @@ if [ $BUILD_MAC == 1 ]; then
 fi
 
 if [ $BUILD_WIN32 == 1 ]; then
+	GECKO_VERSION="$GECKO_VERSION_WIN"
+	DOWNLOAD_URL="https://ftp.mozilla.org/pub/firefox/releases/$GECKO_VERSION"
+	
 	XDIR=firefox-win32
 	rm -rf $XDIR
 	mkdir $XDIR
@@ -164,6 +155,8 @@ if [ $BUILD_WIN32 == 1 ]; then
 fi
 
 if [ $BUILD_LINUX == 1 ]; then
+	GECKO_VERSION="$GECKO_VERSION_LINUX"
+	DOWNLOAD_URL="https://ftp.mozilla.org/pub/firefox/releases/$GECKO_VERSION"
 	rm -rf firefox
 	
 	curl -O "$DOWNLOAD_URL/linux-i686/en-US/firefox-$GECKO_VERSION.tar.bz2"
