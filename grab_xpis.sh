@@ -97,9 +97,9 @@ CONTAINER_DIR=$(dirname "$CALLDIR")
         if [ "${WHENCE}" == "local" ]; then
             #LATEST=$(find "$CONTAINER_DIR/${LOCAL_DIR}"/releases -type f -name '*.xpi' -printf '%AY%Am%Ad%AH%AI%AM%AS %h/%f\n' | grep -v 'beta' | sort -r | head -1 | cut -d\  -f 2)
             if [ "${LOCAL_DIR}" == "jurism" ]; then
-	        LATEST="${CONTAINER_DIR}/zotero-build/xpi/build/zotero-build.xpi"
+	        LATEST="${CONTAINER_DIR}/jurism/build"
 		echo "Building Jurism from ${LATEST}"
-                unzip -q "${LATEST}" -d "$BUILD_DIR/jurism"
+                cp -r "${LATEST}" -d "$BUILD_DIR/jurism"
 	    else
 	        LATEST=$(${GFIND} "$CONTAINER_DIR/${LOCAL_DIR}"/releases -type f -name '*.xpi' -printf '%AY%Am%Ad%AH%AI%AM%AS %h/%f\n' | sort -r | head -1 | cut -d\  -f 2);
                 unzip -q "${LATEST}" -d "$CALLDIR/modules/$LOCAL_DIR/"
