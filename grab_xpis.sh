@@ -99,7 +99,7 @@ CONTAINER_DIR=$(dirname "$CALLDIR")
             if [ "${LOCAL_DIR}" == "jurism" ]; then
 	        LATEST="${CONTAINER_DIR}/jurism/build"
 		echo "Building Jurism from ${LATEST}"
-                cp -r -L "${LATEST}" "$BUILD_DIR/jurism"
+                cp -RL "${LATEST}" "$BUILD_DIR/jurism"
 		#ls -l "$BUILD_DIR/jurism/"
 		# Needed to avoid crash when runner assumes jurism code is packed.
 		cp "$BUILD_DIR/jurism/translators/deleted.txt" "$BUILD_DIR/jurism/deleted.txt" 
