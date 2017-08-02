@@ -1,0 +1,2164 @@
+.
+./chrome
+./chrome/branding
+./chrome/branding/branding
+./chrome/branding/branding/content
+./chrome/branding/branding/content/icon48.png
+./chrome/branding/branding/content/icon64.png
+./chrome/branding/branding/locale
+./chrome/branding/branding/locale/brand.dtd
+./chrome/branding/branding/locale/brand.properties
+./chrome/branding/content
+./chrome/branding/content/icon48.png
+./chrome/branding/content/icon64.png
+./chrome/branding/locale
+./chrome/branding/locale/brand.dtd
+./chrome/branding/locale/brand.properties
+./chrome/console
+./chrome/console/console.css
+./chrome/console/console.js
+./chrome/console/console.xul
+./chrome/console/consoleBindings.xml
+./chrome/console/content
+./chrome/console/content/console.css
+./chrome/console/content/console.js
+./chrome/console/content/console.xul
+./chrome/console/content/consoleBindings.xml
+./chrome/console/locale
+./chrome/console/locale/console.dtd
+./chrome/console/locale/console.properties
+./chrome/console/locale/en-US
+./chrome/console/locale/en-US/console.dtd
+./chrome/console/locale/en-US/console.properties
+./chrome/console/skin
+./chrome/console/skin/console.css
+./chrome/console/skin/osx
+./chrome/console/skin/osx/console.css
+./chrome/content
+./chrome/content/zotero
+./chrome/content/zotero/about.xul
+./chrome/content/zotero/advancedSearch.js
+./chrome/content/zotero/advancedSearch.xul
+./chrome/content/zotero/attachLink.js
+./chrome/content/zotero/attachLink.xul
+./chrome/content/zotero/bibliography.js
+./chrome/content/zotero/bibliography.xul
+./chrome/content/zotero/bindings
+./chrome/content/zotero/bindings/attachmentbox.xml
+./chrome/content/zotero/bindings/customcolorpicker.xml
+./chrome/content/zotero/bindings/filesyncstatus.xml
+./chrome/content/zotero/bindings/guidancepanel.xml
+./chrome/content/zotero/bindings/itembox.xml
+./chrome/content/zotero/bindings/merge.xml
+./chrome/content/zotero/bindings/noteeditor.xml
+./chrome/content/zotero/bindings/relatedbox.xml
+./chrome/content/zotero/bindings/resizabledialog.xml
+./chrome/content/zotero/bindings/storagefilebox.xml
+./chrome/content/zotero/bindings/styled-textbox.xml
+./chrome/content/zotero/bindings/tagsbox.xml
+./chrome/content/zotero/bindings/tagselector.xml
+./chrome/content/zotero/bindings/text-link.xml
+./chrome/content/zotero/bindings/timedtextarea.xml
+./chrome/content/zotero/bindings/zoterosearch.xml
+./chrome/content/zotero/browser.js
+./chrome/content/zotero/captcha.js
+./chrome/content/zotero/captcha.xul
+./chrome/content/zotero/charsetMenu.js
+./chrome/content/zotero/debugViewer.html
+./chrome/content/zotero/debugViewer.js
+./chrome/content/zotero/downloadOverlay.js
+./chrome/content/zotero/downloadOverlay.xul
+./chrome/content/zotero/duplicatesMerge.js
+./chrome/content/zotero/editExtraField.js
+./chrome/content/zotero/editExtraField.xul
+./chrome/content/zotero/errorReport.xul
+./chrome/content/zotero/exportOptions.js
+./chrome/content/zotero/exportOptions.xul
+./chrome/content/zotero/feedSettings.js
+./chrome/content/zotero/feedSettings.xul
+./chrome/content/zotero/fileInterface.js
+./chrome/content/zotero/hardConfirmationDialog.js
+./chrome/content/zotero/hardConfirmationDialog.xul
+./chrome/content/zotero/icon.js
+./chrome/content/zotero/include.js
+./chrome/content/zotero/ingester
+./chrome/content/zotero/ingester/selectitems.js
+./chrome/content/zotero/ingester/selectitems.xul
+./chrome/content/zotero/install_check.jsm
+./chrome/content/zotero/integration
+./chrome/content/zotero/integration/addCitationDialog.js
+./chrome/content/zotero/integration/addCitationDialog.xul
+./chrome/content/zotero/integration/editBibliographyDialog.js
+./chrome/content/zotero/integration/editBibliographyDialog.xul
+./chrome/content/zotero/integration/integrationDocPrefs.xul
+./chrome/content/zotero/integration/progressMeterBib.xul
+./chrome/content/zotero/integration/progressMeterRead.xul
+./chrome/content/zotero/integration/progressMeterRefresh.xul
+./chrome/content/zotero/integration/progressMeterWrite.xul
+./chrome/content/zotero/integration/quickFormat.js
+./chrome/content/zotero/integration/quickFormat.xul
+./chrome/content/zotero/integration/windowDraggingUtils.js
+./chrome/content/zotero/itemPane.js
+./chrome/content/zotero/itemPane.xul
+./chrome/content/zotero/locale
+./chrome/content/zotero/locale/csl
+./chrome/content/zotero/locale/csl/Gemfile
+./chrome/content/zotero/locale/csl/Gemfile.lock
+./chrome/content/zotero/locale/csl/locales-af-ZA.xml
+./chrome/content/zotero/locale/csl/locales-ar.xml
+./chrome/content/zotero/locale/csl/locales-bg-BG.xml
+./chrome/content/zotero/locale/csl/locales-ca-AD.xml
+./chrome/content/zotero/locale/csl/locales-cs-CZ.xml
+./chrome/content/zotero/locale/csl/locales-cy-GB.xml
+./chrome/content/zotero/locale/csl/locales-da-DK.xml
+./chrome/content/zotero/locale/csl/locales-de-AT.xml
+./chrome/content/zotero/locale/csl/locales-de-CH.xml
+./chrome/content/zotero/locale/csl/locales-de-DE.xml
+./chrome/content/zotero/locale/csl/locales-el-GR.xml
+./chrome/content/zotero/locale/csl/locales-en-GB.xml
+./chrome/content/zotero/locale/csl/locales-en-US.xml
+./chrome/content/zotero/locale/csl/locales-es-CL.xml
+./chrome/content/zotero/locale/csl/locales-es-ES.xml
+./chrome/content/zotero/locale/csl/locales-es-MX.xml
+./chrome/content/zotero/locale/csl/locales-et-EE.xml
+./chrome/content/zotero/locale/csl/locales-eu.xml
+./chrome/content/zotero/locale/csl/locales-fa-IR.xml
+./chrome/content/zotero/locale/csl/locales-fi-FI.xml
+./chrome/content/zotero/locale/csl/locales-fr-CA.xml
+./chrome/content/zotero/locale/csl/locales-fr-FR.xml
+./chrome/content/zotero/locale/csl/locales-he-IL.xml
+./chrome/content/zotero/locale/csl/locales-hr-HR.xml
+./chrome/content/zotero/locale/csl/locales-hu-HU.xml
+./chrome/content/zotero/locale/csl/locales-id-ID.xml
+./chrome/content/zotero/locale/csl/locales-is-IS.xml
+./chrome/content/zotero/locale/csl/locales-it-IT.xml
+./chrome/content/zotero/locale/csl/locales-ja-JP.xml
+./chrome/content/zotero/locale/csl/locales-km-KH.xml
+./chrome/content/zotero/locale/csl/locales-ko-KR.xml
+./chrome/content/zotero/locale/csl/locales-lt-LT.xml
+./chrome/content/zotero/locale/csl/locales-lv-LV.xml
+./chrome/content/zotero/locale/csl/locales-mn-MN.xml
+./chrome/content/zotero/locale/csl/locales-nb-NO.xml
+./chrome/content/zotero/locale/csl/locales-nl-NL.xml
+./chrome/content/zotero/locale/csl/locales-nn-NO.xml
+./chrome/content/zotero/locale/csl/locales-pl-PL.xml
+./chrome/content/zotero/locale/csl/locales-pt-BR.xml
+./chrome/content/zotero/locale/csl/locales-pt-PT.xml
+./chrome/content/zotero/locale/csl/locales-ro-RO.xml
+./chrome/content/zotero/locale/csl/locales-ru-RU.xml
+./chrome/content/zotero/locale/csl/locales-sk-SK.xml
+./chrome/content/zotero/locale/csl/locales-sl-SI.xml
+./chrome/content/zotero/locale/csl/locales-sr-RS.xml
+./chrome/content/zotero/locale/csl/locales-sv-SE.xml
+./chrome/content/zotero/locale/csl/locales-th-TH.xml
+./chrome/content/zotero/locale/csl/locales-tr-TR.xml
+./chrome/content/zotero/locale/csl/locales-uk-UA.xml
+./chrome/content/zotero/locale/csl/locales-vi-VN.xml
+./chrome/content/zotero/locale/csl/locales-zh-CN.xml
+./chrome/content/zotero/locale/csl/locales-zh-TW.xml
+./chrome/content/zotero/locale/csl/locales.json
+./chrome/content/zotero/locale/csl/Rakefile
+./chrome/content/zotero/locale/csl/README.md
+./chrome/content/zotero/locale/csl/spec
+./chrome/content/zotero/locale/csl/spec/locales_spec.rb
+./chrome/content/zotero/locale/csl/spec/repository_spec.rb
+./chrome/content/zotero/locale/csl/spec/spec_helper.rb
+./chrome/content/zotero/locateManager.xul
+./chrome/content/zotero/locateMenu.js
+./chrome/content/zotero/longTagFixer.js
+./chrome/content/zotero/longTagFixer.xul
+./chrome/content/zotero/lookup.js
+./chrome/content/zotero/merge.js
+./chrome/content/zotero/merge.xul
+./chrome/content/zotero/note.js
+./chrome/content/zotero/note.xul
+./chrome/content/zotero/overlay.js
+./chrome/content/zotero/overlay.xul
+./chrome/content/zotero/pdfProgress.xul
+./chrome/content/zotero/preferences
+./chrome/content/zotero/preferences/librariesToSync.xul
+./chrome/content/zotero/preferences/preferences.js
+./chrome/content/zotero/preferences/preferences.xul
+./chrome/content/zotero/preferences/preferences_advanced.js
+./chrome/content/zotero/preferences/preferences_advanced.xul
+./chrome/content/zotero/preferences/preferences_advanced_firefox.xul
+./chrome/content/zotero/preferences/preferences_cite.js
+./chrome/content/zotero/preferences/preferences_cite.xul
+./chrome/content/zotero/preferences/preferences_export.js
+./chrome/content/zotero/preferences/preferences_export.xul
+./chrome/content/zotero/preferences/preferences_firefox.xul
+./chrome/content/zotero/preferences/preferences_general.js
+./chrome/content/zotero/preferences/preferences_general.xul
+./chrome/content/zotero/preferences/preferences_general_firefox.xul
+./chrome/content/zotero/preferences/preferences_lang.js
+./chrome/content/zotero/preferences/preferences_lang.xul
+./chrome/content/zotero/preferences/preferences_proxies.js
+./chrome/content/zotero/preferences/preferences_search.js
+./chrome/content/zotero/preferences/preferences_search.xul
+./chrome/content/zotero/preferences/preferences_sync.js
+./chrome/content/zotero/preferences/preferences_sync.xul
+./chrome/content/zotero/preferences/proxyEditor.js
+./chrome/content/zotero/preferences/proxyEditor.xul
+./chrome/content/zotero/preferences/quickCopySiteEditor.xul
+./chrome/content/zotero/progressWindow.xul
+./chrome/content/zotero/proxy.js
+./chrome/content/zotero/proxy.xul
+./chrome/content/zotero/publicationsDialog.js
+./chrome/content/zotero/publicationsDialog.xul
+./chrome/content/zotero/recognizePDF.js
+./chrome/content/zotero/reportInterface.js
+./chrome/content/zotero/rtfScan.js
+./chrome/content/zotero/rtfScan.xul
+./chrome/content/zotero/searchDialog.js
+./chrome/content/zotero/searchDialog.xul
+./chrome/content/zotero/selectItemsDialog.js
+./chrome/content/zotero/selectItemsDialog.xul
+./chrome/content/zotero/standalone
+./chrome/content/zotero/standalone/basicViewer.js
+./chrome/content/zotero/standalone/basicViewer.xul
+./chrome/content/zotero/standalone/editMenuOverlay.xul
+./chrome/content/zotero/standalone/extensionsOverlay.js
+./chrome/content/zotero/standalone/extensionsOverlay.xul
+./chrome/content/zotero/standalone/hiddenWindow.xul
+./chrome/content/zotero/standalone/standalone.js
+./chrome/content/zotero/standalone/standalone.xul
+./chrome/content/zotero/standalone/updatesOverlay.xul
+./chrome/content/zotero/tagColorChooser.js
+./chrome/content/zotero/tagColorChooser.xul
+./chrome/content/zotero/test
+./chrome/content/zotero/test/modtime.js
+./chrome/content/zotero/test/modtime.xul
+./chrome/content/zotero/test/test.js
+./chrome/content/zotero/test/test.xul
+./chrome/content/zotero/timelineInterface.js
+./chrome/content/zotero/tinymce
+./chrome/content/zotero/tinymce/plugins
+./chrome/content/zotero/tinymce/plugins/directionality
+./chrome/content/zotero/tinymce/plugins/directionality/editor_plugin_src.js
+./chrome/content/zotero/tools
+./chrome/content/zotero/tools/build_typeSchemaData.html
+./chrome/content/zotero/tools/closeWindow.xul
+./chrome/content/zotero/tools/csledit.js
+./chrome/content/zotero/tools/csledit.xul
+./chrome/content/zotero/tools/cslpreview.js
+./chrome/content/zotero/tools/cslpreview.xul
+./chrome/content/zotero/tools/data_generator.html
+./chrome/content/zotero/tools/testTranslators
+./chrome/content/zotero/tools/testTranslators/testTranslators.css
+./chrome/content/zotero/tools/testTranslators/testTranslators.html
+./chrome/content/zotero/tools/testTranslators/testTranslators.js
+./chrome/content/zotero/tools/testTranslators/translatorTester.js
+./chrome/content/zotero/updateCSL.xsl
+./chrome/content/zotero/upgrade.xul
+./chrome/content/zotero/xpcom
+./chrome/content/zotero/xpcom/annotate.js
+./chrome/content/zotero/xpcom/api.js
+./chrome/content/zotero/xpcom/attachments.js
+./chrome/content/zotero/xpcom/cite.js
+./chrome/content/zotero/xpcom/citeproc-prereqs.js
+./chrome/content/zotero/xpcom/citeproc.js
+./chrome/content/zotero/xpcom/collectionTreeRow.js
+./chrome/content/zotero/xpcom/collectionTreeView.js
+./chrome/content/zotero/xpcom/cookieSandbox.js
+./chrome/content/zotero/xpcom/data
+./chrome/content/zotero/xpcom/data/cachedJurisdictionData.js
+./chrome/content/zotero/xpcom/data/cachedLanguages.js
+./chrome/content/zotero/xpcom/data/cachedMultiFields.js
+./chrome/content/zotero/xpcom/data/cachedTypes.js
+./chrome/content/zotero/xpcom/data/collection.js
+./chrome/content/zotero/xpcom/data/collections.js
+./chrome/content/zotero/xpcom/data/creators.js
+./chrome/content/zotero/xpcom/data/dataObject.js
+./chrome/content/zotero/xpcom/data/dataObjects.js
+./chrome/content/zotero/xpcom/data/dataObjectUtilities.js
+./chrome/content/zotero/xpcom/data/feed.js
+./chrome/content/zotero/xpcom/data/feedItem.js
+./chrome/content/zotero/xpcom/data/feedItems.js
+./chrome/content/zotero/xpcom/data/feeds.js
+./chrome/content/zotero/xpcom/data/group.js
+./chrome/content/zotero/xpcom/data/groups.js
+./chrome/content/zotero/xpcom/data/item.js
+./chrome/content/zotero/xpcom/data/itemFields.js
+./chrome/content/zotero/xpcom/data/items.js
+./chrome/content/zotero/xpcom/data/libraries.js
+./chrome/content/zotero/xpcom/data/library.js
+./chrome/content/zotero/xpcom/data/notes.js
+./chrome/content/zotero/xpcom/data/relations.js
+./chrome/content/zotero/xpcom/data/search.js
+./chrome/content/zotero/xpcom/data/searchConditions.js
+./chrome/content/zotero/xpcom/data/searches.js
+./chrome/content/zotero/xpcom/data/tags.js
+./chrome/content/zotero/xpcom/dataDirectory.js
+./chrome/content/zotero/xpcom/date.js
+./chrome/content/zotero/xpcom/dateparser.js
+./chrome/content/zotero/xpcom/db.js
+./chrome/content/zotero/xpcom/debug.js
+./chrome/content/zotero/xpcom/dns_worker.js
+./chrome/content/zotero/xpcom/duplicates.js
+./chrome/content/zotero/xpcom/error.js
+./chrome/content/zotero/xpcom/feedReader.js
+./chrome/content/zotero/xpcom/file.js
+./chrome/content/zotero/xpcom/fulltext.js
+./chrome/content/zotero/xpcom/history.js
+./chrome/content/zotero/xpcom/http.js
+./chrome/content/zotero/xpcom/id.js
+./chrome/content/zotero/xpcom/integration.js
+./chrome/content/zotero/xpcom/ipc.js
+./chrome/content/zotero/xpcom/isbn.js
+./chrome/content/zotero/xpcom/itemTreeView.js
+./chrome/content/zotero/xpcom/libraryTreeView.js
+./chrome/content/zotero/xpcom/locale.js
+./chrome/content/zotero/xpcom/locateManager.js
+./chrome/content/zotero/xpcom/mime.js
+./chrome/content/zotero/xpcom/mimeTypeHandler.js
+./chrome/content/zotero/xpcom/multilingual
+./chrome/content/zotero/xpcom/multilingual/convert.js
+./chrome/content/zotero/xpcom/multilingual/creator.js
+./chrome/content/zotero/xpcom/multilingual/field.js
+./chrome/content/zotero/xpcom/multilingual/jurisdiction.js
+./chrome/content/zotero/xpcom/multilingual/subtagRegistry.js
+./chrome/content/zotero/xpcom/multilingual/ui.js
+./chrome/content/zotero/xpcom/multilingual.js
+./chrome/content/zotero/xpcom/notifier.js
+./chrome/content/zotero/xpcom/openurl.js
+./chrome/content/zotero/xpcom/profile.js
+./chrome/content/zotero/xpcom/progressWindow.js
+./chrome/content/zotero/xpcom/proxy.js
+./chrome/content/zotero/xpcom/quickCopy.js
+./chrome/content/zotero/xpcom/rdf
+./chrome/content/zotero/xpcom/rdf/identity.js
+./chrome/content/zotero/xpcom/rdf/init.js
+./chrome/content/zotero/xpcom/rdf/match.js
+./chrome/content/zotero/xpcom/rdf/n3parser.js
+./chrome/content/zotero/xpcom/rdf/rdfparser.js
+./chrome/content/zotero/xpcom/rdf/serialize.js
+./chrome/content/zotero/xpcom/rdf/term.js
+./chrome/content/zotero/xpcom/rdf/uri.js
+./chrome/content/zotero/xpcom/report.js
+./chrome/content/zotero/xpcom/router.js
+./chrome/content/zotero/xpcom/schema.js
+./chrome/content/zotero/xpcom/server.js
+./chrome/content/zotero/xpcom/server_connector.js
+./chrome/content/zotero/xpcom/standalone.js
+./chrome/content/zotero/xpcom/storage
+./chrome/content/zotero/xpcom/storage/storageEngine.js
+./chrome/content/zotero/xpcom/storage/storageLocal.js
+./chrome/content/zotero/xpcom/storage/storageRequest.js
+./chrome/content/zotero/xpcom/storage/storageResult.js
+./chrome/content/zotero/xpcom/storage/storageUtilities.js
+./chrome/content/zotero/xpcom/storage/streamListener.js
+./chrome/content/zotero/xpcom/storage/webdav.js
+./chrome/content/zotero/xpcom/storage/zfs.js
+./chrome/content/zotero/xpcom/storage.js
+./chrome/content/zotero/xpcom/streamer.js
+./chrome/content/zotero/xpcom/style.js
+./chrome/content/zotero/xpcom/sync
+./chrome/content/zotero/xpcom/sync/syncAPIClient.js
+./chrome/content/zotero/xpcom/sync/syncEngine.js
+./chrome/content/zotero/xpcom/sync/syncEventListeners.js
+./chrome/content/zotero/xpcom/sync/syncExceptions.js
+./chrome/content/zotero/xpcom/sync/syncFullTextEngine.js
+./chrome/content/zotero/xpcom/sync/syncLocal.js
+./chrome/content/zotero/xpcom/sync/syncRunner.js
+./chrome/content/zotero/xpcom/sync/syncUtilities.js
+./chrome/content/zotero/xpcom/sync.js
+./chrome/content/zotero/xpcom/syncedSettings.js
+./chrome/content/zotero/xpcom/timeline.js
+./chrome/content/zotero/xpcom/translation
+./chrome/content/zotero/xpcom/translation/tlds.js
+./chrome/content/zotero/xpcom/translation/translate.js
+./chrome/content/zotero/xpcom/translation/translate_firefox.js
+./chrome/content/zotero/xpcom/translation/translate_item.js
+./chrome/content/zotero/xpcom/translation/translator.js
+./chrome/content/zotero/xpcom/translation/translators.js
+./chrome/content/zotero/xpcom/uri.js
+./chrome/content/zotero/xpcom/users.js
+./chrome/content/zotero/xpcom/utilities.js
+./chrome/content/zotero/xpcom/utilities_internal.js
+./chrome/content/zotero/xpcom/utilities_translate.js
+./chrome/content/zotero/xpcom/xregexp
+./chrome/content/zotero/xpcom/xregexp/addons
+./chrome/content/zotero/xpcom/xregexp/addons/build.js
+./chrome/content/zotero/xpcom/xregexp/addons/matchrecursive.js
+./chrome/content/zotero/xpcom/xregexp/addons/unicode
+./chrome/content/zotero/xpcom/xregexp/addons/unicode/unicode-base.js
+./chrome/content/zotero/xpcom/xregexp/addons/unicode/unicode-categories.js
+./chrome/content/zotero/xpcom/xregexp/addons/unicode/unicode-zotero.js
+./chrome/content/zotero/xpcom/xregexp/xregexp.js
+./chrome/content/zotero/xpcom/zotero.js
+./chrome/content/zotero/zoteroPane.js
+./chrome/content/zotero/zoteroPane.xul
+./chrome/content/zotero-platform
+./chrome/content/zotero-platform/mac
+./chrome/content/zotero-platform/mac/attachmentbox.css
+./chrome/content/zotero-platform/mac/integration.css
+./chrome/content/zotero-platform/mac/itembox.css
+./chrome/content/zotero-platform/mac/itemPane.css
+./chrome/content/zotero-platform/mac/noteeditor.css
+./chrome/content/zotero-platform/mac/overlay.css
+./chrome/content/zotero-platform/mac/standalone
+./chrome/content/zotero-platform/mac/standalone/menuOverlay.xul
+./chrome/content/zotero-platform/mac/tab.css
+./chrome/content/zotero-platform/mac/tagselector.css
+./chrome/content/zotero-platform/mac/treesource-collection.png
+./chrome/content/zotero-platform/mac/treesource-search.png
+./chrome/content/zotero-platform/mac/zotero-z-16px-australis.png
+./chrome/content/zotero-platform/mac/zotero-z-32px-australis.png
+./chrome/content/zotero-platform/mac/zotero.css
+./chrome/content/zotero-platform/unix
+./chrome/content/zotero-platform/unix/attachmentbox.css
+./chrome/content/zotero-platform/unix/integration.css
+./chrome/content/zotero-platform/unix/itembox.css
+./chrome/content/zotero-platform/unix/itemPane.css
+./chrome/content/zotero-platform/unix/noteeditor.css
+./chrome/content/zotero-platform/unix/overlay.css
+./chrome/content/zotero-platform/unix/publicationsDialog.css
+./chrome/content/zotero-platform/unix/standalone
+./chrome/content/zotero-platform/unix/standalone/menuOverlay.xul
+./chrome/content/zotero-platform/unix/tab.css
+./chrome/content/zotero-platform/unix/tagselector.css
+./chrome/content/zotero-platform/unix/zotero-z-16px-australis.png
+./chrome/content/zotero-platform/unix/zotero-z-32px-australis.png
+./chrome/content/zotero-platform/win
+./chrome/content/zotero-platform/win/attachmentbox.css
+./chrome/content/zotero-platform/win/integration.css
+./chrome/content/zotero-platform/win/itembox.css
+./chrome/content/zotero-platform/win/itemPane.css
+./chrome/content/zotero-platform/win/noteeditor.css
+./chrome/content/zotero-platform/win/overlay.css
+./chrome/content/zotero-platform/win/standalone
+./chrome/content/zotero-platform/win/standalone/menuOverlay.xul
+./chrome/content/zotero-platform/win/tab.css
+./chrome/content/zotero-platform/win/tagselector.css
+./chrome/content/zotero-platform/win/zotero-z-16px-australis.png
+./chrome/content/zotero-platform/win/zotero-z-32px-australis.png
+./chrome/locale
+./chrome/locale/af-ZA
+./chrome/locale/af-ZA/zotero
+./chrome/locale/af-ZA/zotero/about.dtd
+./chrome/locale/af-ZA/zotero/csledit.dtd
+./chrome/locale/af-ZA/zotero/cslpreview.dtd
+./chrome/locale/af-ZA/zotero/mozilla
+./chrome/locale/af-ZA/zotero/mozilla/browser.dtd
+./chrome/locale/af-ZA/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/af-ZA/zotero/mozilla/intl.properties
+./chrome/locale/af-ZA/zotero/preferences.dtd
+./chrome/locale/af-ZA/zotero/publications.dtd
+./chrome/locale/af-ZA/zotero/searchbox.dtd
+./chrome/locale/af-ZA/zotero/standalone.dtd
+./chrome/locale/af-ZA/zotero/timeline.properties
+./chrome/locale/af-ZA/zotero/zotero.dtd
+./chrome/locale/af-ZA/zotero/zotero.properties
+./chrome/locale/ar
+./chrome/locale/ar/zotero
+./chrome/locale/ar/zotero/about.dtd
+./chrome/locale/ar/zotero/csledit.dtd
+./chrome/locale/ar/zotero/cslpreview.dtd
+./chrome/locale/ar/zotero/mozilla
+./chrome/locale/ar/zotero/mozilla/browser.dtd
+./chrome/locale/ar/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/ar/zotero/mozilla/intl.properties
+./chrome/locale/ar/zotero/preferences.dtd
+./chrome/locale/ar/zotero/publications.dtd
+./chrome/locale/ar/zotero/searchbox.dtd
+./chrome/locale/ar/zotero/standalone.dtd
+./chrome/locale/ar/zotero/timeline.properties
+./chrome/locale/ar/zotero/zotero.dtd
+./chrome/locale/ar/zotero/zotero.properties
+./chrome/locale/bg-BG
+./chrome/locale/bg-BG/zotero
+./chrome/locale/bg-BG/zotero/about.dtd
+./chrome/locale/bg-BG/zotero/csledit.dtd
+./chrome/locale/bg-BG/zotero/cslpreview.dtd
+./chrome/locale/bg-BG/zotero/mozilla
+./chrome/locale/bg-BG/zotero/mozilla/browser.dtd
+./chrome/locale/bg-BG/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/bg-BG/zotero/mozilla/intl.properties
+./chrome/locale/bg-BG/zotero/preferences.dtd
+./chrome/locale/bg-BG/zotero/publications.dtd
+./chrome/locale/bg-BG/zotero/searchbox.dtd
+./chrome/locale/bg-BG/zotero/standalone.dtd
+./chrome/locale/bg-BG/zotero/timeline.properties
+./chrome/locale/bg-BG/zotero/zotero.dtd
+./chrome/locale/bg-BG/zotero/zotero.properties
+./chrome/locale/ca-AD
+./chrome/locale/ca-AD/zotero
+./chrome/locale/ca-AD/zotero/about.dtd
+./chrome/locale/ca-AD/zotero/csledit.dtd
+./chrome/locale/ca-AD/zotero/cslpreview.dtd
+./chrome/locale/ca-AD/zotero/mozilla
+./chrome/locale/ca-AD/zotero/mozilla/browser.dtd
+./chrome/locale/ca-AD/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/ca-AD/zotero/mozilla/intl.properties
+./chrome/locale/ca-AD/zotero/preferences.dtd
+./chrome/locale/ca-AD/zotero/publications.dtd
+./chrome/locale/ca-AD/zotero/searchbox.dtd
+./chrome/locale/ca-AD/zotero/standalone.dtd
+./chrome/locale/ca-AD/zotero/timeline.properties
+./chrome/locale/ca-AD/zotero/zotero.dtd
+./chrome/locale/ca-AD/zotero/zotero.properties
+./chrome/locale/cs-CZ
+./chrome/locale/cs-CZ/zotero
+./chrome/locale/cs-CZ/zotero/about.dtd
+./chrome/locale/cs-CZ/zotero/csledit.dtd
+./chrome/locale/cs-CZ/zotero/cslpreview.dtd
+./chrome/locale/cs-CZ/zotero/mozilla
+./chrome/locale/cs-CZ/zotero/mozilla/browser.dtd
+./chrome/locale/cs-CZ/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/cs-CZ/zotero/mozilla/intl.properties
+./chrome/locale/cs-CZ/zotero/preferences.dtd
+./chrome/locale/cs-CZ/zotero/publications.dtd
+./chrome/locale/cs-CZ/zotero/searchbox.dtd
+./chrome/locale/cs-CZ/zotero/standalone.dtd
+./chrome/locale/cs-CZ/zotero/timeline.properties
+./chrome/locale/cs-CZ/zotero/zotero.dtd
+./chrome/locale/cs-CZ/zotero/zotero.properties
+./chrome/locale/da-DK
+./chrome/locale/da-DK/zotero
+./chrome/locale/da-DK/zotero/about.dtd
+./chrome/locale/da-DK/zotero/csledit.dtd
+./chrome/locale/da-DK/zotero/cslpreview.dtd
+./chrome/locale/da-DK/zotero/mozilla
+./chrome/locale/da-DK/zotero/mozilla/browser.dtd
+./chrome/locale/da-DK/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/da-DK/zotero/mozilla/intl.properties
+./chrome/locale/da-DK/zotero/preferences.dtd
+./chrome/locale/da-DK/zotero/publications.dtd
+./chrome/locale/da-DK/zotero/searchbox.dtd
+./chrome/locale/da-DK/zotero/standalone.dtd
+./chrome/locale/da-DK/zotero/timeline.properties
+./chrome/locale/da-DK/zotero/zotero.dtd
+./chrome/locale/da-DK/zotero/zotero.properties
+./chrome/locale/de
+./chrome/locale/de/zotero
+./chrome/locale/de/zotero/about.dtd
+./chrome/locale/de/zotero/csledit.dtd
+./chrome/locale/de/zotero/cslpreview.dtd
+./chrome/locale/de/zotero/mozilla
+./chrome/locale/de/zotero/mozilla/browser.dtd
+./chrome/locale/de/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/de/zotero/mozilla/intl.properties
+./chrome/locale/de/zotero/preferences.dtd
+./chrome/locale/de/zotero/publications.dtd
+./chrome/locale/de/zotero/searchbox.dtd
+./chrome/locale/de/zotero/standalone.dtd
+./chrome/locale/de/zotero/timeline.properties
+./chrome/locale/de/zotero/zotero.dtd
+./chrome/locale/de/zotero/zotero.properties
+./chrome/locale/el-GR
+./chrome/locale/el-GR/zotero
+./chrome/locale/el-GR/zotero/about.dtd
+./chrome/locale/el-GR/zotero/csledit.dtd
+./chrome/locale/el-GR/zotero/cslpreview.dtd
+./chrome/locale/el-GR/zotero/mozilla
+./chrome/locale/el-GR/zotero/mozilla/browser.dtd
+./chrome/locale/el-GR/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/el-GR/zotero/mozilla/intl.properties
+./chrome/locale/el-GR/zotero/preferences.dtd
+./chrome/locale/el-GR/zotero/publications.dtd
+./chrome/locale/el-GR/zotero/searchbox.dtd
+./chrome/locale/el-GR/zotero/standalone.dtd
+./chrome/locale/el-GR/zotero/timeline.properties
+./chrome/locale/el-GR/zotero/zotero.dtd
+./chrome/locale/el-GR/zotero/zotero.properties
+./chrome/locale/en-US
+./chrome/locale/en-US/zotero
+./chrome/locale/en-US/zotero/#Untitled-3#
+./chrome/locale/en-US/zotero/about.dtd
+./chrome/locale/en-US/zotero/csledit.dtd
+./chrome/locale/en-US/zotero/cslpreview.dtd
+./chrome/locale/en-US/zotero/mozilla
+./chrome/locale/en-US/zotero/mozilla/browser.dtd
+./chrome/locale/en-US/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/en-US/zotero/mozilla/intl.properties
+./chrome/locale/en-US/zotero/preferences.dtd
+./chrome/locale/en-US/zotero/publications.dtd
+./chrome/locale/en-US/zotero/searchbox.dtd
+./chrome/locale/en-US/zotero/standalone.dtd
+./chrome/locale/en-US/zotero/timeline.properties
+./chrome/locale/en-US/zotero/zotero.dtd
+./chrome/locale/en-US/zotero/zotero.properties
+./chrome/locale/es-ES
+./chrome/locale/es-ES/zotero
+./chrome/locale/es-ES/zotero/about.dtd
+./chrome/locale/es-ES/zotero/csledit.dtd
+./chrome/locale/es-ES/zotero/cslpreview.dtd
+./chrome/locale/es-ES/zotero/mozilla
+./chrome/locale/es-ES/zotero/mozilla/browser.dtd
+./chrome/locale/es-ES/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/es-ES/zotero/mozilla/intl.properties
+./chrome/locale/es-ES/zotero/preferences.dtd
+./chrome/locale/es-ES/zotero/publications.dtd
+./chrome/locale/es-ES/zotero/searchbox.dtd
+./chrome/locale/es-ES/zotero/standalone.dtd
+./chrome/locale/es-ES/zotero/timeline.properties
+./chrome/locale/es-ES/zotero/zotero.dtd
+./chrome/locale/es-ES/zotero/zotero.properties
+./chrome/locale/et-EE
+./chrome/locale/et-EE/zotero
+./chrome/locale/et-EE/zotero/about.dtd
+./chrome/locale/et-EE/zotero/csledit.dtd
+./chrome/locale/et-EE/zotero/cslpreview.dtd
+./chrome/locale/et-EE/zotero/mozilla
+./chrome/locale/et-EE/zotero/mozilla/browser.dtd
+./chrome/locale/et-EE/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/et-EE/zotero/mozilla/intl.properties
+./chrome/locale/et-EE/zotero/preferences.dtd
+./chrome/locale/et-EE/zotero/publications.dtd
+./chrome/locale/et-EE/zotero/searchbox.dtd
+./chrome/locale/et-EE/zotero/standalone.dtd
+./chrome/locale/et-EE/zotero/timeline.properties
+./chrome/locale/et-EE/zotero/zotero.dtd
+./chrome/locale/et-EE/zotero/zotero.properties
+./chrome/locale/eu-ES
+./chrome/locale/eu-ES/zotero
+./chrome/locale/eu-ES/zotero/about.dtd
+./chrome/locale/eu-ES/zotero/csledit.dtd
+./chrome/locale/eu-ES/zotero/cslpreview.dtd
+./chrome/locale/eu-ES/zotero/mozilla
+./chrome/locale/eu-ES/zotero/mozilla/browser.dtd
+./chrome/locale/eu-ES/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/eu-ES/zotero/mozilla/intl.properties
+./chrome/locale/eu-ES/zotero/preferences.dtd
+./chrome/locale/eu-ES/zotero/publications.dtd
+./chrome/locale/eu-ES/zotero/searchbox.dtd
+./chrome/locale/eu-ES/zotero/standalone.dtd
+./chrome/locale/eu-ES/zotero/timeline.properties
+./chrome/locale/eu-ES/zotero/zotero.dtd
+./chrome/locale/eu-ES/zotero/zotero.properties
+./chrome/locale/fa
+./chrome/locale/fa/zotero
+./chrome/locale/fa/zotero/about.dtd
+./chrome/locale/fa/zotero/csledit.dtd
+./chrome/locale/fa/zotero/cslpreview.dtd
+./chrome/locale/fa/zotero/mozilla
+./chrome/locale/fa/zotero/mozilla/browser.dtd
+./chrome/locale/fa/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/fa/zotero/mozilla/intl.properties
+./chrome/locale/fa/zotero/preferences.dtd
+./chrome/locale/fa/zotero/publications.dtd
+./chrome/locale/fa/zotero/searchbox.dtd
+./chrome/locale/fa/zotero/standalone.dtd
+./chrome/locale/fa/zotero/timeline.properties
+./chrome/locale/fa/zotero/zotero.dtd
+./chrome/locale/fa/zotero/zotero.properties
+./chrome/locale/fi-FI
+./chrome/locale/fi-FI/zotero
+./chrome/locale/fi-FI/zotero/about.dtd
+./chrome/locale/fi-FI/zotero/csledit.dtd
+./chrome/locale/fi-FI/zotero/cslpreview.dtd
+./chrome/locale/fi-FI/zotero/mozilla
+./chrome/locale/fi-FI/zotero/mozilla/browser.dtd
+./chrome/locale/fi-FI/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/fi-FI/zotero/mozilla/intl.properties
+./chrome/locale/fi-FI/zotero/preferences.dtd
+./chrome/locale/fi-FI/zotero/publications.dtd
+./chrome/locale/fi-FI/zotero/searchbox.dtd
+./chrome/locale/fi-FI/zotero/standalone.dtd
+./chrome/locale/fi-FI/zotero/timeline.properties
+./chrome/locale/fi-FI/zotero/zotero.dtd
+./chrome/locale/fi-FI/zotero/zotero.properties
+./chrome/locale/fr-FR
+./chrome/locale/fr-FR/zotero
+./chrome/locale/fr-FR/zotero/about.dtd
+./chrome/locale/fr-FR/zotero/csledit.dtd
+./chrome/locale/fr-FR/zotero/cslpreview.dtd
+./chrome/locale/fr-FR/zotero/mozilla
+./chrome/locale/fr-FR/zotero/mozilla/browser.dtd
+./chrome/locale/fr-FR/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/fr-FR/zotero/mozilla/intl.properties
+./chrome/locale/fr-FR/zotero/preferences.dtd
+./chrome/locale/fr-FR/zotero/publications.dtd
+./chrome/locale/fr-FR/zotero/searchbox.dtd
+./chrome/locale/fr-FR/zotero/standalone.dtd
+./chrome/locale/fr-FR/zotero/timeline.properties
+./chrome/locale/fr-FR/zotero/zotero.dtd
+./chrome/locale/fr-FR/zotero/zotero.properties
+./chrome/locale/gl-ES
+./chrome/locale/gl-ES/zotero
+./chrome/locale/gl-ES/zotero/about.dtd
+./chrome/locale/gl-ES/zotero/csledit.dtd
+./chrome/locale/gl-ES/zotero/cslpreview.dtd
+./chrome/locale/gl-ES/zotero/mozilla
+./chrome/locale/gl-ES/zotero/mozilla/browser.dtd
+./chrome/locale/gl-ES/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/gl-ES/zotero/mozilla/intl.properties
+./chrome/locale/gl-ES/zotero/preferences.dtd
+./chrome/locale/gl-ES/zotero/publications.dtd
+./chrome/locale/gl-ES/zotero/searchbox.dtd
+./chrome/locale/gl-ES/zotero/standalone.dtd
+./chrome/locale/gl-ES/zotero/timeline.properties
+./chrome/locale/gl-ES/zotero/zotero.dtd
+./chrome/locale/gl-ES/zotero/zotero.properties
+./chrome/locale/he-IL
+./chrome/locale/he-IL/zotero
+./chrome/locale/he-IL/zotero/about.dtd
+./chrome/locale/he-IL/zotero/csledit.dtd
+./chrome/locale/he-IL/zotero/cslpreview.dtd
+./chrome/locale/he-IL/zotero/mozilla
+./chrome/locale/he-IL/zotero/mozilla/browser.dtd
+./chrome/locale/he-IL/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/he-IL/zotero/mozilla/intl.properties
+./chrome/locale/he-IL/zotero/preferences.dtd
+./chrome/locale/he-IL/zotero/publications.dtd
+./chrome/locale/he-IL/zotero/searchbox.dtd
+./chrome/locale/he-IL/zotero/standalone.dtd
+./chrome/locale/he-IL/zotero/timeline.properties
+./chrome/locale/he-IL/zotero/zotero.dtd
+./chrome/locale/he-IL/zotero/zotero.properties
+./chrome/locale/hr-HR
+./chrome/locale/hr-HR/zotero
+./chrome/locale/hr-HR/zotero/about.dtd
+./chrome/locale/hr-HR/zotero/csledit.dtd
+./chrome/locale/hr-HR/zotero/cslpreview.dtd
+./chrome/locale/hr-HR/zotero/mozilla
+./chrome/locale/hr-HR/zotero/mozilla/browser.dtd
+./chrome/locale/hr-HR/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/hr-HR/zotero/mozilla/intl.properties
+./chrome/locale/hr-HR/zotero/preferences.dtd
+./chrome/locale/hr-HR/zotero/publications.dtd
+./chrome/locale/hr-HR/zotero/searchbox.dtd
+./chrome/locale/hr-HR/zotero/standalone.dtd
+./chrome/locale/hr-HR/zotero/timeline.properties
+./chrome/locale/hr-HR/zotero/zotero.dtd
+./chrome/locale/hr-HR/zotero/zotero.properties
+./chrome/locale/hu-HU
+./chrome/locale/hu-HU/zotero
+./chrome/locale/hu-HU/zotero/about.dtd
+./chrome/locale/hu-HU/zotero/csledit.dtd
+./chrome/locale/hu-HU/zotero/cslpreview.dtd
+./chrome/locale/hu-HU/zotero/mozilla
+./chrome/locale/hu-HU/zotero/mozilla/browser.dtd
+./chrome/locale/hu-HU/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/hu-HU/zotero/mozilla/intl.properties
+./chrome/locale/hu-HU/zotero/preferences.dtd
+./chrome/locale/hu-HU/zotero/publications.dtd
+./chrome/locale/hu-HU/zotero/searchbox.dtd
+./chrome/locale/hu-HU/zotero/standalone.dtd
+./chrome/locale/hu-HU/zotero/timeline.properties
+./chrome/locale/hu-HU/zotero/zotero.dtd
+./chrome/locale/hu-HU/zotero/zotero.properties
+./chrome/locale/id-ID
+./chrome/locale/id-ID/zotero
+./chrome/locale/id-ID/zotero/about.dtd
+./chrome/locale/id-ID/zotero/csledit.dtd
+./chrome/locale/id-ID/zotero/cslpreview.dtd
+./chrome/locale/id-ID/zotero/mozilla
+./chrome/locale/id-ID/zotero/mozilla/browser.dtd
+./chrome/locale/id-ID/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/id-ID/zotero/mozilla/intl.properties
+./chrome/locale/id-ID/zotero/preferences.dtd
+./chrome/locale/id-ID/zotero/publications.dtd
+./chrome/locale/id-ID/zotero/searchbox.dtd
+./chrome/locale/id-ID/zotero/standalone.dtd
+./chrome/locale/id-ID/zotero/timeline.properties
+./chrome/locale/id-ID/zotero/zotero.dtd
+./chrome/locale/id-ID/zotero/zotero.properties
+./chrome/locale/is-IS
+./chrome/locale/is-IS/zotero
+./chrome/locale/is-IS/zotero/about.dtd
+./chrome/locale/is-IS/zotero/csledit.dtd
+./chrome/locale/is-IS/zotero/cslpreview.dtd
+./chrome/locale/is-IS/zotero/mozilla
+./chrome/locale/is-IS/zotero/mozilla/browser.dtd
+./chrome/locale/is-IS/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/is-IS/zotero/mozilla/intl.properties
+./chrome/locale/is-IS/zotero/preferences.dtd
+./chrome/locale/is-IS/zotero/publications.dtd
+./chrome/locale/is-IS/zotero/searchbox.dtd
+./chrome/locale/is-IS/zotero/standalone.dtd
+./chrome/locale/is-IS/zotero/timeline.properties
+./chrome/locale/is-IS/zotero/zotero.dtd
+./chrome/locale/is-IS/zotero/zotero.properties
+./chrome/locale/it-IT
+./chrome/locale/it-IT/zotero
+./chrome/locale/it-IT/zotero/about.dtd
+./chrome/locale/it-IT/zotero/csledit.dtd
+./chrome/locale/it-IT/zotero/cslpreview.dtd
+./chrome/locale/it-IT/zotero/mozilla
+./chrome/locale/it-IT/zotero/mozilla/browser.dtd
+./chrome/locale/it-IT/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/it-IT/zotero/mozilla/intl.properties
+./chrome/locale/it-IT/zotero/preferences.dtd
+./chrome/locale/it-IT/zotero/publications.dtd
+./chrome/locale/it-IT/zotero/searchbox.dtd
+./chrome/locale/it-IT/zotero/standalone.dtd
+./chrome/locale/it-IT/zotero/timeline.properties
+./chrome/locale/it-IT/zotero/zotero.dtd
+./chrome/locale/it-IT/zotero/zotero.properties
+./chrome/locale/ja-JP
+./chrome/locale/ja-JP/zotero
+./chrome/locale/ja-JP/zotero/about.dtd
+./chrome/locale/ja-JP/zotero/csledit.dtd
+./chrome/locale/ja-JP/zotero/cslpreview.dtd
+./chrome/locale/ja-JP/zotero/mozilla
+./chrome/locale/ja-JP/zotero/mozilla/browser.dtd
+./chrome/locale/ja-JP/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/ja-JP/zotero/mozilla/intl.properties
+./chrome/locale/ja-JP/zotero/preferences.dtd
+./chrome/locale/ja-JP/zotero/publications.dtd
+./chrome/locale/ja-JP/zotero/searchbox.dtd
+./chrome/locale/ja-JP/zotero/standalone.dtd
+./chrome/locale/ja-JP/zotero/timeline.properties
+./chrome/locale/ja-JP/zotero/zotero.dtd
+./chrome/locale/ja-JP/zotero/zotero.properties
+./chrome/locale/km
+./chrome/locale/km/zotero
+./chrome/locale/km/zotero/about.dtd
+./chrome/locale/km/zotero/csledit.dtd
+./chrome/locale/km/zotero/cslpreview.dtd
+./chrome/locale/km/zotero/mozilla
+./chrome/locale/km/zotero/mozilla/browser.dtd
+./chrome/locale/km/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/km/zotero/mozilla/intl.properties
+./chrome/locale/km/zotero/preferences.dtd
+./chrome/locale/km/zotero/publications.dtd
+./chrome/locale/km/zotero/searchbox.dtd
+./chrome/locale/km/zotero/standalone.dtd
+./chrome/locale/km/zotero/timeline.properties
+./chrome/locale/km/zotero/zotero.dtd
+./chrome/locale/km/zotero/zotero.properties
+./chrome/locale/ko-KR
+./chrome/locale/ko-KR/zotero
+./chrome/locale/ko-KR/zotero/about.dtd
+./chrome/locale/ko-KR/zotero/csledit.dtd
+./chrome/locale/ko-KR/zotero/cslpreview.dtd
+./chrome/locale/ko-KR/zotero/mozilla
+./chrome/locale/ko-KR/zotero/mozilla/browser.dtd
+./chrome/locale/ko-KR/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/ko-KR/zotero/mozilla/intl.properties
+./chrome/locale/ko-KR/zotero/preferences.dtd
+./chrome/locale/ko-KR/zotero/publications.dtd
+./chrome/locale/ko-KR/zotero/searchbox.dtd
+./chrome/locale/ko-KR/zotero/standalone.dtd
+./chrome/locale/ko-KR/zotero/timeline.properties
+./chrome/locale/ko-KR/zotero/zotero.dtd
+./chrome/locale/ko-KR/zotero/zotero.properties
+./chrome/locale/lt-LT
+./chrome/locale/lt-LT/zotero
+./chrome/locale/lt-LT/zotero/about.dtd
+./chrome/locale/lt-LT/zotero/csledit.dtd
+./chrome/locale/lt-LT/zotero/cslpreview.dtd
+./chrome/locale/lt-LT/zotero/mozilla
+./chrome/locale/lt-LT/zotero/mozilla/browser.dtd
+./chrome/locale/lt-LT/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/lt-LT/zotero/mozilla/intl.properties
+./chrome/locale/lt-LT/zotero/preferences.dtd
+./chrome/locale/lt-LT/zotero/publications.dtd
+./chrome/locale/lt-LT/zotero/searchbox.dtd
+./chrome/locale/lt-LT/zotero/standalone.dtd
+./chrome/locale/lt-LT/zotero/timeline.properties
+./chrome/locale/lt-LT/zotero/zotero.dtd
+./chrome/locale/lt-LT/zotero/zotero.properties
+./chrome/locale/mn-MN
+./chrome/locale/mn-MN/zotero
+./chrome/locale/mn-MN/zotero/about.dtd
+./chrome/locale/mn-MN/zotero/csledit.dtd
+./chrome/locale/mn-MN/zotero/cslpreview.dtd
+./chrome/locale/mn-MN/zotero/mozilla
+./chrome/locale/mn-MN/zotero/mozilla/browser.dtd
+./chrome/locale/mn-MN/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/mn-MN/zotero/mozilla/intl.properties
+./chrome/locale/mn-MN/zotero/preferences.dtd
+./chrome/locale/mn-MN/zotero/publications.dtd
+./chrome/locale/mn-MN/zotero/searchbox.dtd
+./chrome/locale/mn-MN/zotero/standalone.dtd
+./chrome/locale/mn-MN/zotero/timeline.properties
+./chrome/locale/mn-MN/zotero/zotero.dtd
+./chrome/locale/mn-MN/zotero/zotero.properties
+./chrome/locale/nb-NO
+./chrome/locale/nb-NO/zotero
+./chrome/locale/nb-NO/zotero/about.dtd
+./chrome/locale/nb-NO/zotero/csledit.dtd
+./chrome/locale/nb-NO/zotero/cslpreview.dtd
+./chrome/locale/nb-NO/zotero/mozilla
+./chrome/locale/nb-NO/zotero/mozilla/browser.dtd
+./chrome/locale/nb-NO/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/nb-NO/zotero/mozilla/intl.properties
+./chrome/locale/nb-NO/zotero/preferences.dtd
+./chrome/locale/nb-NO/zotero/publications.dtd
+./chrome/locale/nb-NO/zotero/searchbox.dtd
+./chrome/locale/nb-NO/zotero/standalone.dtd
+./chrome/locale/nb-NO/zotero/timeline.properties
+./chrome/locale/nb-NO/zotero/zotero.dtd
+./chrome/locale/nb-NO/zotero/zotero.properties
+./chrome/locale/nl-NL
+./chrome/locale/nl-NL/zotero
+./chrome/locale/nl-NL/zotero/about.dtd
+./chrome/locale/nl-NL/zotero/csledit.dtd
+./chrome/locale/nl-NL/zotero/cslpreview.dtd
+./chrome/locale/nl-NL/zotero/mozilla
+./chrome/locale/nl-NL/zotero/mozilla/browser.dtd
+./chrome/locale/nl-NL/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/nl-NL/zotero/mozilla/intl.properties
+./chrome/locale/nl-NL/zotero/preferences.dtd
+./chrome/locale/nl-NL/zotero/publications.dtd
+./chrome/locale/nl-NL/zotero/searchbox.dtd
+./chrome/locale/nl-NL/zotero/standalone.dtd
+./chrome/locale/nl-NL/zotero/timeline.properties
+./chrome/locale/nl-NL/zotero/zotero.dtd
+./chrome/locale/nl-NL/zotero/zotero.properties
+./chrome/locale/nn-NO
+./chrome/locale/nn-NO/zotero
+./chrome/locale/nn-NO/zotero/about.dtd
+./chrome/locale/nn-NO/zotero/csledit.dtd
+./chrome/locale/nn-NO/zotero/cslpreview.dtd
+./chrome/locale/nn-NO/zotero/mozilla
+./chrome/locale/nn-NO/zotero/mozilla/browser.dtd
+./chrome/locale/nn-NO/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/nn-NO/zotero/mozilla/intl.properties
+./chrome/locale/nn-NO/zotero/preferences.dtd
+./chrome/locale/nn-NO/zotero/publications.dtd
+./chrome/locale/nn-NO/zotero/searchbox.dtd
+./chrome/locale/nn-NO/zotero/standalone.dtd
+./chrome/locale/nn-NO/zotero/timeline.properties
+./chrome/locale/nn-NO/zotero/zotero.dtd
+./chrome/locale/nn-NO/zotero/zotero.properties
+./chrome/locale/pl-PL
+./chrome/locale/pl-PL/zotero
+./chrome/locale/pl-PL/zotero/about.dtd
+./chrome/locale/pl-PL/zotero/csledit.dtd
+./chrome/locale/pl-PL/zotero/cslpreview.dtd
+./chrome/locale/pl-PL/zotero/mozilla
+./chrome/locale/pl-PL/zotero/mozilla/browser.dtd
+./chrome/locale/pl-PL/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/pl-PL/zotero/mozilla/intl.properties
+./chrome/locale/pl-PL/zotero/preferences.dtd
+./chrome/locale/pl-PL/zotero/publications.dtd
+./chrome/locale/pl-PL/zotero/searchbox.dtd
+./chrome/locale/pl-PL/zotero/standalone.dtd
+./chrome/locale/pl-PL/zotero/timeline.properties
+./chrome/locale/pl-PL/zotero/zotero.dtd
+./chrome/locale/pl-PL/zotero/zotero.properties
+./chrome/locale/pt-BR
+./chrome/locale/pt-BR/zotero
+./chrome/locale/pt-BR/zotero/about.dtd
+./chrome/locale/pt-BR/zotero/csledit.dtd
+./chrome/locale/pt-BR/zotero/cslpreview.dtd
+./chrome/locale/pt-BR/zotero/mozilla
+./chrome/locale/pt-BR/zotero/mozilla/browser.dtd
+./chrome/locale/pt-BR/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/pt-BR/zotero/mozilla/intl.properties
+./chrome/locale/pt-BR/zotero/preferences.dtd
+./chrome/locale/pt-BR/zotero/publications.dtd
+./chrome/locale/pt-BR/zotero/searchbox.dtd
+./chrome/locale/pt-BR/zotero/standalone.dtd
+./chrome/locale/pt-BR/zotero/timeline.properties
+./chrome/locale/pt-BR/zotero/zotero.dtd
+./chrome/locale/pt-BR/zotero/zotero.properties
+./chrome/locale/pt-PT
+./chrome/locale/pt-PT/zotero
+./chrome/locale/pt-PT/zotero/about.dtd
+./chrome/locale/pt-PT/zotero/csledit.dtd
+./chrome/locale/pt-PT/zotero/cslpreview.dtd
+./chrome/locale/pt-PT/zotero/mozilla
+./chrome/locale/pt-PT/zotero/mozilla/browser.dtd
+./chrome/locale/pt-PT/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/pt-PT/zotero/mozilla/intl.properties
+./chrome/locale/pt-PT/zotero/preferences.dtd
+./chrome/locale/pt-PT/zotero/publications.dtd
+./chrome/locale/pt-PT/zotero/searchbox.dtd
+./chrome/locale/pt-PT/zotero/standalone.dtd
+./chrome/locale/pt-PT/zotero/timeline.properties
+./chrome/locale/pt-PT/zotero/zotero.dtd
+./chrome/locale/pt-PT/zotero/zotero.properties
+./chrome/locale/ro-RO
+./chrome/locale/ro-RO/zotero
+./chrome/locale/ro-RO/zotero/about.dtd
+./chrome/locale/ro-RO/zotero/csledit.dtd
+./chrome/locale/ro-RO/zotero/cslpreview.dtd
+./chrome/locale/ro-RO/zotero/mozilla
+./chrome/locale/ro-RO/zotero/mozilla/browser.dtd
+./chrome/locale/ro-RO/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/ro-RO/zotero/mozilla/intl.properties
+./chrome/locale/ro-RO/zotero/preferences.dtd
+./chrome/locale/ro-RO/zotero/publications.dtd
+./chrome/locale/ro-RO/zotero/searchbox.dtd
+./chrome/locale/ro-RO/zotero/standalone.dtd
+./chrome/locale/ro-RO/zotero/timeline.properties
+./chrome/locale/ro-RO/zotero/zotero.dtd
+./chrome/locale/ro-RO/zotero/zotero.properties
+./chrome/locale/ru-RU
+./chrome/locale/ru-RU/zotero
+./chrome/locale/ru-RU/zotero/about.dtd
+./chrome/locale/ru-RU/zotero/csledit.dtd
+./chrome/locale/ru-RU/zotero/cslpreview.dtd
+./chrome/locale/ru-RU/zotero/mozilla
+./chrome/locale/ru-RU/zotero/mozilla/browser.dtd
+./chrome/locale/ru-RU/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/ru-RU/zotero/mozilla/intl.properties
+./chrome/locale/ru-RU/zotero/preferences.dtd
+./chrome/locale/ru-RU/zotero/publications.dtd
+./chrome/locale/ru-RU/zotero/searchbox.dtd
+./chrome/locale/ru-RU/zotero/standalone.dtd
+./chrome/locale/ru-RU/zotero/timeline.properties
+./chrome/locale/ru-RU/zotero/zotero.dtd
+./chrome/locale/ru-RU/zotero/zotero.properties
+./chrome/locale/sk-SK
+./chrome/locale/sk-SK/zotero
+./chrome/locale/sk-SK/zotero/about.dtd
+./chrome/locale/sk-SK/zotero/csledit.dtd
+./chrome/locale/sk-SK/zotero/cslpreview.dtd
+./chrome/locale/sk-SK/zotero/mozilla
+./chrome/locale/sk-SK/zotero/mozilla/browser.dtd
+./chrome/locale/sk-SK/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/sk-SK/zotero/mozilla/intl.properties
+./chrome/locale/sk-SK/zotero/preferences.dtd
+./chrome/locale/sk-SK/zotero/publications.dtd
+./chrome/locale/sk-SK/zotero/searchbox.dtd
+./chrome/locale/sk-SK/zotero/standalone.dtd
+./chrome/locale/sk-SK/zotero/timeline.properties
+./chrome/locale/sk-SK/zotero/zotero.dtd
+./chrome/locale/sk-SK/zotero/zotero.properties
+./chrome/locale/sl-SI
+./chrome/locale/sl-SI/zotero
+./chrome/locale/sl-SI/zotero/about.dtd
+./chrome/locale/sl-SI/zotero/csledit.dtd
+./chrome/locale/sl-SI/zotero/cslpreview.dtd
+./chrome/locale/sl-SI/zotero/mozilla
+./chrome/locale/sl-SI/zotero/mozilla/browser.dtd
+./chrome/locale/sl-SI/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/sl-SI/zotero/mozilla/intl.properties
+./chrome/locale/sl-SI/zotero/preferences.dtd
+./chrome/locale/sl-SI/zotero/publications.dtd
+./chrome/locale/sl-SI/zotero/searchbox.dtd
+./chrome/locale/sl-SI/zotero/standalone.dtd
+./chrome/locale/sl-SI/zotero/timeline.properties
+./chrome/locale/sl-SI/zotero/zotero.dtd
+./chrome/locale/sl-SI/zotero/zotero.properties
+./chrome/locale/sr-RS
+./chrome/locale/sr-RS/zotero
+./chrome/locale/sr-RS/zotero/about.dtd
+./chrome/locale/sr-RS/zotero/csledit.dtd
+./chrome/locale/sr-RS/zotero/cslpreview.dtd
+./chrome/locale/sr-RS/zotero/mozilla
+./chrome/locale/sr-RS/zotero/mozilla/browser.dtd
+./chrome/locale/sr-RS/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/sr-RS/zotero/mozilla/intl.properties
+./chrome/locale/sr-RS/zotero/preferences.dtd
+./chrome/locale/sr-RS/zotero/publications.dtd
+./chrome/locale/sr-RS/zotero/searchbox.dtd
+./chrome/locale/sr-RS/zotero/standalone.dtd
+./chrome/locale/sr-RS/zotero/timeline.properties
+./chrome/locale/sr-RS/zotero/zotero.dtd
+./chrome/locale/sr-RS/zotero/zotero.properties
+./chrome/locale/sv-SE
+./chrome/locale/sv-SE/zotero
+./chrome/locale/sv-SE/zotero/about.dtd
+./chrome/locale/sv-SE/zotero/csledit.dtd
+./chrome/locale/sv-SE/zotero/cslpreview.dtd
+./chrome/locale/sv-SE/zotero/mozilla
+./chrome/locale/sv-SE/zotero/mozilla/browser.dtd
+./chrome/locale/sv-SE/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/sv-SE/zotero/mozilla/intl.properties
+./chrome/locale/sv-SE/zotero/preferences.dtd
+./chrome/locale/sv-SE/zotero/publications.dtd
+./chrome/locale/sv-SE/zotero/searchbox.dtd
+./chrome/locale/sv-SE/zotero/standalone.dtd
+./chrome/locale/sv-SE/zotero/timeline.properties
+./chrome/locale/sv-SE/zotero/zotero.dtd
+./chrome/locale/sv-SE/zotero/zotero.properties
+./chrome/locale/th-TH
+./chrome/locale/th-TH/zotero
+./chrome/locale/th-TH/zotero/about.dtd
+./chrome/locale/th-TH/zotero/csledit.dtd
+./chrome/locale/th-TH/zotero/cslpreview.dtd
+./chrome/locale/th-TH/zotero/mozilla
+./chrome/locale/th-TH/zotero/mozilla/browser.dtd
+./chrome/locale/th-TH/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/th-TH/zotero/mozilla/intl.properties
+./chrome/locale/th-TH/zotero/preferences.dtd
+./chrome/locale/th-TH/zotero/publications.dtd
+./chrome/locale/th-TH/zotero/searchbox.dtd
+./chrome/locale/th-TH/zotero/standalone.dtd
+./chrome/locale/th-TH/zotero/timeline.properties
+./chrome/locale/th-TH/zotero/zotero.dtd
+./chrome/locale/th-TH/zotero/zotero.properties
+./chrome/locale/tr-TR
+./chrome/locale/tr-TR/zotero
+./chrome/locale/tr-TR/zotero/about.dtd
+./chrome/locale/tr-TR/zotero/csledit.dtd
+./chrome/locale/tr-TR/zotero/cslpreview.dtd
+./chrome/locale/tr-TR/zotero/mozilla
+./chrome/locale/tr-TR/zotero/mozilla/browser.dtd
+./chrome/locale/tr-TR/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/tr-TR/zotero/mozilla/intl.properties
+./chrome/locale/tr-TR/zotero/preferences.dtd
+./chrome/locale/tr-TR/zotero/publications.dtd
+./chrome/locale/tr-TR/zotero/searchbox.dtd
+./chrome/locale/tr-TR/zotero/standalone.dtd
+./chrome/locale/tr-TR/zotero/timeline.properties
+./chrome/locale/tr-TR/zotero/zotero.dtd
+./chrome/locale/tr-TR/zotero/zotero.properties
+./chrome/locale/uk-UA
+./chrome/locale/uk-UA/zotero
+./chrome/locale/uk-UA/zotero/about.dtd
+./chrome/locale/uk-UA/zotero/csledit.dtd
+./chrome/locale/uk-UA/zotero/cslpreview.dtd
+./chrome/locale/uk-UA/zotero/mozilla
+./chrome/locale/uk-UA/zotero/mozilla/browser.dtd
+./chrome/locale/uk-UA/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/uk-UA/zotero/mozilla/intl.properties
+./chrome/locale/uk-UA/zotero/preferences.dtd
+./chrome/locale/uk-UA/zotero/publications.dtd
+./chrome/locale/uk-UA/zotero/searchbox.dtd
+./chrome/locale/uk-UA/zotero/standalone.dtd
+./chrome/locale/uk-UA/zotero/timeline.properties
+./chrome/locale/uk-UA/zotero/zotero.dtd
+./chrome/locale/uk-UA/zotero/zotero.properties
+./chrome/locale/vi-VN
+./chrome/locale/vi-VN/zotero
+./chrome/locale/vi-VN/zotero/about.dtd
+./chrome/locale/vi-VN/zotero/csledit.dtd
+./chrome/locale/vi-VN/zotero/cslpreview.dtd
+./chrome/locale/vi-VN/zotero/mozilla
+./chrome/locale/vi-VN/zotero/mozilla/browser.dtd
+./chrome/locale/vi-VN/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/vi-VN/zotero/mozilla/intl.properties
+./chrome/locale/vi-VN/zotero/preferences.dtd
+./chrome/locale/vi-VN/zotero/publications.dtd
+./chrome/locale/vi-VN/zotero/searchbox.dtd
+./chrome/locale/vi-VN/zotero/standalone.dtd
+./chrome/locale/vi-VN/zotero/timeline.properties
+./chrome/locale/vi-VN/zotero/zotero.dtd
+./chrome/locale/vi-VN/zotero/zotero.properties
+./chrome/locale/zh-CN
+./chrome/locale/zh-CN/zotero
+./chrome/locale/zh-CN/zotero/about.dtd
+./chrome/locale/zh-CN/zotero/csledit.dtd
+./chrome/locale/zh-CN/zotero/cslpreview.dtd
+./chrome/locale/zh-CN/zotero/mozilla
+./chrome/locale/zh-CN/zotero/mozilla/browser.dtd
+./chrome/locale/zh-CN/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/zh-CN/zotero/mozilla/intl.properties
+./chrome/locale/zh-CN/zotero/preferences.dtd
+./chrome/locale/zh-CN/zotero/publications.dtd
+./chrome/locale/zh-CN/zotero/searchbox.dtd
+./chrome/locale/zh-CN/zotero/standalone.dtd
+./chrome/locale/zh-CN/zotero/timeline.properties
+./chrome/locale/zh-CN/zotero/zotero.dtd
+./chrome/locale/zh-CN/zotero/zotero.properties
+./chrome/locale/zh-TW
+./chrome/locale/zh-TW/zotero
+./chrome/locale/zh-TW/zotero/about.dtd
+./chrome/locale/zh-TW/zotero/csledit.dtd
+./chrome/locale/zh-TW/zotero/cslpreview.dtd
+./chrome/locale/zh-TW/zotero/mozilla
+./chrome/locale/zh-TW/zotero/mozilla/browser.dtd
+./chrome/locale/zh-TW/zotero/mozilla/editMenuOverlay.dtd
+./chrome/locale/zh-TW/zotero/mozilla/intl.properties
+./chrome/locale/zh-TW/zotero/preferences.dtd
+./chrome/locale/zh-TW/zotero/publications.dtd
+./chrome/locale/zh-TW/zotero/searchbox.dtd
+./chrome/locale/zh-TW/zotero/standalone.dtd
+./chrome/locale/zh-TW/zotero/timeline.properties
+./chrome/locale/zh-TW/zotero/zotero.dtd
+./chrome/locale/zh-TW/zotero/zotero.properties
+./chrome/skin
+./chrome/skin/default
+./chrome/skin/default/zotero
+./chrome/skin/default/zotero/about.css
+./chrome/skin/default/zotero/annotate-add-selected.png
+./chrome/skin/default/zotero/annotate-add.png
+./chrome/skin/default/zotero/annotate-collapse.png
+./chrome/skin/default/zotero/annotate-highlight-selected.png
+./chrome/skin/default/zotero/annotate-highlight.png
+./chrome/skin/default/zotero/annotate-unhighlight-selected.png
+./chrome/skin/default/zotero/annotate-unhighlight.png
+./chrome/skin/default/zotero/annotation-close.png
+./chrome/skin/default/zotero/annotation-grippy.png
+./chrome/skin/default/zotero/annotation-hidden.gif
+./chrome/skin/default/zotero/annotation-hide.png
+./chrome/skin/default/zotero/annotation-move-selected.png
+./chrome/skin/default/zotero/annotation-move.png
+./chrome/skin/default/zotero/annotation.css
+./chrome/skin/default/zotero/annotation.html
+./chrome/skin/default/zotero/arrow-curve-090-left.png
+./chrome/skin/default/zotero/arrow-down.gif
+./chrome/skin/default/zotero/arrow-join-090.png
+./chrome/skin/default/zotero/arrow-split-090.png
+./chrome/skin/default/zotero/arrow_refresh.png
+./chrome/skin/default/zotero/arrow_refresh@2x.png
+./chrome/skin/default/zotero/arrow_rotate_animated.png
+./chrome/skin/default/zotero/arrow_rotate_static.png
+./chrome/skin/default/zotero/attach-small.png
+./chrome/skin/default/zotero/attach.png
+./chrome/skin/default/zotero/attach@2x.png
+./chrome/skin/default/zotero/bell_error.png
+./chrome/skin/default/zotero/bibliography.css
+./chrome/skin/default/zotero/bindings
+./chrome/skin/default/zotero/bindings/attachmentbox.css
+./chrome/skin/default/zotero/bindings/customcolorpicker.css
+./chrome/skin/default/zotero/bindings/guidancepanel.css
+./chrome/skin/default/zotero/bindings/itembox.css
+./chrome/skin/default/zotero/bindings/noteeditor.css
+./chrome/skin/default/zotero/bindings/search.css
+./chrome/skin/default/zotero/bindings/tagsbox.css
+./chrome/skin/default/zotero/bindings/tagselector.css
+./chrome/skin/default/zotero/bookmark-pencil.png
+./chrome/skin/default/zotero/bullet_blue.png
+./chrome/skin/default/zotero/bullet_blue@2x.png
+./chrome/skin/default/zotero/bullet_blue_empty.png
+./chrome/skin/default/zotero/bullet_blue_empty@2x.png
+./chrome/skin/default/zotero/bullet_yellow.png
+./chrome/skin/default/zotero/chevron-left_808080_32.png
+./chrome/skin/default/zotero/chevron-right_808080_32.png
+./chrome/skin/default/zotero/citation-add-gray.png
+./chrome/skin/default/zotero/citation-add.png
+./chrome/skin/default/zotero/citation-delete-gray.png
+./chrome/skin/default/zotero/citation-delete.png
+./chrome/skin/default/zotero/citation-down-gray.png
+./chrome/skin/default/zotero/citation-down.png
+./chrome/skin/default/zotero/citation-up-gray.png
+./chrome/skin/default/zotero/citation-up.png
+./chrome/skin/default/zotero/cog.png
+./chrome/skin/default/zotero/cog@2x.png
+./chrome/skin/default/zotero/control_stop_blue.png
+./chrome/skin/default/zotero/control_stop_blue@2x.png
+./chrome/skin/default/zotero/cross-script.png
+./chrome/skin/default/zotero/cross.png
+./chrome/skin/default/zotero/document-search-result.png
+./chrome/skin/default/zotero/drive_network.png
+./chrome/skin/default/zotero/edit-list-order.png
+./chrome/skin/default/zotero/error.png
+./chrome/skin/default/zotero/error@2x.png
+./chrome/skin/default/zotero/errorReport.css
+./chrome/skin/default/zotero/exclamation.png
+./chrome/skin/default/zotero/exclamation@2x.png
+./chrome/skin/default/zotero/group_add.png
+./chrome/skin/default/zotero/group_add@2x.png
+./chrome/skin/default/zotero/integration.css
+./chrome/skin/default/zotero/itemPane.css
+./chrome/skin/default/zotero/juris-m-logo.svg
+./chrome/skin/default/zotero/library_add.png
+./chrome/skin/default/zotero/library_add@2x.png
+./chrome/skin/default/zotero/licenses
+./chrome/skin/default/zotero/licenses/cc-by-nc-nd.svg
+./chrome/skin/default/zotero/licenses/cc-by-nc-sa.svg
+./chrome/skin/default/zotero/licenses/cc-by-nc.svg
+./chrome/skin/default/zotero/licenses/cc-by-nd.svg
+./chrome/skin/default/zotero/licenses/cc-by-sa.svg
+./chrome/skin/default/zotero/licenses/cc-by.svg
+./chrome/skin/default/zotero/licenses/cc-srr.png
+./chrome/skin/default/zotero/licenses/cc0.svg
+./chrome/skin/default/zotero/licenses/reserved.png
+./chrome/skin/default/zotero/lifebuoy.png
+./chrome/skin/default/zotero/locate-external-viewer.png
+./chrome/skin/default/zotero/locate-external-viewer@2x.png
+./chrome/skin/default/zotero/locate-internal-viewer.png
+./chrome/skin/default/zotero/locate-library-lookup.png
+./chrome/skin/default/zotero/locate-show-file.png
+./chrome/skin/default/zotero/locate-show-file@2x.png
+./chrome/skin/default/zotero/locate-view-online.png
+./chrome/skin/default/zotero/locate-view-online@2x.png
+./chrome/skin/default/zotero/longTagFixer.css
+./chrome/skin/default/zotero/mac
+./chrome/skin/default/zotero/mac/arrow-down.png
+./chrome/skin/default/zotero/mac/cog.png
+./chrome/skin/default/zotero/mac/folderDropArrow.png
+./chrome/skin/default/zotero/mac/hgrippy.png
+./chrome/skin/default/zotero/mac/hsplitter.png
+./chrome/skin/default/zotero/mac/menubutton-end-pressed.png
+./chrome/skin/default/zotero/mac/menubutton-end.png
+./chrome/skin/default/zotero/mac/menubutton-mid-pressed.png
+./chrome/skin/default/zotero/mac/menubutton-start-pressed.png
+./chrome/skin/default/zotero/mac/menubutton-start.png
+./chrome/skin/default/zotero/mac/moz
+./chrome/skin/default/zotero/mac/moz/Search.png
+./chrome/skin/default/zotero/mac/moz/Search@2x.png
+./chrome/skin/default/zotero/mac/searchbar-dropmarker.png
+./chrome/skin/default/zotero/mac/toolbar-advanced-search.png
+./chrome/skin/default/zotero/mac/toolbar-advanced-search@2x.png
+./chrome/skin/default/zotero/mac/toolbar-background.png
+./chrome/skin/default/zotero/mac/toolbar-note-add.png
+./chrome/skin/default/zotero/mac/toolbar-note-add@2x.png
+./chrome/skin/default/zotero/mac/twisty-active-open.svg
+./chrome/skin/default/zotero/mac/twisty-active.svg
+./chrome/skin/default/zotero/mac/twisty-open.svg
+./chrome/skin/default/zotero/mac/twisty-selected-active-open.svg
+./chrome/skin/default/zotero/mac/twisty-selected-active.svg
+./chrome/skin/default/zotero/mac/twisty-selected-open.svg
+./chrome/skin/default/zotero/mac/twisty-selected.svg
+./chrome/skin/default/zotero/mac/twisty.svg
+./chrome/skin/default/zotero/mac/vgrippy.png
+./chrome/skin/default/zotero/mac/viewbutton-left-down.png
+./chrome/skin/default/zotero/mac/viewbutton-left-inactive.png
+./chrome/skin/default/zotero/mac/viewbutton-left-selected-down.png
+./chrome/skin/default/zotero/mac/viewbutton-left-selected-inactive.png
+./chrome/skin/default/zotero/mac/viewbutton-left-selected.png
+./chrome/skin/default/zotero/mac/viewbutton-left.png
+./chrome/skin/default/zotero/mac/viewbutton-middle-down.png
+./chrome/skin/default/zotero/mac/viewbutton-middle-inactive.png
+./chrome/skin/default/zotero/mac/viewbutton-middle-selected-down.png
+./chrome/skin/default/zotero/mac/viewbutton-middle-selected-inactive.png
+./chrome/skin/default/zotero/mac/viewbutton-middle-selected.png
+./chrome/skin/default/zotero/mac/viewbutton-middle.png
+./chrome/skin/default/zotero/mac/viewbutton-right-down.png
+./chrome/skin/default/zotero/mac/viewbutton-right-inactive.png
+./chrome/skin/default/zotero/mac/viewbutton-right-selected-down.png
+./chrome/skin/default/zotero/mac/viewbutton-right-selected-inactive.png
+./chrome/skin/default/zotero/mac/viewbutton-right-selected.png
+./chrome/skin/default/zotero/mac/viewbutton-right.png
+./chrome/skin/default/zotero/mac/vsplitter.png
+./chrome/skin/default/zotero/merge.css
+./chrome/skin/default/zotero/minus-active.png
+./chrome/skin/default/zotero/minus.png
+./chrome/skin/default/zotero/overlay.css
+./chrome/skin/default/zotero/page-white-add@2x.png
+./chrome/skin/default/zotero/page_white_add.png
+./chrome/skin/default/zotero/pie.png
+./chrome/skin/default/zotero/plus-active.png
+./chrome/skin/default/zotero/plus.png
+./chrome/skin/default/zotero/preferences.css
+./chrome/skin/default/zotero/prefs-advanced.png
+./chrome/skin/default/zotero/prefs-export.png
+./chrome/skin/default/zotero/prefs-general.png
+./chrome/skin/default/zotero/prefs-keys.png
+./chrome/skin/default/zotero/prefs-lang.png
+./chrome/skin/default/zotero/prefs-proxies.png
+./chrome/skin/default/zotero/prefs-search.png
+./chrome/skin/default/zotero/prefs-styles.png
+./chrome/skin/default/zotero/prefs-sync.png
+./chrome/skin/default/zotero/progress_arcs.png
+./chrome/skin/default/zotero/publicationsDialog.css
+./chrome/skin/default/zotero/puzzle-arrow.png
+./chrome/skin/default/zotero/report
+./chrome/skin/default/zotero/report/detail.css
+./chrome/skin/default/zotero/report/detail_print.css
+./chrome/skin/default/zotero/report/detail_screen.css
+./chrome/skin/default/zotero/report_user.png
+./chrome/skin/default/zotero/rtfscan-accept.png
+./chrome/skin/default/zotero/rtfscan-link.png
+./chrome/skin/default/zotero/spinner-14px@2x.png
+./chrome/skin/default/zotero/standalone.css
+./chrome/skin/default/zotero/tab.css
+./chrome/skin/default/zotero/tag-automatic.png
+./chrome/skin/default/zotero/tag-automatic@2x.png
+./chrome/skin/default/zotero/tag-selector-menu.png
+./chrome/skin/default/zotero/tag-selector-menu@2x.png
+./chrome/skin/default/zotero/tag.png
+./chrome/skin/default/zotero/tag@2x.png
+./chrome/skin/default/zotero/tagColorChooser.css
+./chrome/skin/default/zotero/textfield-dual.png
+./chrome/skin/default/zotero/textfield-single.png
+./chrome/skin/default/zotero/tick.png
+./chrome/skin/default/zotero/timeline
+./chrome/skin/default/zotero/timeline/bundle.css
+./chrome/skin/default/zotero/timeline/bundle.js
+./chrome/skin/default/zotero/timeline/timeline-api.js
+./chrome/skin/default/zotero/timeline/timeline.html
+./chrome/skin/default/zotero/timeline/timelineControls.js
+./chrome/skin/default/zotero/toolbar-advanced-search.png
+./chrome/skin/default/zotero/toolbar-advanced-search@2x.png
+./chrome/skin/default/zotero/toolbar-collection-add.png
+./chrome/skin/default/zotero/toolbar-collection-add@2x.png
+./chrome/skin/default/zotero/toolbar-collection-delete.png
+./chrome/skin/default/zotero/toolbar-collection-delete@2x.png
+./chrome/skin/default/zotero/toolbar-collection-edit-gray.png
+./chrome/skin/default/zotero/toolbar-collection-edit.png
+./chrome/skin/default/zotero/toolbar-collection-edit@2x.png
+./chrome/skin/default/zotero/toolbar-feed-add.png
+./chrome/skin/default/zotero/toolbar-feed-add@2x.png
+./chrome/skin/default/zotero/toolbar-feed-edit.png
+./chrome/skin/default/zotero/toolbar-feed-edit@2x.png
+./chrome/skin/default/zotero/toolbar-fullscreen-bottom.png
+./chrome/skin/default/zotero/toolbar-fullscreen-top.png
+./chrome/skin/default/zotero/toolbar-fullscreen-top@2x.png
+./chrome/skin/default/zotero/toolbar-go-arrow-disabled.png
+./chrome/skin/default/zotero/toolbar-go-arrow.png
+./chrome/skin/default/zotero/toolbar-go-arrow@2x.png
+./chrome/skin/default/zotero/toolbar-item-add.png
+./chrome/skin/default/zotero/toolbar-item-add@2x.png
+./chrome/skin/default/zotero/toolbar-link-add.png
+./chrome/skin/default/zotero/toolbar-link-add@2x.png
+./chrome/skin/default/zotero/toolbar-lookup.png
+./chrome/skin/default/zotero/toolbar-note-add.png
+./chrome/skin/default/zotero/toolbar-note-add@2x.png
+./chrome/skin/default/zotero/toolbar-snapshot-add.png
+./chrome/skin/default/zotero/treeitem-artwork.png
+./chrome/skin/default/zotero/treeitem-artwork@2x.png
+./chrome/skin/default/zotero/treeitem-attachment-link.png
+./chrome/skin/default/zotero/treeitem-attachment-link@2x.png
+./chrome/skin/default/zotero/treeitem-attachment-pdf.png
+./chrome/skin/default/zotero/treeitem-attachment-pdf@2x.png
+./chrome/skin/default/zotero/treeitem-attachment-snapshot.png
+./chrome/skin/default/zotero/treeitem-attachment-web-link.png
+./chrome/skin/default/zotero/treeitem-attachment-web-link@2x.png
+./chrome/skin/default/zotero/treeitem-audioRecording.png
+./chrome/skin/default/zotero/treeitem-audioRecording@2x.png
+./chrome/skin/default/zotero/treeitem-bill.png
+./chrome/skin/default/zotero/treeitem-bill@2x.png
+./chrome/skin/default/zotero/treeitem-blogPost.png
+./chrome/skin/default/zotero/treeitem-book.png
+./chrome/skin/default/zotero/treeitem-book@2x.png
+./chrome/skin/default/zotero/treeitem-bookSection.png
+./chrome/skin/default/zotero/treeitem-bookSection@2x.png
+./chrome/skin/default/zotero/treeitem-case.png
+./chrome/skin/default/zotero/treeitem-computerProgram.png
+./chrome/skin/default/zotero/treeitem-computerProgram@2x.png
+./chrome/skin/default/zotero/treeitem-conferencePaper.png
+./chrome/skin/default/zotero/treeitem-dictionaryEntry.png
+./chrome/skin/default/zotero/treeitem-email.png
+./chrome/skin/default/zotero/treeitem-encyclopediaArticle.png
+./chrome/skin/default/zotero/treeitem-film.png
+./chrome/skin/default/zotero/treeitem-film@2x.png
+./chrome/skin/default/zotero/treeitem-forumPost.png
+./chrome/skin/default/zotero/treeitem-forumPost@2x.png
+./chrome/skin/default/zotero/treeitem-hearing.png
+./chrome/skin/default/zotero/treeitem-instantMessage.png
+./chrome/skin/default/zotero/treeitem-instantMessage@2x.png
+./chrome/skin/default/zotero/treeitem-interview.png
+./chrome/skin/default/zotero/treeitem-interview@2x.png
+./chrome/skin/default/zotero/treeitem-journalArticle.png
+./chrome/skin/default/zotero/treeitem-journalArticle@2x.png
+./chrome/skin/default/zotero/treeitem-letter.png
+./chrome/skin/default/zotero/treeitem-letter@2x.png
+./chrome/skin/default/zotero/treeitem-magazineArticle.png
+./chrome/skin/default/zotero/treeitem-magazineArticle@2x.png
+./chrome/skin/default/zotero/treeitem-manuscript.png
+./chrome/skin/default/zotero/treeitem-map.png
+./chrome/skin/default/zotero/treeitem-newspaperArticle.png
+./chrome/skin/default/zotero/treeitem-newspaperArticle@2x.png
+./chrome/skin/default/zotero/treeitem-note-small.png
+./chrome/skin/default/zotero/treeitem-note.png
+./chrome/skin/default/zotero/treeitem-note@2x.png
+./chrome/skin/default/zotero/treeitem-patent.png
+./chrome/skin/default/zotero/treeitem-podcast.png
+./chrome/skin/default/zotero/treeitem-presentation.png
+./chrome/skin/default/zotero/treeitem-radioBroadcast.png
+./chrome/skin/default/zotero/treeitem-regulation.png
+./chrome/skin/default/zotero/treeitem-report.png
+./chrome/skin/default/zotero/treeitem-report@2x.png
+./chrome/skin/default/zotero/treeitem-statute.png
+./chrome/skin/default/zotero/treeitem-thesis.png
+./chrome/skin/default/zotero/treeitem-tvBroadcast.png
+./chrome/skin/default/zotero/treeitem-videoRecording.png
+./chrome/skin/default/zotero/treeitem-webpage-gray.png
+./chrome/skin/default/zotero/treeitem-webpage-gray@2x.png
+./chrome/skin/default/zotero/treeitem-webpage-gray@48px.png
+./chrome/skin/default/zotero/treeitem-webpage.png
+./chrome/skin/default/zotero/treeitem-webpage@2x.png
+./chrome/skin/default/zotero/treeitem-webpage@48px.png
+./chrome/skin/default/zotero/treeitem.png
+./chrome/skin/default/zotero/treeitem@2x.png
+./chrome/skin/default/zotero/treesource-bucket.png
+./chrome/skin/default/zotero/treesource-collection.png
+./chrome/skin/default/zotero/treesource-collection@2x.png
+./chrome/skin/default/zotero/treesource-commons.png
+./chrome/skin/default/zotero/treesource-duplicates.png
+./chrome/skin/default/zotero/treesource-duplicates@2x.png
+./chrome/skin/default/zotero/treesource-feed-error.png
+./chrome/skin/default/zotero/treesource-feed-error@2x.png
+./chrome/skin/default/zotero/treesource-feed-updating.png
+./chrome/skin/default/zotero/treesource-feed.png
+./chrome/skin/default/zotero/treesource-feed@2x.png
+./chrome/skin/default/zotero/treesource-feedLibrary.png
+./chrome/skin/default/zotero/treesource-feedLibrary@2x.png
+./chrome/skin/default/zotero/treesource-groups.png
+./chrome/skin/default/zotero/treesource-groups@2x.png
+./chrome/skin/default/zotero/treesource-library.png
+./chrome/skin/default/zotero/treesource-library@2x.png
+./chrome/skin/default/zotero/treesource-search.png
+./chrome/skin/default/zotero/treesource-search@2x.png
+./chrome/skin/default/zotero/treesource-share.png
+./chrome/skin/default/zotero/treesource-trash-full.png
+./chrome/skin/default/zotero/treesource-trash-full@2x.png
+./chrome/skin/default/zotero/treesource-trash.png
+./chrome/skin/default/zotero/treesource-trash@2x.png
+./chrome/skin/default/zotero/treesource-unfiled.png
+./chrome/skin/default/zotero/treesource-unfiled@2x.png
+./chrome/skin/default/zotero/upgrade.css
+./chrome/skin/default/zotero/warning.png
+./chrome/skin/default/zotero/warning@2x.png
+./chrome/skin/default/zotero/win
+./chrome/skin/default/zotero/win/mainwindow-dropdown-arrow.png
+./chrome/skin/default/zotero/zotero-new-z-16px.png
+./chrome/skin/default/zotero/zotero-new-z-48px.png
+./chrome/skin/default/zotero/zotero-z-16px-active.png
+./chrome/skin/default/zotero/zotero-z-16px.png
+./chrome/skin/default/zotero/zotero-z-24px-active.png
+./chrome/skin/default/zotero/zotero-z-32px-australis-mac.svg
+./chrome/skin/default/zotero/zotero-z-32px-australis-unix.svg
+./chrome/skin/default/zotero/zotero-z-32px-australis-win.svg
+./chrome/skin/default/zotero/zotero-z-32px-australis.svg
+./chrome/skin/default/zotero/zotero.css
+./chrome/skin/default/zotero/zotero_z_32px.png
+./deleted.txt
+./jurism.jar
+./resource
+./resource/bluebird
+./resource/bluebird.js
+./resource/concurrentCaller.js
+./resource/config.js
+./resource/csl-validator.js
+./resource/hide.vbs
+./resource/pathparser.js
+./resource/polyfill.js
+./resource/react-dom.js
+./resource/react.js
+./resource/redirect.sh
+./resource/redirect.vbs
+./resource/require.js
+./resource/schema
+./resource/schema/abbreviations.json
+./resource/schema/connectorTypeSchemaData.js
+./resource/schema/dateFormats.json
+./resource/schema/engines.json
+./resource/schema/jurisdiction-map-10002.json
+./resource/schema/jurisdictions.json
+./resource/schema/jurisdictions.sql
+./resource/schema/multilingual.sql
+./resource/schema/renamed-styles.json
+./resource/schema/repotime.txt
+./resource/schema/system.sql
+./resource/schema/triggers.sql
+./resource/schema/userdata.sql
+./resource/schema/zls.sql
+./resource/tinymce
+./resource/tinymce/css
+./resource/tinymce/css/integration-content.css
+./resource/tinymce/css/note-content.css
+./resource/tinymce/css/note-ui.css
+./resource/tinymce/integration.html
+./resource/tinymce/langs
+./resource/tinymce/langs/ar.js
+./resource/tinymce/langs/bg_BG.js
+./resource/tinymce/langs/ca.js
+./resource/tinymce/langs/cs_CZ.js
+./resource/tinymce/langs/da.js
+./resource/tinymce/langs/de.js
+./resource/tinymce/langs/el.js
+./resource/tinymce/langs/es.js
+./resource/tinymce/langs/et.js
+./resource/tinymce/langs/eu.js
+./resource/tinymce/langs/fa_IR.js
+./resource/tinymce/langs/fi.js
+./resource/tinymce/langs/fr_FR.js
+./resource/tinymce/langs/gl.js
+./resource/tinymce/langs/he_IL.js
+./resource/tinymce/langs/hr.js
+./resource/tinymce/langs/hu_HU.js
+./resource/tinymce/langs/id.js
+./resource/tinymce/langs/is_IS.js
+./resource/tinymce/langs/it.js
+./resource/tinymce/langs/ja.js
+./resource/tinymce/langs/km_KH.js
+./resource/tinymce/langs/ko_KR.js
+./resource/tinymce/langs/lt.js
+./resource/tinymce/langs/nb_NO.js
+./resource/tinymce/langs/nl.js
+./resource/tinymce/langs/pl.js
+./resource/tinymce/langs/pt_BR.js
+./resource/tinymce/langs/pt_PT.js
+./resource/tinymce/langs/ro.js
+./resource/tinymce/langs/ru.js
+./resource/tinymce/langs/sk.js
+./resource/tinymce/langs/sl_SI.js
+./resource/tinymce/langs/sv_SE.js
+./resource/tinymce/langs/th_TH.js
+./resource/tinymce/langs/tr_TR.js
+./resource/tinymce/langs/uk.js
+./resource/tinymce/langs/vi_VN.js
+./resource/tinymce/langs/zh_CN.js
+./resource/tinymce/langs/zh_TW.js
+./resource/tinymce/license.txt
+./resource/tinymce/locale.js
+./resource/tinymce/note.html
+./resource/tinymce/noteview.html
+./resource/tinymce/plugins
+./resource/tinymce/plugins/autolink
+./resource/tinymce/plugins/autolink/plugin.js
+./resource/tinymce/plugins/code
+./resource/tinymce/plugins/code/plugin.js
+./resource/tinymce/plugins/contextmenu
+./resource/tinymce/plugins/contextmenu/plugin.js
+./resource/tinymce/plugins/directionality
+./resource/tinymce/plugins/directionality/plugin.js
+./resource/tinymce/plugins/link
+./resource/tinymce/plugins/link/plugin.js
+./resource/tinymce/plugins/lists
+./resource/tinymce/plugins/lists/plugin.js
+./resource/tinymce/plugins/paste
+./resource/tinymce/plugins/paste/plugin.js
+./resource/tinymce/plugins/searchreplace
+./resource/tinymce/plugins/searchreplace/plugin.js
+./resource/tinymce/plugins/textcolor
+./resource/tinymce/plugins/textcolor/plugin.js
+./resource/tinymce/skins
+./resource/tinymce/skins/lightgray
+./resource/tinymce/skins/lightgray/content.min.css
+./resource/tinymce/skins/lightgray/fonts
+./resource/tinymce/skins/lightgray/fonts/tinymce-small.woff
+./resource/tinymce/skins/lightgray/fonts/tinymce.woff
+./resource/tinymce/skins/lightgray/img
+./resource/tinymce/skins/lightgray/img/anchor.gif
+./resource/tinymce/skins/lightgray/img/loader.gif
+./resource/tinymce/skins/lightgray/img/object.gif
+./resource/tinymce/skins/lightgray/img/trans.gif
+./resource/tinymce/skins/lightgray/skin.min.css
+./resource/tinymce/themes
+./resource/tinymce/themes/modern
+./resource/tinymce/themes/modern/theme.js
+./resource/tinymce/tinymce.js
+./resource/web-library
+./resource/word-processor-plugin-installer.js
+./skin
+./skin/preferences
+./skin/preferences/preferences.css
+./styles
+./styles/.git
+./styles/american-anthropological-association.csl
+./styles/apa.csl
+./styles/cell.csl
+./styles/chicago-author-date.csl
+./styles/chicago-fullnote-bibliography.csl
+./styles/chicago-note-bibliography.csl
+./styles/elsevier-harvard.csl
+./styles/ieee.csl
+./styles/jm-chicago-fullnote-bibliography-polyglot.csl
+./styles/jm-chicago-fullnote-bibliography.csl
+./styles/jm-chinese-gb7714-2005-numeric.csl
+./styles/jm-diritto-pubblico-comparato-ed-europeo.csl
+./styles/jm-harvard-australian-national-university.csl
+./styles/jm-indigobook-law-review.csl
+./styles/jm-indigobook.csl
+./styles/jm-oscola.csl
+./styles/jm-taylor-and-francis-chicago-author-date.csl
+./styles/jm-turabian-fullnote-bibliography-eu-multi.csl
+./styles/jm-turabian-fullnote-bibliography-nl-multi.csl
+./styles/modern-humanities-research-association.csl
+./styles/modern-language-association.csl
+./styles/nature.csl
+./styles/update
+./styles/vancouver.csl
+./translators
+./translators/.ci
+./translators/.ci/.gitignore
+./translators/.ci/checkDeletedTxt.sh
+./translators/.ci/checkTranslator.sh
+./translators/.ci/helper.sh
+./translators/.ci/jshintrc
+./translators/.ci/package.json
+./translators/.ci/README.md
+./translators/.git
+./translators/.travis.yml
+./translators/A Contra Corriente.js
+./translators/Ab Imperio.js
+./translators/Access Medicine.js
+./translators/ACLWeb.js
+./translators/ACM Digital Library.js
+./translators/ACS Publications.js
+./translators/AEA Web.js
+./translators/Agencia del ISBN.js
+./translators/AIP.js
+./translators/Airiti.js
+./translators/Alexander Street Press.js
+./translators/AllAfrica.js
+./translators/AlterNet.js
+./translators/Aluka.js
+./translators/Amazon.js
+./translators/American Institute of Aeronautics and Astronautics.js
+./translators/American Prospect.js
+./translators/AMS Journals.js
+./translators/AMS MathSciNet.js
+./translators/Ancestry.com US Federal Census.js
+./translators/Annual Reviews.js
+./translators/APA PsycNET.js
+./translators/APN.ru.js
+./translators/APS-Physics.js
+./translators/APS.js
+./translators/Archeion.js
+./translators/Archiv fuer Sozialgeschichte.js
+./translators/Archive Ouverte en Sciences de l'Information et de la Communication  (AOSIC).js
+./translators/Archives Canada-France.js
+./translators/Archives Canada.js
+./translators/Artefacts Canada.js
+./translators/ARTFL Encyclopedie.js
+./translators/ARTnews.js
+./translators/ARTstor.js
+./translators/arXiv.org.js
+./translators/ASCE.js
+./translators/ASCO Meeting Library.js
+./translators/Atlanta Journal Constitution.js
+./translators/Atypon Journals.js
+./translators/AustLII and NZLII.js
+./translators/Australian Dictionary of Biography.js
+./translators/BAILII.js
+./translators/BBC.js
+./translators/beck-online.js
+./translators/Beobachter.js
+./translators/Bezneng Gajit.js
+./translators/BibLaTeX.js
+./translators/Biblio.com.js
+./translators/Bibliontology RDF.js
+./translators/Bibliotheeque et Archives Nationales du Quebec.js
+./translators/Bibliotheque et Archives Nationale du Quebec (Pistard).js
+./translators/Bibliotheque nationale de France.js
+./translators/BIBSYS.js
+./translators/BibTeX.js
+./translators/BioMed Central.js
+./translators/BioOne.js
+./translators/Biz Makoto.js
+./translators/Blaetter.js
+./translators/Blogger.js
+./translators/Bloomberg.js
+./translators/BOCC.js
+./translators/BOFiP-Impots.js
+./translators/Bookmarks.js
+./translators/Boston Review.js
+./translators/Bracero History Archive.js
+./translators/Brill Journals.js
+./translators/Bryn Mawr Classical Review.js
+./translators/Bundesgesetzblatt.js
+./translators/Business Standard.js
+./translators/CABI - CAB Abstracts.js
+./translators/Cairn.info.js
+./translators/Cambridge Core.js
+./translators/Canada.com.js
+./translators/Canadian Letters and Images.js
+./translators/Canadiana.ca.js
+./translators/CanLII.js
+./translators/CCfr (BnF).js
+./translators/Cell Press.js
+./translators/Chadwyck Literature Online.js
+./translators/Champlain Society - Collection.js
+./translators/Christian Science Monitor.js
+./translators/Chronicling America.js
+./translators/Chuo Nippo.js
+./translators/CiNii.js
+./translators/Citavi 5 XML.js
+./translators/CiteSeer.js
+./translators/CiteULike.js
+./translators/Civilization.ca.js
+./translators/CLACSO.js
+./translators/CLASE.js
+./translators/Clinical Key.js
+./translators/CNKI.js
+./translators/Code4Lib Journal.js
+./translators/COinS.js
+./translators/Columbia University Press.js
+./translators/Common-Place.js
+./translators/Copernicus.js
+./translators/Cornell LII - FRCP.js
+./translators/Cornell LII - US Code.js
+./translators/Cornell LII.js
+./translators/Cornell University Press.js
+./translators/CourtListener.js
+./translators/Courts in Japan.js
+./translators/CrossRef.js
+./translators/CSIRO Publishing.js
+./translators/CSL JSON.js
+./translators/CSV.js
+./translators/Cyberpresse.js
+./translators/Dagstuhl Research Online Publication Server.js
+./translators/DAI-Zenon.js
+./translators/DART-Europe.js
+./translators/DataCite.js
+./translators/DBLP Computer Science Bibliography.js
+./translators/Defense Technical Information Center.js
+./translators/DeGruyter.js
+./translators/dejure.org.js
+./translators/deleted.txt
+./translators/Delpher.js
+./translators/Demographic Research.js
+./translators/DEPATISnet.js
+./translators/Der Freitag.js
+./translators/Deutsche Nationalbibliothek.js
+./translators/dhistory.js
+./translators/Dialnet.js
+./translators/Die Zeit.js
+./translators/digibib.net.js
+./translators/Digital Humanities Quarterly.js
+./translators/Digital Medievalist.js
+./translators/DigiZeitschriften.js
+./translators/dLibra.js
+./translators/DOI.js
+./translators/Douban.js
+./translators/DPLA.js
+./translators/DrugBank.ca.js
+./translators/Dryad Digital Repository.js
+./translators/DTU Orbit.js
+./translators/Early English Books Online.js
+./translators/Eastview.js
+./translators/ebrary.js
+./translators/EBSCOhost.js
+./translators/Edinburgh University Press Journals.js
+./translators/Education Week.js
+./translators/EIDR.js
+./translators/Electronic Colloquium on Computational Complexity.js
+./translators/eLibrary.ru.js
+./translators/eLife.js
+./translators/Elsevier Health Journals.js
+./translators/Embedded Metadata.js
+./translators/eMedicine.js
+./translators/eMJA.js
+./translators/Encyclopedia of Chicago.js
+./translators/Endnote XML.js
+./translators/Engineering Village.js
+./translators/EPA National Library Catalog.js
+./translators/Epicurious.js
+./translators/ePrint IACR.js
+./translators/ERIC.js
+./translators/ESpacenet.js
+./translators/etatar.ru.js
+./translators/Euclid.js
+./translators/EurasiaNet.js
+./translators/Eurogamer.js
+./translators/Evernote.js
+./translators/Fachportal Padagogik.js
+./translators/Factiva.js
+./translators/Fairfax Australia.js
+./translators/Fastcase (cases).js
+./translators/FAZ.NET.js
+./translators/feb-web.ru.js
+./translators/Figshare.js
+./translators/Financial Times.js
+./translators/fishpond.co.nz.js
+./translators/Flickr.js
+./translators/Foreign Affairs.js
+./translators/Foreign Policy.js
+./translators/fr-online.de.js
+./translators/Free Law Reporter.js
+./translators/FreeCite.js
+./translators/FreePatentsOnline.js
+./translators/Frontiers.js
+./translators/GaleGDC.js
+./translators/Galegroup.js
+./translators/Gallica.js
+./translators/Game Studies.js
+./translators/GameSpot.js
+./translators/Gasyrlar Awazy.js
+./translators/Gemeinsamer Bibliotheksverbund ISBN.js
+./translators/Gene Ontology.js
+./translators/Github.js
+./translators/Glenbow Library.js
+./translators/Gmail.js
+./translators/Google Books.js
+./translators/Google Patents.js
+./translators/Google Play.js
+./translators/Google Scholar.js
+./translators/GPO Access e-CFR.js
+./translators/Gulag Many Days, Many Lives.js
+./translators/Haaretz.js
+./translators/HAL Archives Ouvertes.js
+./translators/Handelszeitung.js
+./translators/Hanrei Watch.js
+./translators/Harpers.js
+./translators/Hathi Trust.js
+./translators/HCSP.js
+./translators/HeinOnline.js
+./translators/HighBeam.js
+./translators/HighWire 2.0.js
+./translators/HighWire.js
+./translators/Hindawi Publishers.js
+./translators/Hispanic-American Periodical Index (Beta).js
+./translators/Hispanic-American Periodical Index.js
+./translators/HLAS (historical).js
+./translators/Hoovers.js
+./translators/Huff Post.js
+./translators/IBISWorld.js
+./translators/IEEE Computer Society.js
+./translators/IEEE Xplore.js
+./translators/IGN.js
+./translators/IMDb.js
+./translators/In These Times.js
+./translators/Informationssystem Medienpaedagogik.js
+./translators/Informit Australia.js
+./translators/informIT database.js
+./translators/InfoTrac.js
+./translators/IngentaConnect.js
+./translators/Insignia OPAC.js
+./translators/INSPIRE.js
+./translators/Institute of Physics.js
+./translators/Intellixir.js
+./translators/Inter-Research Science Center.js
+./translators/Internet Archive Wayback Machine.js
+./translators/Internet Archive.js
+./translators/io-port.js
+./translators/IRIS.js
+./translators/Isidore.js
+./translators/ISTC.js
+./translators/J-Stage.js
+./translators/Jahrbuch.js
+./translators/Japan Diet Transcripts.js
+./translators/Japan Legislation.js
+./translators/Japan Legislative Council Minutes.js
+./translators/Japan Times Online.js
+./translators/Japanese Law Translation.js
+./translators/jmlr.js
+./translators/Journal of Electronic Publishing.js
+./translators/Journal of Extension.js
+./translators/JRC Publications Repository.js
+./translators/JSTOR.js
+./translators/Juricaf.js
+./translators/jurion.js
+./translators/Juris.js
+./translators/JurPC.js
+./translators/KitapYurdu.com.js
+./translators/KOBV.js
+./translators/Kommersant.js
+./translators/L'Annee Philologique.js
+./translators/La Croix.js
+./translators/LA Times.js
+./translators/Lagen.nu.js
+./translators/Le Devoir.js
+./translators/Le Figaro.js
+./translators/Le monde diplomatique.js
+./translators/Le Monde.js
+./translators/Legifrance.js
+./translators/Legislative Insight.js
+./translators/LexisNexis.js
+./translators/LexisNexisTLS.js
+./translators/Library Catalog (Aleph).js
+./translators/Library Catalog (Amicus).js
+./translators/Library Catalog (Aquabrowser).js
+./translators/Library Catalog (BiblioCommons).js
+./translators/Library Catalog (Capita Prism).js
+./translators/Library Catalog (DRA).js
+./translators/Library Catalog (Dynix).js
+./translators/Library Catalog (Encore).js
+./translators/Library Catalog (GEAC).js
+./translators/Library Catalog (InnoPAC).js
+./translators/Library Catalog (Koha).js
+./translators/Library Catalog (Mango).js
+./translators/Library Catalog (OPALS).js
+./translators/Library Catalog (PICA).js
+./translators/Library Catalog (PICA2).js
+./translators/Library Catalog (Polaris).js
+./translators/Library Catalog (SIRSI eLibrary).js
+./translators/Library Catalog (SIRSI).js
+./translators/Library Catalog (SLIMS).js
+./translators/Library Catalog (TLCYouSeeMore).js
+./translators/Library Catalog (Voyager 7).js
+./translators/Library Catalog (Voyager).js
+./translators/Library Catalog (VTLS).js
+./translators/Library Genesis.js
+./translators/Library of Congress ISBN.js
+./translators/LiveJournal.js
+./translators/London Review of Books.js
+./translators/Lulu.js
+./translators/MAB2.js
+./translators/magazines.russ.ru.js
+./translators/Mailman.js
+./translators/Mainichi Daily News.js
+./translators/MARC.js
+./translators/MARCXML.js
+./translators/Matbugat.ru.js
+./translators/Max Planck Institute for the History of Science Virtual Laboratory Library.js
+./translators/MDPI Journals.js
+./translators/medes.js
+./translators/Medium.js
+./translators/MEDLINEnbib.js
+./translators/mEDRA.js
+./translators/MetaLib.js
+./translators/Microbiology Society Journals.js
+./translators/Microsoft Academic.js
+./translators/MIT Press Journals.js
+./translators/MODS.js
+./translators/Mongolia Court Judgments.js
+./translators/Mongolia Legislation.js
+./translators/MSN Sankei News.js
+./translators/Musee du Louvre.js
+./translators/Nagoya University OPAC.js
+./translators/NASA ADS.js
+./translators/NASA NTRS.js
+./translators/National Archive of the UK.js
+./translators/National Archives of Australia.js
+./translators/National Archives of South Africa.js
+./translators/National Archives of the United States.js
+./translators/National Assembly of Laos.js
+./translators/National Bureau of Economic Research.js
+./translators/National Diet Library Catalogue.js
+./translators/National Gallery of Art - USA.js
+./translators/National Library of Australia (new catalog).js
+./translators/National Library of Australia.js
+./translators/National Library of Belarus.js
+./translators/National Library of Norway.js
+./translators/National Post.js
+./translators/Nature Publishing Group.js
+./translators/NCBI Nucleotide.js
+./translators/Neural Information Processing Systems.js
+./translators/New Zealand Herald.js
+./translators/newshub.co.nz.js
+./translators/NewsnetTamedia.js
+./translators/newspapers.com.js
+./translators/Notre Dame Philosophical Reviews.js
+./translators/NRC Research Press.js
+./translators/Nuclear Receptor Signaling.js
+./translators/NYTimes.com.js
+./translators/NZZ.ch.js
+./translators/OCLC WorldCat FirstSearch.js
+./translators/OECD.js
+./translators/OhioLINK.js
+./translators/Old Bailey Online.js
+./translators/Open Journal Systems.js
+./translators/Open WorldCat.js
+./translators/OpenCongress.js
+./translators/OpenEdition Books.js
+./translators/OpenJudis - Indian Supreme Court cases.js
+./translators/Optical Society of America.js
+./translators/ORCID.js
+./translators/OSTI Energy Citations.js
+./translators/OVID Tagged.js
+./translators/Ovid.js
+./translators/Oxford English Dictionary.js
+./translators/Oxford Music and Art Online.js
+./translators/Oxford University Press.js
+./translators/OZON.ru.js
+./translators/Papers Past.js
+./translators/Paris Review.js
+./translators/Pastebin.js
+./translators/Patents - USPTO.js
+./translators/PEI Archival Information Network.js
+./translators/PEP Web.js
+./translators/Philosopher's Imprint.js
+./translators/PhilPapers.js
+./translators/Pion Journals.js
+./translators/Pleade.js
+./translators/PLoS Journals.js
+./translators/Polygon.js
+./translators/Potsdamer Neueste Nachrichten.js
+./translators/Primo.js
+./translators/Probing the Past.js
+./translators/Project Gutenberg.js
+./translators/Project MUSE.js
+./translators/ProMED.js
+./translators/ProQuest PolicyFile.js
+./translators/ProQuest.js
+./translators/Protein Data Bank.js
+./translators/Pubget.js
+./translators/Publications du Quebec.js
+./translators/PubMed Central.js
+./translators/PubMed XML.js
+./translators/PubMed.js
+./translators/PyPI.js
+./translators/R-Packages.js
+./translators/Radio Liberty.js
+./translators/RDF.js
+./translators/Readability.js
+./translators/REDALYC.js
+./translators/ReferBibIX.js
+./translators/RefWorks Tagged.js
+./translators/Regeringskansliet.js
+./translators/ReliefWeb.js
+./translators/RePEc - Econpapers.js
+./translators/RePEc - IDEAS.js
+./translators/Retsinformation.js
+./translators/Reuters.js
+./translators/Revues.org.js
+./translators/RIS.js
+./translators/Rock, Paper, Shotgun.js
+./translators/Roll Call.js
+./translators/RSC Publishing.js
+./translators/SAE Papers.js
+./translators/Safari Books Online.js
+./translators/SAGE Journals.js
+./translators/SAGE Knowledge.js
+./translators/sbn.it.js
+./translators/Scannable Cite.js
+./translators/Scholars Portal Journals.js
+./translators/Schweizer Radio und Fernsehen SRF.js
+./translators/SciELO.js
+./translators/Science Links Japan.js
+./translators/ScienceDirect.js
+./translators/Scopus.js
+./translators/semantics Visual Library.js
+./translators/SFU IPinCH.js
+./translators/Silverchair.js
+./translators/SIRS Knowledge Source.js
+./translators/Slate.js
+./translators/SlideShare.js
+./translators/SORA.js
+./translators/Spiegel Online.js
+./translators/Springer Link.js
+./translators/Springer Science+Business Media.js
+./translators/SSOAR.js
+./translators/SSRN.js
+./translators/Stanford Encyclopedia of Philosophy.js
+./translators/Store norske leksikon.js
+./translators/Stuff.co.nz.js
+./translators/Sueddeutsche.de.js
+./translators/Summon 2.js
+./translators/Tagesspiegel.js
+./translators/Talis Aspire.js
+./translators/TalisPrism.js
+./translators/Tatar zamani.js
+./translators/Tatknigafund.js
+./translators/Tatpressa.ru.js
+./translators/Taylor and Francis+NEJM.js
+./translators/taz.de.js
+./translators/TEI.js
+./translators/Tesis Doctorals en Xarxa.js
+./translators/The Atlantic.js
+./translators/The Australian.js
+./translators/The Boston Globe.js
+./translators/The Chronicle of Higher Education.js
+./translators/The Daily Beast.js
+./translators/The Economic Times.js
+./translators/The Economist.js
+./translators/The Free Dictionary.js
+./translators/The Globe and Mail.js
+./translators/The Guardian.js
+./translators/The Hamilton Spectator.js
+./translators/The Hindu (old).js
+./translators/The Hindu.js
+./translators/The Met.js
+./translators/The Microfinance Gateway.js
+./translators/The Nation.js
+./translators/The New Republic.js
+./translators/The New York Review of Books.js
+./translators/The New Yorker.js
+./translators/The Open Library.js
+./translators/The Telegraph.js
+./translators/The Times UK.js
+./translators/TheMarker.js
+./translators/Theory of Computing.js
+./translators/Time.com.js
+./translators/Toronto Star.js
+./translators/Treesearch.js
+./translators/Trove.js
+./translators/TV by the Numbers.js
+./translators/TVNZ.js
+./translators/Twitter.js
+./translators/Ubiquity Journals.js
+./translators/unAPI.js
+./translators/Unqualified Dublin Core RDF.js
+./translators/UPCommons.js
+./translators/UpToDate References.js
+./translators/US National Archives Research Catalog.js
+./translators/USgamer.js
+./translators/Uzbekistan lex.uz.js
+./translators/Vanderbilt eJournals.js
+./translators/Vanity Fair.js
+./translators/Verniana-Jules Verne Studies.js
+./translators/Vimeo.js
+./translators/VoxEU.js
+./translators/Wall Street Journal.js
+./translators/Wanfang Data.js
+./translators/Washington Monthly.js
+./translators/washingtonpost.com.js
+./translators/Web of Science Tagged.js
+./translators/Web of Science.js
+./translators/Welt Online.js
+./translators/WestLaw Japan.js
+./translators/WikiLeaks PlusD.js
+./translators/Wikimedia Commons.js
+./translators/Wikipedia Citation Templates.js
+./translators/Wikipedia.js
+./translators/Wikisource.js
+./translators/Wildlife Biology in Practice.js
+./translators/Wiley Online Library.js
+./translators/Winnipeg Free Press.js
+./translators/WIPO.js
+./translators/wiso.js
+./translators/World History Connected.js
+./translators/World Shakespeare Bibliography Online.js
+./translators/WorldCat Discovery Service.js
+./translators/XML ContextObject.js
+./translators/Ynet.js
+./translators/YouTube.js
+./translators/zbMATH.js
+./translators/Zenodo.js
+./translators/ZIPonline.js
+./translators/Zotero RDF.js
+./translators/zotero.org.js
