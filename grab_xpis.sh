@@ -5,6 +5,16 @@
 
 set -e
 
+set +e
+gsed --version > /dev/null 2<&1
+if [ $? -gt 0 ]; then
+    GSED="sed"
+else
+    GSED="gsed"
+fi
+set -e
+
+
 
 CALLDIR="$3"
 if [ "" == "$3" ]; then
@@ -99,7 +109,7 @@ CONTAINER_DIR=$(dirname "$CALLDIR")
             if [ "${LOCAL_DIR}" == "jurism" ]; then
 	        LATEST="${CONTAINER_DIR}/jurism/build"
 		echo "Building Jurism from ${LATEST}"
-                cp -r -L "${LATEST}" "$BUILD_DIR/jurism"
+                cp -RL "${LATEST}" "$BUILD_DIR/jurism"
 		#ls -l "$BUILD_DIR/jurism/"
 		# Needed to avoid crash when runner assumes jurism code is packed.
 		cp "$BUILD_DIR/jurism/translators/deleted.txt" "$BUILD_DIR/jurism/deleted.txt" 
@@ -107,7 +117,7 @@ CONTAINER_DIR=$(dirname "$CALLDIR")
 		CL_KEY=$(cat "${CONTAINER_DIR}"/jurism/cl-key.txt)
 		echo $CL_KEY
 		echo "${BUILD_DIR}/jurism/resource/config.js"
-		sed -si "s/%%VALUE%%/${CL_KEY}/" "${BUILD_DIR}/jurism/resource/config.js"
+		${GSED} -si "s/%%VALUE%%/${CL_KEY}/" "${BUILD_DIR}/jurism/resource/config.js"
 	    else
 	        LATEST=$(${GFIND} "$CONTAINER_DIR/${LOCAL_DIR}"/releases -type f -name '*.xpi' -printf '%AY%Am%Ad%AH%AI%AM%AS %h/%f\n' | sort -r | head -1 | cut -d\  -f 2);
                 unzip -q "${LATEST}" -d "$CALLDIR/modules/$LOCAL_DIR/"
