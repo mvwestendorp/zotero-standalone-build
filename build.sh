@@ -362,35 +362,36 @@ fi
 
 # Win32
 if [ $BUILD_WIN32 == 1 ]; then
-	echo 'Building Jurism_win32'
+	echo 'Building Zotero_win32'
 	
 	# Set up directory
-	APPDIR="$STAGE_DIR/Jurism_win32"
+	APPDIR="$STAGE_DIR/Zotero_win32"
 	rm -rf "$APPDIR"
 	mkdir "$APPDIR"
 	
-	# Copy relevant assets from Firefox
-	mkdir "$APPDIR/xulrunner"
-	cp -R "$WIN32_RUNTIME_PATH"/!(api-ms*.dll|application.ini|browser|defaults|devtools-files|crashreporter*|firefox.exe|maintenanceservice*|precomplete|removed-files|uninstall|update*) "$APPDIR/xulrunner"
+	# Modify platform-specific prefs
+	perl -pi -e 's/%GECKO_VERSION%/'"$GECKO_VERSION_WIN"'/g' "$BUILD_DIR/jurism/defaults/preferences/prefs.js"
 	
-	# Copy jurism.exe AKA zotero.exe, which is xulrunner-stub from https://github.com/duanyao/xulrunner-stub
+	# Copy relevant assets from Firefox
+	cp -R "$WIN32_RUNTIME_PATH"/!(application.ini|browser|defaults|devtools-files|crashreporter*|firefox.exe|maintenanceservice*|precomplete|removed-files|uninstall|update*) "$APPDIR"
+	
+	# Copy jurism.exe, which is xulrunner-stub from https://github.com/duanyao/xulrunner-stub
 	# modified with ReplaceVistaIcon.exe and edited with Resource Hacker
 	#
-	   "$CALLDIR/win/ReplaceVistaIcon/ReplaceVistaIcon.exe" \
-	       "`cygpath -w \"$CALLDIR/win/jurism.exe\"`" \
-	       "`cygpath -w \"$CALLDIR/assets/icons/default/main-window.ico\"`"
+	#   "$CALLDIR/win/ReplaceVistaIcon/ReplaceVistaIcon.exe" \
+	#       "`cygpath -w \"$APPDIR/jurism.exe\"`" \
+	#       "`cygpath -w \"$CALLDIR/assets/icons/default/main-window.ico\"`"
 	#
 	cp "$CALLDIR/win/jurism.exe" "$APPDIR"
-	
+
+
+	# zotero.exe (xulrunner-stub) is compiled with VS2013 therefore
+	# needs older 'msvcr' library than Firefox has
+	cp "$CALLDIR/win/msvcr120.dll" "$APPDIR"
+
 	# Use our own updater, because Mozilla's requires updates signed by Mozilla
-	cp "$CALLDIR/win/updater.exe" "$APPDIR/xulrunner"
-	cat "$CALLDIR/win/installer/updater_append.ini" >> "$APPDIR/xulrunner/updater.ini"
-	
-	# Copy files to root as required by xulrunner-stub
-	cp "$WIN32_RUNTIME_PATH/mozglue.dll" \
-		"$WIN32_RUNTIME_PATH/msvcp120.dll" \
-		"$WIN32_RUNTIME_PATH/msvcr120.dll" \
-		"$APPDIR/"
+	cp "$CALLDIR/win/updater.exe" "$APPDIR"
+	cat "$CALLDIR/win/installer/updater_append.ini" >> "$APPDIR/updater.ini"
 	
 	cp -R "$BUILD_DIR/jurism/"* "$BUILD_DIR/application.ini" "$APPDIR"
 	
@@ -404,6 +405,9 @@ if [ $BUILD_WIN32 == 1 ]; then
 		cp "$WIN32_RUNTIME_PATH/devtools-files/components/interfaces.xpt" "$APPDIR/components/"
 	fi
 	
+	
+## ******************************************
+
 	# Add word processor plug-ins
 	mkdir "$APPDIR/extensions"
 	cp -RH "$CALLDIR/modules/jurism-word-for-windows-integration" "$APPDIR/extensions/jurismWinWordIntegration@juris-m.github.io"
