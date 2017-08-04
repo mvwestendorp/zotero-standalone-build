@@ -410,20 +410,20 @@ if [ $BUILD_WIN32 == 1 ]; then
 
 	# Add word processor plug-ins
 	mkdir "$APPDIR/extensions"
-	###cp -RH "$CALLDIR/modules/jurism-word-for-windows-integration" "$APPDIR/extensions/jurismWinWordIntegration@juris-m.github.io"
-	###cp -RH "$CALLDIR/modules/jurism-libreoffice-integration" "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
+	cp -RH "$CALLDIR/modules/jurism-word-for-windows-integration" "$APPDIR/extensions/jurismWinWordIntegration@juris-m.github.io"
+	cp -RH "$CALLDIR/modules/jurism-libreoffice-integration" "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
 
     # Add Abbreviation Filter (abbrevs-filter)
-	###cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
+	cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
 
     # Add Jurisdiction Support (myles)
-	###cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
+	cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
 	
     # Add Bluebook signal helper (bluebook-signals-for-zotero)
-	###cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com"
+	cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com"
 	
     # Add ODF/RTF Scan (zotero-odf-scan)
-	###cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+	cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
 	# Delete extraneous files
 	${GFIND} "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;
