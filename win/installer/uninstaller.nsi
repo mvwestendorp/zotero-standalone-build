@@ -171,12 +171,12 @@ Section "Uninstall"
   ${MUI_INSTALLOPTIONS_READ} $0 "unconfirm.ini" "Field 3" "State"
   ${If} "$0" == "1"
     SetShellVarContext current
-    Push "Zotero\Zotero"
+    Push "Jurism\Jurism"
     Call un.DeleteRelativeProfiles
-    RmDir "$APPDATA\Zotero"
+    RmDir "$APPDATA\Jurism"
   ${EndIf}
 
-  ; Check whether Zotero was installed under HKLM. If it was we will need to elevate.
+  ; Check whether Jurism was installed under HKLM. If it was we will need to elevate.
   SetShellVarContext all
   Push "0"
   Push $INSTDIR
@@ -209,7 +209,7 @@ Section "Uninstall"
   ApplicationID::UninstallJumpLists "${AppUserModelID}"
 
   ClearErrors
-  ${un.RegCleanMain} "Software\Zotero"
+  ${un.RegCleanMain} "Software\Jurism"
   ${un.RegCleanUninstall}
   ${un.DeleteShortcuts}
   ${un.SetAppLSPCategories}
@@ -238,7 +238,7 @@ Section "Uninstall"
     ${un.RegCleanFileHandler}  ".csl"    "ZoteroCSL"
   ${EndIf}
 
-  ${un.GetSecondInstallPath} "Software\Zotero" $R9
+  ${un.GetSecondInstallPath} "Software\Jurism" $R9
 
   StrCpy $0 "Software\Microsoft\Windows\CurrentVersion\App Paths\${FileMainEXE}"
   ${If} $R9 == "false"
@@ -274,19 +274,19 @@ Section "Uninstall"
   ${EndIf}
 
   ; Remove the updates directory for Vista and above
-  ${un.CleanUpdatesDir} "Zotero\Zotero"
+  ${un.CleanUpdatesDir} "Jurism\Jurism"
 
   ; Parse the uninstall log to unregister dll's and remove all installed
   ; files / directories this install is responsible for.
   ${un.ParseUninstallLog}
 
   ; Files that were added by an in-app update aren't currently being added to the uninstall log,
-  ; so manually delete everything we know about as long as the directory name begins with "Zotero".
+  ; so manually delete everything we know about as long as the directory name begins with "Jurism".
   ; We don't just delete the directory because we don't know for sure that the user didn't do
   ; something crazy like put their data directory in it.
   ${GetFileName} $INSTDIR $R1
   StrCpy $R2 $R1 6
-  StrCmp $R2 "Zotero" +1 post_delete
+  StrCmp $R2 "Jurism" +1 post_delete
   ${If} ${FileExists} "$INSTDIR\chrome"
     RMDir /r /REBOOTOK "$INSTDIR\chrome"
   ${EndIF}

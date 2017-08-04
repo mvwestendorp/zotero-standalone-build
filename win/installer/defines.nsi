@@ -17,7 +17,7 @@
 
 !define FileMainEXE           "jurism.exe"
 !define WindowClass           "ZoteroMessageWindow"
-!define AppRegName            "Zotero"
+!define AppRegName            "Jurism"
 
 !define BrandShortName        "Jurism"
 !define PreReleaseSuffix      ""

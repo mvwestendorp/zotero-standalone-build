@@ -2177,7 +2177,7 @@ FunctionEnd
 
       outerdecrement:
       IntOp $R6 $R6 - 1 ; decrement the outer loop's counter when the key is deleted successfully.
-      ; Attempt to delete Software/Zotero. There is nothing we can do if the
+      ; Attempt to delete Software/Jurism. There is nothing we can do if the
       ; user lacks permissions to delete this key.
       DeleteRegKey /ifempty SHCTX "$R9"
       ClearErrors
@@ -4329,12 +4329,12 @@ FunctionEnd
 
 !ifndef NO_INSTDIR_FROM_REG
       SetShellVarContext all      ; Set SHCTX to HKLM
-      ${GetSingleInstallPath} "Software\Zotero\${BrandFullNameInternal}" $R9
+      ${GetSingleInstallPath} "Software\Jurism\${BrandFullNameInternal}" $R9
 
       StrCmp "$R9" "false" +1 finish_get_install_dir
 
       SetShellVarContext current  ; Set SHCTX to HKCU
-      ${GetSingleInstallPath} "Software\Zotero\${BrandFullNameInternal}" $R9
+      ${GetSingleInstallPath} "Software\Jurism\${BrandFullNameInternal}" $R9
 
       finish_get_install_dir:
       StrCmp "$R9" "false" +2 +1
