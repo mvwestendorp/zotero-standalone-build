@@ -14,7 +14,7 @@ LINUX_i686_RUNTIME_PATH="$DIR/xulrunner/firefox-i686"
 LINUX_x86_64_RUNTIME_PATH="$DIR/xulrunner/firefox-x86_64"
 
 # Whether to sign builds
-SIGN=0
+SIGN=1
 
 # OS X Developer ID certificate information
 DEVELOPER_ID=F0F1FE48DB909B263AC51C8215374D87FDC12121
@@ -31,7 +31,7 @@ SIGNTOOL_CERT_SUBJECT="Corporation for Digital Scholarship"
 # Directory for Zotero code repos
 repo_dir=$( cd "$DIR"/.. && pwd )
 # Directory for Zotero source code
-ZOTERO_SOURCE_DIR="$repo_dir"/jurism
+ZOTERO_SOURCE_DIR="$repo_dir"/zotero-client
 # Directory for Zotero build files (needed for scripts/*_build_and_deploy)
 ZOTERO_BUILD_DIR="$repo_dir"/zotero-build
 # Directory for unpacked binaries
@@ -39,13 +39,13 @@ STAGE_DIR="$DIR/staging"
 # Directory for packed binaries
 DIST_DIR="$DIR/dist"
 
-SOURCE_REPO_URL="https://github.com/juris-m/zotero"
-S3_BUCKET="jurism-download"
+SOURCE_REPO_URL="https://github.com/zotero/zotero"
+S3_BUCKET="zotero-download"
 S3_CI_ZIP_PATH="ci/client"
 S3_DIST_PATH="client"
 
-DEPLOY_HOST="-p 2222 fbennett@gator3143.hostgator.com"
-DEPLOY_PATH="public_html/download/client/manifests"
+DEPLOY_HOST="deploy.zotero"
+DEPLOY_PATH="www/www-production/public/download/client/manifests"
 DEPLOY_CMD="ssh $DEPLOY_HOST update-site-files"
 
 BUILD_PLATFORMS=""
