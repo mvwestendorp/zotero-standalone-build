@@ -3,9 +3,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Version of Gecko to build with
 #
 # xulrunner-stub.exe currently requires <=47, though it can probably be rebuilt against a later SDK
-GECKO_VERSION_MAC="54.0"
-GECKO_VERSION_LINUX="54.0"
-GECKO_VERSION_WIN="52.2.0esr"
+GECKO_VERSION_MAC="54.0.1"
+GECKO_VERSION_LINUX="54.0.1"
+GECKO_VERSION_WIN="52.3.0esr"
 
 # Paths to Gecko runtimes
 MAC_RUNTIME_PATH="$DIR/xulrunner/Firefox.app"
@@ -31,7 +31,7 @@ SIGNTOOL_CERT_SUBJECT="Corporation for Digital Scholarship"
 # Directory for Zotero code repos
 repo_dir=$( cd "$DIR"/.. && pwd )
 # Directory for Zotero source code
-ZOTERO_SOURCE_DIR="$repo_dir"/zotero-client
+ZOTERO_SOURCE_DIR="$repo_dir"/jurism
 # Directory for Zotero build files (needed for scripts/*_build_and_deploy)
 ZOTERO_BUILD_DIR="$repo_dir"/zotero-build
 # Directory for unpacked binaries
@@ -39,8 +39,8 @@ STAGE_DIR="$DIR/staging"
 # Directory for packed binaries
 DIST_DIR="$DIR/dist"
 
-SOURCE_REPO_URL="https://github.com/zotero/zotero"
-S3_BUCKET="zotero-download"
+SOURCE_REPO_URL="https://github.com/juris-m/zotero"
+S3_BUCKET="jurism-download"
 S3_CI_ZIP_PATH="ci/client"
 S3_DIST_PATH="client"
 
