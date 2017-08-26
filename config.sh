@@ -44,8 +44,8 @@ S3_BUCKET="jurism-download"
 S3_CI_ZIP_PATH="ci/client"
 S3_DIST_PATH="client"
 
-DEPLOY_HOST="deploy.zotero"
-DEPLOY_PATH="www/www-production/public/download/client/manifests"
+DEPLOY_HOST="-p 2222 fbennett@gator3143.hostgator.com"
+DEPLOY_PATH="public_html/download/client/manifests"
 DEPLOY_CMD="ssh $DEPLOY_HOST update-site-files"
 
 BUILD_PLATFORMS=""
