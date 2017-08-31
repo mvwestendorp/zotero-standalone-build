@@ -103,6 +103,11 @@ do
 	
 	echo
 	echo "Getting $platform_name incrementals"
+    echo "SCRIPT_DIR $SCRIPT_DIR"
+    echo "CHANNEL $CHANNEL"
+    echo "PLATFORMS:i:1 ${PLATFORMS:i:1}"
+    echo "NUM_INCREMENTALS $NUM_INCREMENTALS"
+    "$SCRIPT_DIR/manage_incrementals" -c "$CHANNEL" -p "${PLATFORMS:i:1}" -n "$NUM_INCREMENTALS"
 	INCREMENTALS="`\"$SCRIPT_DIR/manage_incrementals\" -c $CHANNEL -p ${PLATFORMS:i:1} -n $NUM_INCREMENTALS`"
 	echo "$INCREMENTALS"
 	echo

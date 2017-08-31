@@ -141,10 +141,10 @@ for version in "$FROM" "$TO"; do
 	mkdir -p "$versiondir"
 	cd "$versiondir"
 	
-	MAC_ARCHIVE="Zotero-${version}.dmg"
-	WIN_ARCHIVE="Zotero-${version}_win32.zip"
-	LINUX_X86_ARCHIVE="Zotero-${version}_linux-i686.tar.bz2"
-	LINUX_X86_64_ARCHIVE="Zotero-${version}_linux-x86_64.tar.bz2"
+	MAC_ARCHIVE="Jurism-${version}.dmg"
+	WIN_ARCHIVE="Jurism-${version}_win32.zip"
+	LINUX_X86_ARCHIVE="Jurism-${version}_linux-i686.tar.bz2"
+	LINUX_X86_64_ARCHIVE="Jurism-${version}_linux-x86_64.tar.bz2"
 	
 	CACHE_DIR="$ROOT_DIR/cache"
 	if [ ! -e "$CACHE_DIR" ]; then
@@ -267,7 +267,7 @@ for build in "mac" "win32" "linux-i686" "linux-x86_64"; do
 		if [[ $build == "linux-i686" ]] || [[ $build == "linux-x86_64" ]] && [[ $BUILD_LINUX == 0 ]]; then
 			continue
 		fi
-		dir="Zotero_$build"
+		dir="Jurism_$build"
 		touch "$UPDATE_STAGE_DIR/$TO/$dir/precomplete"
 		cp "$SCRIPT_DIR/removed-files_$build" "$UPDATE_STAGE_DIR/$TO/$dir/removed-files"
 	fi
@@ -285,13 +285,13 @@ for build in "mac" "win32" "linux-i686" "linux-x86_64"; do
 			to_dir="$UPDATE_STAGE_DIR/$TO/$dir"
 		fi
 		
-		"$SCRIPT_DIR/make_incremental_update.sh" "$DIST_DIR/Zotero-${TO}-${FROM}_$build.mar" "$from_dir" "$to_dir"
+		"$SCRIPT_DIR/make_incremental_update.sh" "$DIST_DIR/Jurism-${TO}-${FROM}_$build.mar" "$from_dir" "$to_dir"
 		CHANGES_MADE=1
 	fi
 	if [[ $BUILD_FULL == 1 ]]; then
 		echo
 		echo "Building full $build update for $TO"
-		"$SCRIPT_DIR/make_full_update.sh" "$DIST_DIR/Zotero-${TO}-full_$build.mar" "$UPDATE_STAGE_DIR/$TO/$dir"
+		"$SCRIPT_DIR/make_full_update.sh" "$DIST_DIR/Jurism-${TO}-full_$build.mar" "$UPDATE_STAGE_DIR/$TO/$dir"
 		CHANGES_MADE=1
 	fi
 done
