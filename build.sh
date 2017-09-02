@@ -184,6 +184,8 @@ fi
 
 cd "$BUILD_DIR/zotero"
 
+echo $BUILD_DIR
+
 VERSION=`perl -ne 'print and last if s/.*<em:version>(.*)<\/em:version>.*/\1/;' install.rdf`
 if [ -z "$VERSION" ]; then
 	echo "Version number not found in install.rdf"
@@ -218,7 +220,10 @@ cp -R "$CALLDIR/assets/console/skin/osx" "$BUILD_DIR/zotero/chrome/console/skin"
 cp -R "$CALLDIR/assets/console/locale/en-US" "$BUILD_DIR/zotero/chrome/console/locale"
 cat "$CALLDIR/assets/console/jsconsole.manifest" >> "$BUILD_DIR/zotero/chrome.manifest"
 
-# [Juris-M] set CL_KEY if available
+# [Juris-M] set CL_KEY. Crash if not available.
+set -e
+CL_KEY=$(cat "$CALLDIR/cl-key.txt")
+set +e
 ${GSED} -si "s/%%VALUE%%/${CL_KEY}/" "$BUILD_DIR/zotero/resource/config.js"
 
 # Delete files that shouldn't be distributed
