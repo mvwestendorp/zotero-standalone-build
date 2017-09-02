@@ -35,6 +35,12 @@ fi
 DEVTOOLS=0
 PACKAGE=1
 
+gsed --version > /dev/null 2<&1
+if [ $? -gt 0 ]; then
+    GSED="sed"
+else
+    GSED="gsed"
+fi
 gfind --version > /dev/null 2<&1
 if [ $? -gt 0 ]; then
     GFIND="find"
@@ -212,8 +218,11 @@ cp -R "$CALLDIR/assets/console/skin/osx" "$BUILD_DIR/zotero/chrome/console/skin"
 cp -R "$CALLDIR/assets/console/locale/en-US" "$BUILD_DIR/zotero/chrome/console/locale"
 cat "$CALLDIR/assets/console/jsconsole.manifest" >> "$BUILD_DIR/zotero/chrome.manifest"
 
+# [Juris-M] set CL_KEY if available
+${GSED} -si "s/%%VALUE%%/${CL_KEY}/" "$BUILD_DIR/zotero/resource/config.js"
+
 # Delete files that shouldn't be distributed
-find "$BUILD_DIR/zotero/chrome" -name .DS_Store -exec rm -f {} \;
+${GFIND} "$BUILD_DIR/zotero/chrome" -name .DS_Store -exec rm -f {} \;
 
 # Zip chrome into JAR
 cd "$BUILD_DIR/zotero"
@@ -255,7 +264,7 @@ grep app.update.channel "$BUILD_DIR/zotero/defaults/preferences/prefs.js"
 echo
 
 # Remove unnecessary files
-find "$BUILD_DIR" -name .DS_Store -exec rm -f {} \;
+${GFIND} "$BUILD_DIR" -name .DS_Store -exec rm -f {} \;
 rm -rf "$BUILD_DIR/zotero/test"
 
 cd "$CALLDIR"
@@ -549,16 +558,16 @@ if [ $BUILD_LINUX == 1 ]; then
 		rm -rf "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io/.git"
 
         # Add Abbreviation Filter (abbrevs-filter)
-		#cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
+		cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
 
         # Add Jurisdiction Support (myles)
-		#cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
+		cp -RH "$CALLDIR/modules/myles" "$APPDIR/extensions/myles@juris-m.github.io"
 		
         # Add Bluebook signal helper (bluebook-signals-for-zotero)
-		#cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com"
+		cp -RH "$CALLDIR/modules/bluebook-signals-for-zotero" "$APPDIR/extensions/bluebook-signals-for-zotero@mystery-lab.com"
 		
         # Add ODF/RTF Scan (zotero-odf-scan)
-		#cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
+		cp -RH "$CALLDIR/modules/zotero-odf-scan-plugin" "$APPDIR/extensions/rtf-odf-scan-for-zotero@mystery-lab.com"
 		
 		# Delete extraneous files
 		${GFIND} "$APPDIR" -depth -type d -name .git -exec rm -rf {} \;

@@ -116,7 +116,7 @@ for version in "$FROM" "$TO"; do
 		continue
 	fi
 	
-	echo "Getting Zotero version $version"
+	echo "Getting Jurism version $version"
 	
 	versiondir="$UPDATE_STAGE_DIR/$version"
 	
@@ -210,16 +210,16 @@ for version in "$FROM" "$TO"; do
 	# Delete cached files older than 14 days
 	find "$CACHE_DIR" -ctime +14 -delete
 	
-	# Unpack Zotero.app
+	# Unpack Jurism.app
 	if [ $BUILD_MAC == 1 ]; then
 		if [ -f "$MAC_ARCHIVE" ]; then
 			set +e
-			hdiutil detach -quiet /Volumes/Zotero 2>/dev/null
+			hdiutil detach -quiet /Volumes/Jurism 2>/dev/null
 			set -e
 			hdiutil attach -quiet "$MAC_ARCHIVE"
-			cp -R /Volumes/Zotero/Zotero.app "$versiondir"
+			cp -R /Volumes/Jurism/Jurism.app "$versiondir"
 			rm "$MAC_ARCHIVE"
-			hdiutil detach -quiet /Volumes/Zotero
+			hdiutil detach -quiet /Volumes/Jurism
 			INCREMENTALS_FOUND=1
 		else
 			echo "$MAC_ARCHIVE not found"
@@ -259,7 +259,7 @@ for build in "mac" "win32" "linux-i686" "linux-x86_64"; do
 		if [[ $BUILD_MAC == 0 ]]; then
 			continue
 		fi
-		dir="Zotero.app"
+		dir="Jurism.app"
 	else
 		if [[ $build == "win32" ]] && [[ $BUILD_WIN32 == 0 ]]; then
 			continue
