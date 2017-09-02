@@ -228,7 +228,7 @@ Section "-InstallStartCleanup"
   ${EndIf}
 
   ; Remove the updates directory for Vista and above
-  ${CleanUpdatesDir} "Zotero\Zotero"
+  ${CleanUpdatesDir} "Jurism\Jurism"
 
 
   ${InstallStartCleanupCommon}
@@ -277,25 +277,25 @@ Section "-Application" APP_IDX
 
   ${LogHeader} "Adding Registry Entries"
   SetShellVarContext current  ; Set SHCTX to HKCU
-  ${RegCleanMain} "Software\Zotero"
+  ${RegCleanMain} "Software\Jurism"
   ${RegCleanUninstall}
   ${UpdateProtocolHandlers}
 
   ClearErrors
-  WriteRegStr HKLM "Software\Zotero" "${BrandShortName}InstallerTest" "Write Test"
+  WriteRegStr HKLM "Software\Jurism" "${BrandShortName}InstallerTest" "Write Test"
   ${If} ${Errors}
     StrCpy $TmpVal "HKCU" ; used primarily for logging
   ${Else}
     SetShellVarContext all  ; Set SHCTX to HKLM
-    DeleteRegValue HKLM "Software\Zotero" "${BrandShortName}InstallerTest"
+    DeleteRegValue HKLM "Software\Jurism" "${BrandShortName}InstallerTest"
     StrCpy $TmpVal "HKLM" ; used primarily for logging
-    ${RegCleanMain} "Software\Zotero"
+    ${RegCleanMain} "Software\Jurism"
     ${RegCleanUninstall}
     ${UpdateProtocolHandlers}
 
-    ReadRegStr $0 HKLM "Software\zotero.org\Zotero" "CurrentVersion"
+    ReadRegStr $0 HKLM "Software\zotero.org\Jurism" "CurrentVersion"
     ${If} "$0" != "${GREVersion}"
-      WriteRegStr HKLM "Software\zotero.org\Zotero" "CurrentVersion" "${GREVersion}"
+      WriteRegStr HKLM "Software\zotero.org\Jurism" "CurrentVersion" "${GREVersion}"
     ${EndIf}
   ${EndIf}
 
@@ -787,9 +787,9 @@ Function preSummary
 
   ; Check if it is possible to write to HKLM
   ClearErrors
-  WriteRegStr HKLM "Software\Zotero" "${BrandShortName}InstallerTest" "Write Test"
+  WriteRegStr HKLM "Software\Jurism" "${BrandShortName}InstallerTest" "Write Test"
   ${Unless} ${Errors}
-    DeleteRegValue HKLM "Software\Zotero" "${BrandShortName}InstallerTest"
+    DeleteRegValue HKLM "Software\Jurism" "${BrandShortName}InstallerTest"
     ; Check if Firefox is the http handler for this user.
     SetShellVarContext current ; Set SHCTX to the current user
     ${IsHandlerForInstallDir} "http" $R9
@@ -859,15 +859,15 @@ Function .onInit
 
   ${InstallOnInitCommon} "$(WARN_MIN_SUPPORTED_OS_MSG)"
 
-  ; If a version beginning with "Zotero Standalone" is installed, uninstall that first, since we're now
-  ; just "Zotero"
+  ; If a version beginning with "Jurism Standalone" is installed, uninstall that first, since we're now
+  ; just "Jurism"
   StrCpy $0 0
   enum_uninst_keys:
     EnumRegKey $1 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall" $0
     StrCmp $1 "" continue_installation
-    ; "Zotero Standalone" included a version suffix, so check the beginning
+    ; "Jurism Standalone" included a version suffix, so check the beginning
     StrCpy $2 $1 17
-    StrCmp $2 "Zotero Standalone" get_uninst_exe
+    StrCmp $2 "Jurism Standalone" get_uninst_exe
     IntOp $0 $0 + 1
     Goto enum_uninst_keys
   
@@ -876,8 +876,8 @@ Function .onInit
     ReadRegStr $3 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$1" "InstallLocation"
   
   MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION \
-    "An older version of Zotero is installed. $\n$\nIf you continue, the existing version \
-    will be removed. Your Zotero data will not be affected." \
+    "An older version of Jurism is installed. $\n$\nIf you continue, the existing version \
+    will be removed. Your Jurism data will not be affected." \
     /SD IDOK IDOK uninst
   Abort
   
@@ -888,12 +888,12 @@ Function .onInit
     Sleep 3000
     
     ; Files that were added by an in-app update won't be automatically deleted by the 4.0 uninstaller,
-    ; so manually delete everything we know about as long as the directory name begins with "Zotero".
+    ; so manually delete everything we know about as long as the directory name begins with "Jurism".
     ; We don't just delete the directory because we don't know for sure that the user didn't do
     ; something crazy like put their data directory in it.
     ${GetFileName} $3 $4
     StrCpy $5 $4 6
-    StrCmp $5 "Zotero" +1 continue_installation
+    StrCmp $5 "Jurism" +1 continue_installation
     RMDir /r /REBOOTOK "$3\chrome"
     RMDir /r /REBOOTOK "$3\components"
     RMDir /r /REBOOTOK "$3\defaults"

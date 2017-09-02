@@ -37,11 +37,11 @@ Contents/Resources/styles.zip
 Contents/Resources/install.rdf
 Contents/Resources/deleted.txt
 Contents/Resources/extensions/pythonext@mozdev.org/*
-Contents/Resources/extensions/zoteroMacWordIntegration@zotero.org/components/install.py
-Contents/Resources/extensions/zoteroMacWordIntegration@zotero.org/components/install.pyo
-Contents/Resources/extensions/zoteroMacWordIntegration@zotero.org/components/zoteroIntegrationApplication.py
-Contents/Resources/extensions/zoteroMacWordIntegration@zotero.org/components/zoteroIntegrationApplication.pyo
-Contents/Resources/extensions/zoteroMacWordIntegration@zotero.org/pylib/*
+Contents/Resources/extensions/jurismMacWordIntegration@juris-m.github.io/components/install.py
+Contents/Resources/extensions/jurismMacWordIntegration@juris-m.github.io/components/install.pyo
+Contents/Resources/extensions/jurismMacWordIntegration@juris-m.github.io/components/zoteroIntegrationApplication.py
+Contents/Resources/extensions/jurismMacWordIntegration@juris-m.github.io/components/zoteroIntegrationApplication.pyo
+Contents/Resources/extensions/jurismMacWordIntegration@juris-m.github.io/pylib/*
 Contents/Resources/resource/*
-Contents/Resources/chrome/zotero.jar
+Contents/Resources/chrome/jurism.jar
 Contents/Resources/test/*

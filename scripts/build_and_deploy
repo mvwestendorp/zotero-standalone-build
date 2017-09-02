@@ -103,6 +103,11 @@ do
 	
 	echo
 	echo "Getting $platform_name incrementals"
+    echo "SCRIPT_DIR $SCRIPT_DIR"
+    echo "CHANNEL $CHANNEL"
+    echo "PLATFORMS:i:1 ${PLATFORMS:i:1}"
+    echo "NUM_INCREMENTALS $NUM_INCREMENTALS"
+    "$SCRIPT_DIR/manage_incrementals" -c "$CHANNEL" -p "${PLATFORMS:i:1}" -n "$NUM_INCREMENTALS"
 	INCREMENTALS="`\"$SCRIPT_DIR/manage_incrementals\" -c $CHANNEL -p ${PLATFORMS:i:1} -n $NUM_INCREMENTALS`"
 	echo "$INCREMENTALS"
 	echo
@@ -123,6 +128,7 @@ mkdir "$TEMP_DIR/version_info"
 chmod g+ws "$TEMP_DIR/version_info"
 cp "$DIST_DIR"/files-* "$TEMP_DIR/version_info"
 chmod g+w "$TEMP_DIR"/version_info/files-*
+
 rsync -rv "$TEMP_DIR/version_info/" $DEPLOY_HOST:"$channel_deploy_path/$VERSION/"
 
 # Download updates JSON for each platform, update it, and reupload it
@@ -143,10 +149,15 @@ do
 	for arch in $architectures;
 	do
 		jsonfile="updates-$arch.json"
-		
-		scp $DEPLOY_HOST:"$channel_deploy_path/$jsonfile" "$TEMP_DIR/$jsonfile"
+
+        set +e
+		$SCP_CMD $DEPLOY_HOST:"$channel_deploy_path/$jsonfile" "$TEMP_DIR/$jsonfile"
+        if [ "$?" -gt 0 ]; then
+            echo "[]" > "$TEMP_DIR/$jsonfile"
+        fi
+        set -e
 		"$ROOT_DIR/update-packaging/add_version_info" -f "$TEMP_DIR/$jsonfile" -v $VERSION -b $BUILD_ID
-		scp "$TEMP_DIR/$jsonfile" $DEPLOY_HOST:"$channel_deploy_path/$jsonfile"
+		$SCP_CMD "$TEMP_DIR/$jsonfile" $DEPLOY_HOST:"$channel_deploy_path/$jsonfile"
 	done
 done
 
@@ -157,6 +168,6 @@ do
 	"$SCRIPT_DIR/manage_incrementals" -c $CHANNEL -p ${PLATFORMS:i:1} -a $VERSION
 done
 
-$DEPLOY_CMD
+$SCP_CMD "$DEPLOY_FROM[@]" "$DEPLOY_TO[@]"
 
 rm -rf "$STAGE_DIR"/*

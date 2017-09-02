@@ -3,9 +3,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Version of Gecko to build with
 #
 # xulrunner-stub.exe currently requires <=47, though it can probably be rebuilt against a later SDK
-GECKO_VERSION_MAC="54.0"
-GECKO_VERSION_LINUX="54.0"
-GECKO_VERSION_WIN="52.2.0esr"
+GECKO_VERSION_MAC="54.0.1"
+GECKO_VERSION_LINUX="54.0.1"
+GECKO_VERSION_WIN="52.3.0esr"
 
 # Paths to Gecko runtimes
 MAC_RUNTIME_PATH="$DIR/xulrunner/Firefox.app"
@@ -14,7 +14,7 @@ LINUX_i686_RUNTIME_PATH="$DIR/xulrunner/firefox-i686"
 LINUX_x86_64_RUNTIME_PATH="$DIR/xulrunner/firefox-x86_64"
 
 # Whether to sign builds
-SIGN=0
+SIGN=1
 
 # OS X Developer ID certificate information
 DEVELOPER_ID=F0F1FE48DB909B263AC51C8215374D87FDC12121

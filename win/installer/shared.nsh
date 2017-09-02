@@ -6,24 +6,24 @@
   ${CreateShortcutsLog}
 
   ; Remove registry entries for non-existent apps and for apps that point to our
-  ; install location in the Software\Zotero key and uninstall registry entries
+  ; install location in the Software\Jurism key and uninstall registry entries
   ; that point to our install location for both HKCU and HKLM.
   SetShellVarContext current  ; Set SHCTX to the current user (e.g. HKCU)
-  ${RegCleanMain} "Software\Zotero"
+  ${RegCleanMain} "Software\Jurism"
   ${RegCleanUninstall}
   ${UpdateProtocolHandlers}
   ; Win7 taskbar and start menu link maintenance
   Call FixShortcutAppModelIDs
 
   ClearErrors
-  WriteRegStr HKLM "Software\Zotero" "${BrandShortName}InstallerTest" "Write Test"
+  WriteRegStr HKLM "Software\Jurism" "${BrandShortName}InstallerTest" "Write Test"
   ${If} ${Errors}
     StrCpy $TmpVal "HKCU" ; used primarily for logging
   ${Else}
     SetShellVarContext all    ; Set SHCTX to all users (e.g. HKLM)
-    DeleteRegValue HKLM "Software\Zotero" "${BrandShortName}InstallerTest"
+    DeleteRegValue HKLM "Software\Jurism" "${BrandShortName}InstallerTest"
     StrCpy $TmpVal "HKLM" ; used primarily for logging
-    ${RegCleanMain} "Software\Zotero"
+    ${RegCleanMain} "Software\Jurism"
     ${RegCleanUninstall}
     ${UpdateProtocolHandlers}
     ${SetAppLSPCategories} ${LSP_CATEGORIES}
@@ -31,9 +31,9 @@
     ; Win7 taskbar and start menu link maintenance
     Call FixShortcutAppModelIDs
 
-    ReadRegStr $0 HKLM "Software\zotero.org\Zotero" "CurrentVersion"
+    ReadRegStr $0 HKLM "Software\zotero.org\Jurism" "CurrentVersion"
     ${If} "$0" != "${GREVersion}"
-      WriteRegStr HKLM "Software\zotero.org\Zotero" "CurrentVersion" "${GREVersion}"
+      WriteRegStr HKLM "Software\zotero.org\Jurism" "CurrentVersion" "${GREVersion}"
     ${EndIf}
   ${EndIf}
 
@@ -43,14 +43,14 @@
 !macroend
 !define PostUpdate "!insertmacro PostUpdate"
 
-; Adds zotero:// protocol handler and makes Zotero open exported bib files
+; Adds zotero:// protocol handler and makes Jurism open exported bib files
 !macro SetHandlers
   Push "$INSTDIR\${FileMainEXE}"
   Call GetLongPath
   Pop $8
   
   ${AddHandlerValues} "Software\Classes\zotero" "$\"$8$\" -url $\"%1$\"" \
-      "$8,1" "Zotero Protocol" "true" ""
+      "$8,1" "Jurism Protocol" "true" ""
   
   ; Add handlers for reference formats
   ${AddHandlerValues} "Software\Classes\ZoteroRIS" "$\"$8$\" -file $\"%1$\"" \
@@ -125,32 +125,32 @@
 !macroend
 !define SetHandlers "!insertmacro SetHandlers"
 
-; Add Software\Zotero\ registry entries (uses SHCTX).
+; Add Software\Jurism\ registry entries (uses SHCTX).
 !macro SetAppKeys
   Push $INSTDIR
   Call GetLongPath
   Pop $8
-  StrCpy $0 "Software\Zotero\${BrandFullNameInternal}\${AppVersion} (${AB_CD})\Main"
+  StrCpy $0 "Software\Jurism\${BrandFullNameInternal}\${AppVersion} (${AB_CD})\Main"
   ${WriteRegStr2} $TmpVal "$0" "Install Directory" "$8" 0
   ${WriteRegStr2} $TmpVal "$0" "PathToExe" "$8\${FileMainEXE}" 0
 
-  StrCpy $0 "Software\Zotero\${BrandFullNameInternal}\${AppVersion} (${AB_CD})\Uninstall"
+  StrCpy $0 "Software\Jurism\${BrandFullNameInternal}\${AppVersion} (${AB_CD})\Uninstall"
   ${WriteRegStr2} $TmpVal "$0" "Description" "${BrandFullNameInternal} ${AppVersion} (${ARCH} ${AB_CD})" 0
 
-  StrCpy $0 "Software\Zotero\${BrandFullNameInternal}\${AppVersion} (${AB_CD})"
+  StrCpy $0 "Software\Jurism\${BrandFullNameInternal}\${AppVersion} (${AB_CD})"
   ${WriteRegStr2} $TmpVal  "$0" "" "${AppVersion} (${AB_CD})" 0
 
-  StrCpy $0 "Software\Zotero\${BrandFullNameInternal} ${AppVersion}\bin"
+  StrCpy $0 "Software\Jurism\${BrandFullNameInternal} ${AppVersion}\bin"
   ${WriteRegStr2} $TmpVal "$0" "PathToExe" "$8\${FileMainEXE}" 0
 
-  StrCpy $0 "Software\Zotero\${BrandFullNameInternal} ${AppVersion}\extensions"
+  StrCpy $0 "Software\Jurism\${BrandFullNameInternal} ${AppVersion}\extensions"
   ${WriteRegStr2} $TmpVal "$0" "Components" "$8\components" 0
   ${WriteRegStr2} $TmpVal "$0" "Plugins" "$8\plugins" 0
 
-  StrCpy $0 "Software\Zotero\${BrandFullNameInternal} ${AppVersion}"
+  StrCpy $0 "Software\Jurism\${BrandFullNameInternal} ${AppVersion}"
   ${WriteRegStr2} $TmpVal "$0" "GeckoVer" "${GREVersion}" 0
 
-  StrCpy $0 "Software\Zotero\${BrandFullNameInternal}"
+  StrCpy $0 "Software\Jurism\${BrandFullNameInternal}"
   ${WriteRegStr2} $TmpVal "$0" "" "${GREVersion}" 0
   ${WriteRegStr2} $TmpVal "$0" "CurrentVersion" "${AppVersion} (${AB_CD})" 0
 !macroend
@@ -255,7 +255,7 @@
   ${IsHandlerForInstallDir} "zotero" $R9
   ${If} "$R9" == "true"
      ${AddHandlerValues} "SOFTWARE\Classes\zotero" "$\"$8$\" -url $\"%1$\"" \
-	     "$8,1" "Zotero" "true" ""
+	     "$8,1" "Jurism" "true" ""
   ${EndIf}
 !macroend
 !define UpdateProtocolHandlers "!insertmacro UpdateProtocolHandlers"

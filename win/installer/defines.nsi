@@ -9,7 +9,7 @@
 # handled in widget/src/windows/WinTaskbar.cpp.
 
 !define AppVendor             "Jurism"
-!define AppName               "Zotero"
+!define AppName               "Jurism"
 !define AppVersion            "{{VERSION}}"
 !define AppUserModelID        "${AppVendor}.${AppName}.${AppVersion}"
 !define GREVersion            2.0
@@ -17,7 +17,7 @@
 
 !define FileMainEXE           "jurism.exe"
 !define WindowClass           "ZoteroMessageWindow"
-!define AppRegName            "Zotero"
+!define AppRegName            "Jurism"
 
 !define BrandShortName        "Jurism"
 !define PreReleaseSuffix      ""
