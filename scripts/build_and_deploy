@@ -168,6 +168,6 @@ do
 	"$SCRIPT_DIR/manage_incrementals" -c $CHANNEL -p ${PLATFORMS:i:1} -a $VERSION
 done
 
-$DEPLOY_CMD
+$SCP_CMD "$DEPLOY_FROM[@]" "$DEPLOY_TO[@]"
 
 rm -rf "$STAGE_DIR"/*
