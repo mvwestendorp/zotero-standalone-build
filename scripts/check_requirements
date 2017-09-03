@@ -121,7 +121,9 @@ echo -n "Checking for AWS S3 access: "
 aws s3 ls $S3_BUCKET/$S3_DIST_PATH | sed 's/^[[:blank:]]*//' || { $FAIL_CMD; FAILED=1; }
 
 echo -n "Checking for deploy host directory access: "
+set +o pipefail
 $SSH_CMD $DEPLOY_HOST ls -d $DEPLOY_PATH || { $FAIL_CMD; FAILED=1; }
+set -o pipefail
 
 
 exit $FAILED
