@@ -419,9 +419,6 @@ if [ $BUILD_WIN32 == 1 ]; then
 		cp "$WIN32_RUNTIME_PATH/devtools-files/components/interfaces.xpt" "$APPDIR/components/"
 	fi
 	
-	
-## ******************************************
-
 	# Add word processor plug-ins
 	mkdir "$APPDIR/extensions"
 	cp -RH "$CALLDIR/modules/jurism-word-for-windows-integration" "$APPDIR/extensions/jurismWinWordIntegration@juris-m.github.io"
