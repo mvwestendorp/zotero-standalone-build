@@ -324,8 +324,17 @@ if [ $BUILD_MAC == 1 ]; then
 	
 	# Add word processor plug-ins
 	mkdir "$CONTENTSDIR/Resources/extensions"
-	cp -RH "$CALLDIR/modules/jurism-word-for-mac-integration" "$CONTENTSDIR/Resources/extensions/jurismMacWordIntegration@juris-m.github.io"
-	cp -RH "$CALLDIR/modules/jurism-libreoffice-integration" "$CONTENTSDIR/Resources/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
+	cp -RH "$CALLDIR/modules/zotero-word-for-mac-integration" "$CONTENTSDIR/Resources/extensions/zoteroMacWordIntegration@zotero.org"
+	cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$CONTENTSDIR/Resources/extensions/zoteroOpenOfficeIntegration@zotero.org"
+	echo
+	for ext in "zoteroMacWordIntegration@zotero.org" "zoteroOpenOfficeIntegration@zotero.org"; do
+        perl -pi -e 's|^(</Description>)|        <em:targetApplication>\n                <Description>\n                        <em:id>juris-m\@juris-m.github.io</em:id>\n                        <em:minVersion>4.0</em:minVersion>\n                        <em:maxVersion>5.0.*</em:maxVersion>\n                </Description>\n        </em:targetApplication>\n${1}|' "$CONTENTSDIR/Resources/extensions/$ext/install.rdf"
+		perl -pi -e 's/\.SOURCE<\/em:version>/.SA.'"$VERSION"'<\/em:version>/' "$CONTENTSDIR/Resources/extensions/$ext/install.rdf"
+		echo -n "$ext Version: "
+		perl -ne 'print and last if s/.*<em:version>(.*)<\/em:version>.*/\1/;' "$CONTENTSDIR/Resources/extensions/$ext/install.rdf"
+		rm -rf "$CONTENTSDIR/Resources/extensions/$ext/.git"
+	done
+	echo
 	
     # Add Abbreviation Filter (abbrevs-filter)
 	cp -RH "$CALLDIR/modules/abbrevs-filter" "$CONTENTSDIR/Resources/extensions/abbrevs-filter@juris-m.github.io"
@@ -421,9 +430,6 @@ if [ $BUILD_WIN32 == 1 ]; then
 	
 	# Add word processor plug-ins
         mkdir "$APPDIR/extensions"
-	#cp -RH "$CALLDIR/modules/jurism-word-for-windows-integration" "$APPDIR/extensions/jurismWinWordIntegration@juris-m.github.io"
-	#cp -RH "$CALLDIR/modules/jurism-libreoffice-integration" "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
-
         cp -RH "$CALLDIR/modules/zotero-word-for-windows-integration" "$APPDIR/extensions/zoteroWinWordIntegration@zotero.org"
         cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org"
         echo
@@ -565,14 +571,15 @@ if [ $BUILD_LINUX == 1 ]; then
         
 		# Add word processor plug-ins
 		mkdir "$APPDIR/extensions"
-		cp -RH "$CALLDIR/modules/jurism-libreoffice-integration" "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
-		perl -pi -e 's/\.SOURCE<\/em:version>/.SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io/install.rdf"
+		cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org"
+                perl -pi -e 's|^(</Description>)|        <em:targetApplication>\n                <Description>\n                        <em:id>juris-m\@juris-m.github.io</em:id>\n                        <em:minVersion>4.0</em:minVersion>\n                        <em:maxVersion>5.0.*</em:maxVersion>\n                </Description>\n        </em:targetApplication>\n${1}|' "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/install.rdf"
+		perl -pi -e 's/\.SOURCE<\/em:version>/.SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/install.rdf"
 		echo
 		echo -n "$ext Version: "
-		perl -ne 'print and last if s/.*<em:version>(.*)<\/em:version>.*/\1/;' "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io/install.rdf"
+		perl -ne 'print and last if s/.*<em:version>(.*)<\/em:version>.*/\1/;' "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/install.rdf"
 		echo
-		rm -rf "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io/.git"
-
+		rm -rf "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/.git"
+        
         # Add Abbreviation Filter (abbrevs-filter)
 		cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"
 
