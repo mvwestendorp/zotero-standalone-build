@@ -420,9 +420,23 @@ if [ $BUILD_WIN32 == 1 ]; then
 	fi
 	
 	# Add word processor plug-ins
-	mkdir "$APPDIR/extensions"
-	cp -RH "$CALLDIR/modules/jurism-word-for-windows-integration" "$APPDIR/extensions/jurismWinWordIntegration@juris-m.github.io"
-	cp -RH "$CALLDIR/modules/jurism-libreoffice-integration" "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
+        mkdir "$APPDIR/extensions"
+	#cp -RH "$CALLDIR/modules/jurism-word-for-windows-integration" "$APPDIR/extensions/jurismWinWordIntegration@juris-m.github.io"
+	#cp -RH "$CALLDIR/modules/jurism-libreoffice-integration" "$APPDIR/extensions/jurismOpenOfficeIntegration@juris-m.github.io"
+
+        cp -RH "$CALLDIR/modules/zotero-word-for-windows-integration" "$APPDIR/extensions/zoteroWinWordIntegration@zotero.org"
+        cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org"
+        echo
+        for ext in "zoteroWinWordIntegration@zotero.org" "zoteroOpenOfficeIntegration@zotero.org"; do
+                perl -pi -e 's|^(</Description>)|        <em:targetApplication>\n                <Description>\n                        <em:id>juris-m\@juris-m.github.io</em:id>\n                        <em:minVersion>4.0</em:minVersion>\n                        <em:maxVersion>5.0.*</em:maxVersion>\n                </Description>\n        </em:targetApplication>\n${1}|' "$APPDIR/extensions/$ext/install.rdf"
+                perl -pi -e 's/\.SOURCE<\/em:version>/.SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/$ext/install.rdf"
+                echo -n "$ext Version: "
+                perl -ne 'print and last if s/.*<em:version>(.*)<\/em:version>.*/\1/;' "$APPDIR/extensions/$ext/install.rdf"
+                rm -rf "$APPDIR/extensions/$ext/.git"
+        done
+        echo
+
+
 
     # Add Abbreviation Filter (abbrevs-filter)
 	cp -RH "$CALLDIR/modules/abbrevs-filter" "$APPDIR/extensions/abbrevs-filter@juris-m.github.io"

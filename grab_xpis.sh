@@ -68,9 +68,6 @@ rm -fR "$CALLDIR/modules"/*
 dirnames="$(cat <<-EOF
 abbrevs-filter
 bluebook-signals-for-zotero
-jurism-libreoffice-integration
-jurism-word-for-mac-integration
-jurism-word-for-windows-integration
 myles
 zotero-odf-scan-plugin
 EOF
