@@ -63,6 +63,11 @@ fi
 # Build Zotero
 "$ROOT_DIR/build.sh" -d "$SOURCE_DIR" -p $PLATFORMS -c $CHANNEL
 
+if [ "$CHANNEL" == "dev" ]; then
+    echo Dev build terminating immediately, no online copy
+    exit 0
+fi
+
 BUILD_ID=`cat "$DIST_DIR/build_id"`
 if [ -z "$BUILD_ID" ]; then
 	echo "Error getting build id"
