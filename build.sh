@@ -198,7 +198,7 @@ echo "Version: $VERSION"
 
 #
 # Restore this eventually, for the additional plugins
-# . grab_xpis.sh "${BUILD_LINUX}${BUILD_MAC}${BUILD_WIN32}" "${XPI_SOURCE}" "$CALLDIR" "$BUILD_DIR"
+"$CALLDIR"/grab_xpis.sh "${BUILD_LINUX}${BUILD_MAC}${BUILD_WIN32}" "$CALLDIR" "$BUILD_DIR"
 #
 
 # Delete Mozilla signing info if present

@@ -18,24 +18,24 @@ else
 fi
 set -e
 
-CALLDIR="$3"
-if [ "" == "$3" ]; then
-	echo "Third argument must be absolute path to dir in which to run this script."
+CALLDIR="$2"
+if [ "" == "$2" ]; then
+	echo "Second argument must be absolute path to dir in which to run this script."
 	exit 1
 fi
 cd $CALLDIR
 . "$CALLDIR/config.sh"
 
-BUILD_DIR="$4"
-if [ "" == "$4" ]; then
-	echo "Fourth argument must be absolute path to build dir."
+BUILD_DIR="$3"
+if [ "" == "$3" ]; then
+	echo "Third argument must be absolute path to build dir."
 	exit 1
 fi
 
 MODE="unknown"
 
 function usage() {
-    echo "grab_xpis.sh accepts 100, 010 or 001 as first argument
+    echo "grab_xpis.sh accepts 100, 010 or 001 as first argument"
     exit 1
 }
 
@@ -55,23 +55,28 @@ case $1 in
         ;;
 esac
 
-WHENCE=$2
-
 SCRIPT_PATH=$(dirname "$0")
 cd "${SCRIPT_PATH}"
 
 if [ ! -d "$CALLDIR/modules" ]; then
     mkdir "$CALLDIR/modules"
 fi
-rm -fR "$CALLDIR/modules"/*
 
-dirnames="$(cat <<-EOF
+for f in "$CALLDIR"/modules/*; do
+    DIRNAME=$(basename "$f")
+    if [ "$DIRNAME" != "zotero-libreoffice-integration" -a "$DIRNAME" != "zotero-word-for-mac-integration" -a "$DIRNAME" != "zotero-word-for-windows-integration" ]; then
+        rm -fR "$f"
+    fi
+done
+
+dirnames=$(cat <<-EOF
 abbrevs-filter
 bluebook-signals-for-zotero
 myles
 zotero-odf-scan-plugin
 EOF
-)"
+)
+
 
 CONTAINER_DIR=$(dirname "$CALLDIR")
 
