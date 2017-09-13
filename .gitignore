@@ -4,3 +4,7 @@ config-custom.sh
 dist
 staging
 xulrunner
+modules/abbrevs-filter
+modules/bluebook-signals-for-zotero
+modules/myles
+modules/zotero-odf-scan-plugin
