@@ -57,6 +57,7 @@ Options
  -t                  build with debugging support
  -p PLATFORMS        build for platforms PLATFORMS (m=Mac, w=Windows, l=Linux)
  -c CHANNEL          use update channel CHANNEL
+ -e                  enforce signing
  -s                  don\'t package; only build binaries in staging/ directory
 DONE
 	exit 1
@@ -91,7 +92,7 @@ BUILD_WIN32=0
 BUILD_LINUX=0
 PACKAGE=1
 DEVTOOLS=0
-while getopts "d:f:p:c:ts" opt; do
+while getopts "d:f:p:c:tse" opt; do
 	case $opt in
 		d)
 			SOURCE_DIR="$OPTARG"
@@ -118,6 +119,9 @@ while getopts "d:f:p:c:ts" opt; do
 			;;
 		t)
 			DEVTOOLS=1
+			;;
+		e)
+			SIGN=1
 			;;
 		s)
 			PACKAGE=0
@@ -291,17 +295,21 @@ if [ $BUILD_MAC == 1 ]; then
 	
 	# Merge relevant assets from Firefox
 	mkdir "$CONTENTSDIR/MacOS"
-	cp -r "$MAC_RUNTIME_PATH/Contents/MacOS/"!(firefox-bin|crashreporter.app) "$CONTENTSDIR/MacOS"
-	cp -r "$MAC_RUNTIME_PATH/Contents/Resources/"!(application.ini|updater.ini|update-settings.ini|browser|precomplete|removed-files|webapprt*|*.icns|defaults|*.lproj) "$CONTENTSDIR/Resources"
+	cp -r "$MAC_RUNTIME_PATH/Contents/MacOS/"!(firefox|firefox-bin|crashreporter.app|pingsender|updater.app) "$CONTENTSDIR/MacOS"
+	cp -r "$MAC_RUNTIME_PATH/Contents/Resources/"!(application.ini|updater.ini|update-settings.ini|browser|devtools-files|precomplete|removed-files|webapprt*|*.icns|defaults|*.lproj) "$CONTENTSDIR/Resources"
 
 	# Use our own launcher
-	mv "$CONTENTSDIR/MacOS/firefox" "$CONTENTSDIR/MacOS/jurism-bin"
 	cp "$CALLDIR/mac/jurism" "$CONTENTSDIR/MacOS/jurism"
 	cp "$BUILD_DIR/application.ini" "$CONTENTSDIR/Resources"
 	
 	cd "$CONTENTSDIR/MacOS"
 	tar -xjf "$CALLDIR/mac/updater.tar.bz2"
-	
+
+	# Copy PDF tools and data
+	cp "$CALLDIR/pdftools/pdftotext-mac" "$CONTENTSDIR/MacOS/pdftotext"
+	cp "$CALLDIR/pdftools/pdfinfo-mac" "$CONTENTSDIR/MacOS/pdfinfo"
+	cp -R "$CALLDIR/pdftools/poppler-data" "$CONTENTSDIR/Resources/"
+
 	# Modify Info.plist
 	perl -pi -e "s/{{VERSION}}/$VERSION/" "$CONTENTSDIR/Info.plist"
 	perl -pi -e "s/{{VERSION_NUMERIC}}/$VERSION_NUMERIC/" "$CONTENTSDIR/Info.plist"
@@ -362,7 +370,9 @@ if [ $BUILD_MAC == 1 ]; then
 	if [ $SIGN == 1 ]; then
 		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/updater.app/Contents/MacOS/org.mozilla.updater"
 		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/updater.app"
-		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/zotero-bin"
+		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/pdftotext"
+		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/pdfinfo"
+		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR/Contents/MacOS/zotero"
 		/usr/bin/codesign --force --sign "$DEVELOPER_ID" "$APPDIR"
 		/usr/bin/codesign --verify -vvvv "$APPDIR"
 	fi
@@ -415,6 +425,11 @@ if [ $BUILD_WIN32 == 1 ]; then
 	# Use our own updater, because Mozilla's requires updates signed by Mozilla
 	cp "$CALLDIR/win/updater.exe" "$APPDIR"
 	cat "$CALLDIR/win/installer/updater_append.ini" >> "$APPDIR/updater.ini"
+
+	# Copy PDF tools and data
+	cp "$CALLDIR/pdftools/pdftotext-win.exe" "$APPDIR/pdftotext.exe"
+	cp "$CALLDIR/pdftools/pdfinfo-win.exe" "$APPDIR/pdfinfo.exe"
+	cp -R "$CALLDIR/pdftools/poppler-data" "$APPDIR/"
 	
 	cp -R "$BUILD_DIR/zotero/"* "$BUILD_DIR/application.ini" "$APPDIR"
 	
@@ -472,22 +487,36 @@ if [ $BUILD_WIN32 == 1 ]; then
 			
 			# Build and sign uninstaller
 			perl -pi -e "s/\{\{VERSION}}/$VERSION/" "$BUILD_DIR/win_installer/defines.nsi"
-			"`cygpath -u \"$MAKENSISU\"`" /V1 "`cygpath -w \"$BUILD_DIR/win_installer/uninstaller.nsi\"`"
+			"`cygpath -u \"${NSIS_DIR}makensis.exe\"`" /V1 "`cygpath -w \"$BUILD_DIR/win_installer/uninstaller.nsi\"`"
 			mkdir "$APPDIR/uninstall"
 			mv "$BUILD_DIR/win_installer/helper.exe" "$APPDIR/uninstall"
 			
-			# Sign jurism.exe, dlls, updater, and uninstaller
+			# Sign zotero.exe, dlls, updater, uninstaller and PDF tools
 			if [ $SIGN == 1 ]; then
-				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Jurism" \
-					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/jurism.exe\"`"
-				for dll in "$APPDIR/"*.dll "$APPDIR/xulrunner/"*.dll; do
-					"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Jurism" \
+				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" \
+					/d "Zotero" /du "$SIGNATURE_URL" \
+					/t http://timestamp.verisign.com/scripts/timstamp.dll \
+					"`cygpath -w \"$APPDIR/zotero.exe\"`"
+				for dll in "$APPDIR/"*.dll "$APPDIR/"*.dll; do
+					"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Zotero" \
 						/du "$SIGNATURE_URL" "`cygpath -w \"$dll\"`"
 				done
-				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Jurism Updater" \
-					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/xulrunner/updater.exe\"`"
-				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Jurism Uninstaller" \
-					/du "$SIGNATURE_URL" "`cygpath -w \"$APPDIR/uninstall/helper.exe\"`"
+				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" \
+					/d "Zotero Updater" /du "$SIGNATURE_URL" \
+					/t http://timestamp.verisign.com/scripts/timstamp.dll \
+					"`cygpath -w \"$APPDIR/updater.exe\"`"
+				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" \
+					/d "Zotero Uninstaller" /du "$SIGNATURE_URL" \
+					/t http://timestamp.verisign.com/scripts/timstamp.dll \
+					"`cygpath -w \"$APPDIR/uninstall/helper.exe\"`"
+				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" \
+					/d "PDF Converter" /du "$SIGNATURE_URL" \
+					/t http://timestamp.verisign.com/scripts/timstamp.dll \
+					"`cygpath -w \"$APPDIR/pdftotext.exe\"`"
+				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" \
+					/d "PDF Info" /du "$SIGNATURE_URL" \
+					/t http://timestamp.verisign.com/scripts/timstamp.dll \
+					"`cygpath -w \"$APPDIR/pdfinfo.exe\"`"
 			fi
 			
 			# Stage installer
@@ -496,11 +525,13 @@ if [ $BUILD_WIN32 == 1 ]; then
 			cp -R "$APPDIR" "$INSTALLER_STAGE_DIR/core"
 			
 			# Build and sign setup.exe
-			"`cygpath -u \"$MAKENSISU\"`" /V1 "`cygpath -w \"$BUILD_DIR/win_installer/installer.nsi\"`"
+			"`cygpath -u \"${NSIS_DIR}makensis.exe\"`" /V1 "`cygpath -w \"$BUILD_DIR/win_installer/installer.nsi\"`"
 			mv "$BUILD_DIR/win_installer/setup.exe" "$INSTALLER_STAGE_DIR"
 			if [ $SIGN == 1 ]; then
-				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" /d "Jurism Setup" \
-					/du "$SIGNATURE_URL" "`cygpath -w \"$INSTALLER_STAGE_DIR/setup.exe\"`"
+				"`cygpath -u \"$SIGNTOOL\"`" sign /n "$SIGNTOOL_CERT_SUBJECT" \
+					/d "Zotero Setup" /du "$SIGNATURE_URL" \
+					/t http://timestamp.verisign.com/scripts/timstamp.dll \
+					"`cygpath -w \"$INSTALLER_STAGE_DIR/setup.exe\"`"
 			fi
 			
 			# Compress application
@@ -517,8 +548,10 @@ if [ $BUILD_WIN32 == 1 ]; then
 			
 			# Sign Zotero_setup.exe
 			if [ $SIGN == 1 ]; then
-				"`cygpath -u \"$SIGNTOOL\"`" sign /a /d "Jurism Setup" \
-					/du "$SIGNATURE_URL" "`cygpath -w \"$INSTALLER_PATH\"`"
+				"`cygpath -u \"$SIGNTOOL\"`" sign /a \
+					/d "Zotero Setup" /du "$SIGNATURE_URL" \
+					/t http://timestamp.verisign.com/scripts/timstamp.dll \
+					"`cygpath -w \"$INSTALLER_PATH\"`"
 			fi
 			
 			chmod 755 "$INSTALLER_PATH"
@@ -541,7 +574,7 @@ if [ $BUILD_LINUX == 1 ]; then
 		mkdir "$APPDIR"
 		
 		# Merge relevant assets from Firefox
-		cp -r "$RUNTIME_PATH/"!(application.ini|browser|defaults|devtools-files|crashreporter|crashreporter.ini|firefox-bin|precomplete|removed-files|run-mozilla.sh|update-settings.ini|updater|updater.ini) "$APPDIR"
+		cp -r "$RUNTIME_PATH/"!(application.ini|browser|defaults|devtools-files|crashreporter|crashreporter.ini|firefox-bin|pingsender|precomplete|removed-files|run-mozilla.sh|update-settings.ini|updater|updater.ini) "$APPDIR"
 		
 		# Use our own launcher that calls the original Firefox executable with -app
 		mv "$APPDIR"/firefox "$APPDIR"/jurism-bin
@@ -553,6 +586,11 @@ if [ $BUILD_LINUX == 1 ]; then
 		
 		# Use our own updater, because Mozilla's requires updates signed by Mozilla
 		cp "$CALLDIR/linux/updater-$arch" "$APPDIR"/updater
+
+		# Copy PDF tools and data
+		cp "$CALLDIR/pdftools/pdftotext-linux-$arch" "$APPDIR/pdftotext"
+		cp "$CALLDIR/pdftools/pdfinfo-linux-$arch" "$APPDIR/pdfinfo"
+		cp -R "$CALLDIR/pdftools/poppler-data" "$APPDIR/"
 		
 		cp -R "$BUILD_DIR/zotero/"* "$BUILD_DIR/application.ini" "$APPDIR"
 		

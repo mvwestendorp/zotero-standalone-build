@@ -4,8 +4,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 #
 # xulrunner-stub.exe currently requires <=47, though it can probably be rebuilt against a later SDK
 GECKO_VERSION_MAC="54.0.1"
-GECKO_VERSION_LINUX="54.0.1"
-GECKO_VERSION_WIN="52.3.0esr"
+GECKO_VERSION_LINUX="52.6.0esr"
+GECKO_VERSION_WIN="52.6.0esr"
 
 # Paths to Gecko runtimes
 MAC_RUNTIME_PATH="$DIR/xulrunner/Firefox.app"
@@ -13,14 +13,17 @@ WIN32_RUNTIME_PATH="$DIR/xulrunner/firefox-win32"
 LINUX_i686_RUNTIME_PATH="$DIR/xulrunner/firefox-i686"
 LINUX_x86_64_RUNTIME_PATH="$DIR/xulrunner/firefox-x86_64"
 
+PDF_TOOLS_VERSION="0.0.2"
+PDF_TOOLS_URL="https://zotero-download.s3.amazonaws.com/pdftools/pdftools-$PDF_TOOLS_VERSION.tar.gz"
+
 # Whether to sign builds
-SIGN=1
+SIGN=0
 
 # OS X Developer ID certificate information
 DEVELOPER_ID=F0F1FE48DB909B263AC51C8215374D87FDC12121
 
 # Paths for Windows installer build
-MAKENSISU='C:\Program Files (x86)\NSIS\Unicode\makensis.exe'
+NSIS_DIR='C:\Program Files (x86)\NSIS\Unicode\'
 
 # Paths for Windows installer build only necessary for signed binaries
 #SIGNTOOL='C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\signtool.exe'

@@ -79,11 +79,12 @@ function modify_omni {
 	# but I couldn't get them to work.
 	perl -pi -e 's/value: true/value: false/' modules/addons/AddonConstants.jsm
 	# Delete binary version of file
-	rm jsloader/resource/gre/modules/addons/AddonConstants.jsm
+	rm -f jsloader/resource/gre/modules/addons/AddonConstants.jsm
 	
-	# Increase internal SQL transaction timeout to an hour
-	perl -pi -e 's/TRANSACTIONS_QUEUE_TIMEOUT_MS = .+/TRANSACTIONS_QUEUE_TIMEOUT_MS = 3600000;/' modules/Sqlite.jsm
-	rm jsloader/resource/gre/modules/Sqlite.jsm
+	# Disable transaction timeout
+	perl -pi -e 's/let timeoutPromise/\/*let timeoutPromise/' modules/Sqlite.jsm
+	perl -pi -e 's/return Promise.race\(\[transactionPromise, timeoutPromise\]\);/*\/return transactionPromise;/' modules/Sqlite.jsm
+	rm -f jsloader/resource/gre/modules/Sqlite.jsm
 	
 	# Disable unwanted components
 	cat components/components.manifest | grep -vi telemetry > components/components2.manifest
