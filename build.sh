@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # Copyright (c) 2011  Zotero
 #                     Center for History and New Media
@@ -32,9 +32,7 @@ else
 	WIN_NATIVE=0
 fi
 
-DEVTOOLS=0
-PACKAGE=1
-
+set +e
 gsed --version > /dev/null 2<&1
 if [ $? -gt 0 ]; then
     GSED="sed"
@@ -47,23 +45,24 @@ if [ $? -gt 0 ]; then
 else
     GFIND="gfind"
 fi
+set -e
 
 function usage {
 	cat >&2 <<DONE
-Usage: $0 [-p PLATFORMS] [-s DIR] [-v VERSION] [-c CHANNEL] [-d] [-t]
+Usage: $0 [-d DIR] [-f FILE] -p PLATFORMS [-c CHANNEL] [-d]
 Options
  -d DIR              build directory to build from (from build_xpi; cannot be used with -f)
  -f FILE             ZIP file to build from (cannot be used with -d)
- -t                  build with debugging support
+ -t                  add devtools
  -p PLATFORMS        build for platforms PLATFORMS (m=Mac, w=Windows, l=Linux)
  -c CHANNEL          use update channel CHANNEL
  -e                  enforce signing
- -s                  don\'t package; only build binaries in staging/ directory
+ -s                  don't package; only build binaries in staging/ directory
 DONE
 	exit 1
 }
 
-BUILD_DIR=`mktemp -d /tmp/tmp.XXXX`
+BUILD_DIR=`mktemp -d`
 function cleanup {
 	rm -rf $BUILD_DIR
 }
@@ -71,18 +70,6 @@ trap cleanup EXIT
 
 function abspath {
 	echo $(cd $(dirname $1); pwd)/$(basename $1);
-}
-
-function seq () {
-  if [ "$1" -lt "$2" ] ; then
-    for ((i="$1"; i<"$2"; i++))
-      do echo $i
-    done
-  else
-    for ((i="$1"; i>"$2"; i--))
-      do echo $i
-    done
-  fi
 }
 
 SOURCE_DIR=""
@@ -133,24 +120,6 @@ while getopts "d:f:p:c:tse" opt; do
 	shift $((OPTIND-1)); OPTIND=1
 done
 
-
-# My Last Param Variables
-#
-#			BUILD_MAC=0
-#			BUILD_WIN32=0
-#			BUILD_LINUX=0
-#					m) BUILD_MAC=1;GECKO_VERSION="40.0";GECKO_SHORT_VERSION="40.0";;
-#					w) BUILD_WIN32=1;GECKO_VERSION="40.0";GECKO_SHORT_VERSION="40.0";;
-#					l) BUILD_LINUX=1;GECKO_VERSION="39.0";GECKO_SHORT_VERSION="39.0";;
-#			SYMLINK_DIR="$OPTARG"
-#			PACKAGE=0
-#			VERSION="$OPTARG"
-#			UPDATE_CHANNEL="$OPTARG"
-#			XPI_SOURCE="$OPTARG"
-#			PACKAGE=0
-#			DEVTOOLS=1
-
-
 # Require source dir or ZIP file
 if [[ -z "$SOURCE_DIR" ]] && [[ -z "$ZIP_FILE" ]]; then
 	usage
@@ -188,8 +157,6 @@ fi
 
 cd "$BUILD_DIR/zotero"
 
-echo $BUILD_DIR
-
 VERSION=`perl -ne 'print and last if s/.*<em:version>(.*)<\/em:version>.*/\1/;' install.rdf`
 if [ -z "$VERSION" ]; then
 	echo "Version number not found in install.rdf"
@@ -199,11 +166,6 @@ rm install.rdf
 
 echo
 echo "Version: $VERSION"
-
-#
-# Restore this eventually, for the additional plugins
-"$CALLDIR"/grab_xpis.sh "${BUILD_LINUX}${BUILD_MAC}${BUILD_WIN32}" "$CALLDIR" "$BUILD_DIR"
-#
 
 # Delete Mozilla signing info if present
 rm -rf META-INF
@@ -223,12 +185,6 @@ cp -R "$CALLDIR/assets/console/content" "$BUILD_DIR/zotero/chrome/console"
 cp -R "$CALLDIR/assets/console/skin/osx" "$BUILD_DIR/zotero/chrome/console/skin"
 cp -R "$CALLDIR/assets/console/locale/en-US" "$BUILD_DIR/zotero/chrome/console/locale"
 cat "$CALLDIR/assets/console/jsconsole.manifest" >> "$BUILD_DIR/zotero/chrome.manifest"
-
-# [Juris-M] set CL_KEY. Crash if not available.
-set -e
-CL_KEY=$(cat "$CALLDIR/cl-key.txt")
-set +e
-${GSED} -si "s/%%VALUE%%/${CL_KEY}/" "$BUILD_DIR/zotero/resource/config.js"
 
 # Delete files that shouldn't be distributed
 ${GFIND} "$BUILD_DIR/zotero/chrome" -name .DS_Store -exec rm -f {} \;
