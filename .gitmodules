@@ -7,4 +7,17 @@
 [submodule "modules/zotero-libreoffice-integration"]
         path = modules/zotero-libreoffice-integration
         url = git://github.com/zotero/zotero-libreoffice-integration.git
-
+[submodule "modules/abbrevs-filter"]
+	path = modules/abbrevs-filter
+	url = https://github.com/Juris-M/abbrevs-filter.git
+	branch = af5
+[submodule "modules/bluebook-signals-for-zotero"]
+	path = modules/bluebook-signals-for-zotero
+	url = https://github.com/Juris-M/bluebook-signals-for-zotero.git
+[submodule "modules/myles"]
+	path = modules/myles
+	url = https://github.com/Juris-M/myles.git
+	branch = myles-5.0
+[submodule "modules/zotero-odf-scan-plugin"]
+	path = modules/zotero-odf-scan-plugin
+	url = https://github.com/Juris-M/zotero-odf-scan-plugin.git
