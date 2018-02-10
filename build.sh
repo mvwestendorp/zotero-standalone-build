@@ -21,6 +21,31 @@
 CALLDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$CALLDIR/config.sh"
 
+## Sniff the channel from the code to be built
+set +e
+FULL_VERSION=`perl -ne 'print and last if s/.*<em:version>(.*)<\/em:version.*/\1/;' "$ZOTERO_BUILD_DIR/xpi/build/staging/install.rdf"`
+IS_JURISM=$(echo $FULL_VERSION | grep -c '\.m[0-9]\+')
+IS_SOURCE=$(echo $FULL_VERSION | grep -c 'SOURCE')
+IS_BETA=$(echo $FULL_VERSION | grep -c '\.m[0-9]\+-beta\.[0-9]\+')
+IS_RELEASE=$(echo $FULL_VERSION | grep -c '\.m[0-9]\+$')
+set -e
+if [ $IS_JURISM -eq 1 ]; then
+    if [ $IS_RELEASE -eq 1 ]; then
+        UPDATE_CHANNEL="release"
+    elif [ $IS_BETA -eq 1 ]; then
+        UPDATE_CHANNEL="beta"
+    elif [ $IS_SOURCE ]; then
+        UPDATE_CHANNEL="source"
+    else
+        echo Version in $ZOTERO_BUILD_DIR/build/staging/install.rdf is neither release, nor beta, nor source.
+    fi
+else
+    echo Content at $ZOTERO_BUILD_DIR/build/staging/ is not a Juris-M client.
+    exit 1
+fi
+
+
+
 if [ "`uname`" = "Darwin" ]; then
 	MAC_NATIVE=1
 else
@@ -49,13 +74,10 @@ set -e
 
 function usage {
 	cat >&2 <<DONE
-Usage: $0 [-d DIR] [-f FILE] -p PLATFORMS [-c CHANNEL] [-d]
+Usage: $0 -p PLATFORMS
 Options
- -d DIR              build directory to build from (from build_xpi; cannot be used with -f)
- -f FILE             ZIP file to build from (cannot be used with -d)
  -t                  add devtools
  -p PLATFORMS        build for platforms PLATFORMS (m=Mac, w=Windows, l=Linux)
- -c CHANNEL          use update channel CHANNEL
  -e                  enforce signing
  -s                  don't package; only build binaries in staging/ directory
 DONE
@@ -79,14 +101,8 @@ BUILD_WIN32=0
 BUILD_LINUX=0
 PACKAGE=1
 DEVTOOLS=0
-while getopts "d:f:p:c:tse" opt; do
+while getopts "p:tse" opt; do
 	case $opt in
-		d)
-			SOURCE_DIR="$OPTARG"
-			;;
-		f)
-			ZIP_FILE="$OPTARG"
-			;;
 		p)
 			for i in `seq 0 1 $((${#OPTARG}-1))`
 			do
@@ -100,9 +116,6 @@ while getopts "d:f:p:c:tse" opt; do
 						;;
 				esac
 			done
-			;;
-		c)
-			UPDATE_CHANNEL="$OPTARG"
 			;;
 		t)
 			DEVTOOLS=1
@@ -120,11 +133,16 @@ while getopts "d:f:p:c:tse" opt; do
 	shift $((OPTIND-1)); OPTIND=1
 done
 
-# Require source dir or ZIP file
-if [[ -z "$SOURCE_DIR" ]] && [[ -z "$ZIP_FILE" ]]; then
-	usage
-elif [[ -n "$SOURCE_DIR" ]] && [[ -n "$ZIP_FILE" ]]; then
-	usage
+SOURCE_DIR="$ZOTERO_BUILD_DIR/xpi/build/staging"
+
+if [[ -z $PLATFORM ]]; then
+	if [ "`uname`" = "Darwin" ]; then
+		BUILD_MAC=1
+	elif [ "`uname`" = "Linux" ]; then
+		BUILD_LINUX=1
+	elif [ "`uname -o 2> /dev/null`" = "Cygwin" ]; then
+		BUILD_WIN32=1
+	fi
 fi
 
 # Require at least one platform
@@ -566,12 +584,14 @@ if [ $BUILD_LINUX == 1 ]; then
 		# Add word processor plug-ins
 		mkdir "$APPDIR/extensions"
 		cp -RH "$CALLDIR/modules/zotero-libreoffice-integration" "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org"
-                perl -pi -e 's|^(</Description>)|        <em:targetApplication>\n                <Description>\n                        <em:id>juris-m\@juris-m.github.io</em:id>\n                        <em:minVersion>4.0</em:minVersion>\n                        <em:maxVersion>5.0.*</em:maxVersion>\n                </Description>\n        </em:targetApplication>\n${1}|' "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/install.rdf"
-		perl -pi -e 's/\.SOURCE<\/em:version>/.SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/install.rdf"
-		echo
-		echo -n "$ext Version: "
-		perl -ne 'print and last if s/.*<em:version>(.*)<\/em:version>.*/\1/;' "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/install.rdf"
-		echo
+		for ext in "zoteroOpenOfficeIntegration@zotero.org"; do
+			perl -pi -e 's|^(</Description>)|        <em:targetApplication>\n                <Description>\n                        <em:id>juris-m\@juris-m.github.io</em:id>\n                        <em:minVersion>4.0</em:minVersion>\n                        <em:maxVersion>5.0.*</em:maxVersion>\n                </Description>\n        </em:targetApplication>\n${1}|' "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/install.rdf"
+			perl -pi -e 's/\.SOURCE<\/em:version>/.SA.'"$VERSION"'<\/em:version>/' "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/install.rdf"
+			echo
+			echo -n "$ext Version: "
+			perl -ne 'print and last if s/.*<em:version>(.*)<\/em:version>.*/\1/;' "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/install.rdf"
+			echo
+		done
 		rm -rf "$APPDIR/extensions/zoteroOpenOfficeIntegration@zotero.org/.git"
         
         # Add Abbreviation Filter (abbrevs-filter)
