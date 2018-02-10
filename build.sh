@@ -40,7 +40,7 @@ if [ $IS_JURISM -eq 1 ]; then
         echo Version in $ZOTERO_BUILD_DIR/build/staging/install.rdf is neither release, nor beta, nor source.
     fi
 else
-    echo Content at $ZOTERO_BUILD_DIR/build/staging/ is not a Juris-M client.
+    echo Content at $ZOTERO_BUILD_DIR/xpi/build/staging/ is not a Juris-M client.
     exit 1
 fi
 
