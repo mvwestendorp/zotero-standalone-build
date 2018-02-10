@@ -1,0 +1,40 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. $SCRIPT_DIR/check_requirements_common
+. $SCRIPT_DIR/check_requirements_build continue
+. $SCRIPT_DIR/check_requirements_packaging continue
+
+echo
+echo "Checking distribution requirements:"
+echo
+
+echo -n "Checking for Mozilla ARchive (MAR) tool: "
+which mar || { $FAIL_CMD; FAILED=1; echo "  -- Install mar from https://wiki.mozilla.org/UpdateGeneration"; }
+
+echo -n "Checking for mbsdiff: "
+which mbsdiff || { $FAIL_CMD; FAILED=1; echo "  -- Install mbsdiff from https://wiki.mozilla.org/UpdateGeneration"; }
+
+echo -n "Checking for rsync: "
+which rsync || { $FAIL_CMD; FAILED=1; }
+
+echo -n "Checking for sha512sum/shasum: "
+which sha512sum 2>/dev/null || which shasum 2>/dev/null || { $FAIL_CMD; FAILED=1; }
+
+echo -n "Checking for AWS CLI: "
+which aws || { $FAIL_CMD; FAILED=1; }
+
+echo -n "Checking for AWS S3 access: "
+aws s3 ls $S3_BUCKET/$S3_DIST_PATH | sed 's/^[[:blank:]]*//' || { $FAIL_CMD; FAILED=1; }
+
+echo -n "Checking for deploy host directory access: "
+set +o pipefail
+$SSH_CMD $DEPLOY_HOST ls -d $DEPLOY_PATH || { $FAIL_CMD; FAILED=1; }
+set -o pipefail
+
+
+
+if [ "$1" != "continue" ]; then
+  exit $FAILED
+fi

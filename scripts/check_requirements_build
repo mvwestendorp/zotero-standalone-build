@@ -1,0 +1,44 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. $SCRIPT_DIR/check_requirements_common
+
+echo
+echo "Checking build requirements:"
+echo
+
+echo -n "Checking for perl: "
+which perl || { $FAIL_CMD; FAILED=1; }
+
+echo -n "Checking for python2.7: "
+which python2.7 || { $FAIL_CMD; FAILED=1; }
+
+echo -n "Checking for python3: "
+which python3 || { $FAIL_CMD; FAILED=1; }
+
+echo -n "Checking for curl: "
+which curl || { $FAIL_CMD; FAILED=1; }
+
+echo -n "Checking for wget: "
+which wget || { $FAIL_CMD; FAILED=1; }
+
+echo -n "Checking for zip: "
+which zip || { $FAIL_CMD; FAILED=1; }
+
+echo -n "Checking for unzip: "
+which unzip || { $FAIL_CMD; FAILED=1; }
+
+echo -n "Checking for awk: "
+which awk || { $FAIL_CMD; FAILED=1; }
+
+if [ "$WIN_NATIVE" == "1" ]; then
+	echo -n "Checking for 7z: "
+	which 7z || { $FAIL_CMD; FAILED=1; }
+fi
+
+
+
+if [ "$1" != "continue" ]; then
+  exit $FAILED
+fi
