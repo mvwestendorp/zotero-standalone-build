@@ -101,8 +101,16 @@ BUILD_WIN32=0
 BUILD_LINUX=0
 PACKAGE=1
 DEVTOOLS=0
-while getopts "p:tse" opt; do
+SOURCE_DIR="$ZOTERO_BUILD_DIR/xpi/build/staging"
+
+while getopts "d:c:p:tse" opt; do
 	case $opt in
+        d)
+            echo Juris-M \(-d\): setting SOURCE_DIR to: $SOURCE_DIR
+            ;;
+        c)
+            echo Juris-M \(-c\): setting UPDATE_CHANNEL to: $UPDATE_CHANNEL
+            ;;
 		p)
 			for i in `seq 0 1 $((${#OPTARG}-1))`
 			do
@@ -132,8 +140,6 @@ while getopts "p:tse" opt; do
 	esac
 	shift $((OPTIND-1)); OPTIND=1
 done
-
-SOURCE_DIR="$ZOTERO_BUILD_DIR/xpi/build/staging"
 
 if [[ -z $PLATFORM ]]; then
 	if [ "`uname`" = "Darwin" ]; then
