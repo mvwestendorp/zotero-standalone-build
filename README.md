@@ -22,8 +22,8 @@ The instructions and tools provided here are derived from the original Zotero St
 
 The build steps in this Juris-M fork differ somewhat from its Zotero parent. Specifically:
 
-- The ``check_requirements`` script has been split into three separate scripts, with extensions ``_build`, ``_packaging``, and ``_release``. The simplified build instructions here should work if only the ``_build`` requirements are satisfied.
-- The ``build.sh`` script has been modified to sniff the client version from the build Juris-M source, and the target platform from the environment.
+-   The `check_requirements` script has been split into three separate scripts, with extensions `_build`, `_packaging`, and `_release`. The simplified build instructions here should work if only the `_build` requirements are satisfied.
+-   The `build.sh` script has been modified to sniff the client version from the build Juris-M source, and the target platform from the environment.
 
 ## Cloning the repository
 
@@ -32,7 +32,7 @@ Enter the directory where your Juris-M development repositories are located, and
   prompt> cd jurism-repos
   prompt> git clone --recursive https://github.com/Juris-M/zotero-standalone-build.git
 ```
-If you forget to include the ``--recursive`` option when cloning, pull in the submodules by entering the repository directory and issuing commands like the following:
+If you forget to include the `--recursive` option when cloning, pull in the submodules by entering the repository directory and issuing commands like the following:
 ```bash
   prompt> cd zotero-standalone-build
   prompt> git submodule init
@@ -41,7 +41,7 @@ If you forget to include the ``--recursive`` option when cloning, pull in the su
 
 ## Checking build requirements
 
-Enter this directory and run ``check_requirements_build`` to check that the tools needed for the build process are available:
+Enter this directory and run `check_requirements_build` to check that the tools needed for the build process are available:
 ```bash
   prompt> cd zotero-standalone-build
   prompt> ./scripts/check_requirements_build
@@ -50,9 +50,9 @@ If anything turns up missing, install as necessary.
 
 ## Fetching the runtime platform code
 
-Grab the runtime code, specifying the target platform with the ``-p`` option (``m=``Mac, ``l=``Linux, ``w=``Windows; for Mac builds, this must be done from Mac OS):
+Grab the runtime code, specifying the target platform with the `-p` option (`m=`Mac, `l=`Linux, `w=`Windows; for Mac builds, this must be done from Mac OS):
 ```bash
-  prompt> ./fetch_xulrunner -p l
+  prompt> ./fetch_xulrunner.sh -p l
 ```
 For Linux, this will fetch two binaries, one each for 32-bit and one for 64-bit builds.
 
@@ -63,13 +63,13 @@ Grab the PDF tools. This bundle was fetched once already when testing the Juris-
   prompt> ./fetch_pdftools
 ```
 
-## Building the client into the ``staging`` directory
+## Building the client into the `staging` directory
 
-To check that the client works correctly when assembled, the following command will place the unpackaged runtime code under the ``./staging`` directory:
+To check that the client works correctly when assembled, the following command will place the unpackaged runtime code under the `./staging` directory:
 ```bash
   prompt> ./scripts/dir_build
 ```
-Building in this way is quick, which is nice for trialing features or checking for bugs after changes to Juris-M core. The fully functional client can then be run by entering its directory and running the ``jurism`` command. For example:
+Building in this way is quick, which is nice for trialing features or checking for bugs after changes to Juris-M core. The fully functional client can then be run by entering its directory and running the `jurism` command. For example:
 ```bash
   prompt> cd ./staging/Jurism_linux-x86_64
   prompt> ./jurism
@@ -77,15 +77,15 @@ Building in this way is quick, which is nice for trialing features or checking f
 
 ## Building the client
 
-The client is built by running the ``./build.sh`` script in the root directory of the repository:
+The client is built by running the `./build.sh` script in the root directory of the repository:
 ```bash
   prompt> ./build.sh
 ```
-The script should complete without error, and leave a copy (or in the case of Linux, two copies) of the installer in the ``./dist`` directory. If the script complains that the platform must be specified, it can be forced with the ``-p`` option:
+The script should complete without error, and leave a copy (or in the case of Linux, two copies) of the installer in the `./dist` directory. If the script complains that the platform must be specified, it can be forced with the `-p` option:
 ```bash
   prompt> ./build.sh -p l
 ```
-To more quickly build only an unpacked copy of the runtime in the ``./staging`` directory, use the ``-s`` option:
+To more quickly build only an unpacked copy of the runtime in the `./staging` directory, use the `-s` option:
 ```bash
   prompt> ./build.sh -s
 ```
