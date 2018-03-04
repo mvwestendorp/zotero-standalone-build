@@ -1,9 +1,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Version of Gecko to build with
-#
-# xulrunner-stub.exe currently requires <=47, though it can probably be rebuilt against a later SDK
-GECKO_VERSION_MAC="54.0.1"
+GECKO_VERSION_MAC="52.6.0esr"
 GECKO_VERSION_LINUX="52.6.0esr"
 GECKO_VERSION_WIN="52.6.0esr"
 
@@ -13,7 +11,7 @@ WIN32_RUNTIME_PATH="$DIR/xulrunner/firefox-win32"
 LINUX_i686_RUNTIME_PATH="$DIR/xulrunner/firefox-i686"
 LINUX_x86_64_RUNTIME_PATH="$DIR/xulrunner/firefox-x86_64"
 
-PDF_TOOLS_VERSION="0.0.2"
+PDF_TOOLS_VERSION="0.0.3"
 PDF_TOOLS_URL="https://zotero-download.s3.amazonaws.com/pdftools/pdftools-$PDF_TOOLS_VERSION.tar.gz"
 
 # Whether to sign builds
