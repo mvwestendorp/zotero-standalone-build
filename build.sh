@@ -362,7 +362,7 @@ if [ $BUILD_MAC == 1 ]; then
 		if [ $MAC_NATIVE == 1 ]; then
 			echo 'Creating Mac installer'
 			"$CALLDIR/mac/pkg-dmg" --source "$STAGE_DIR/Jurism.app" \
-				--target "$DIST_DIR/jurism-for-mac-all-$VERSION.dmg" \
+				--target "$DIST_DIR/Jurism-for-mac-all-$VERSION.dmg" \
 				--sourcefile --volname Jurism --copy "$CALLDIR/mac/DSStore:/.DS_Store" \
 				--symlink /Applications:"/Drag Here to Install" > /dev/null
 		else
@@ -455,7 +455,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 
 	if [ $PACKAGE == 1 ]; then
 		if [ $WIN_NATIVE == 1 ]; then
-			INSTALLER_PATH="$DIST_DIR/jurism-for-windows-all-${VERSION}_setup.exe"
+			INSTALLER_PATH="$DIST_DIR/Jurism-for-windows-all-${VERSION}_setup.exe"
 			
 			echo 'Creating Windows installer'
 			# Copy installer files
