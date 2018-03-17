@@ -30,7 +30,7 @@ aws s3 ls $S3_BUCKET/$S3_DIST_PATH | sed 's/^[[:blank:]]*//' || { $FAIL_CMD; FAI
 
 echo -n "Checking for deploy host directory access: "
 set +o pipefail
-$SSH_CMD $DEPLOY_HOST ls -d $DEPLOY_PATH || { $FAIL_CMD; FAILED=1; }
+ssh $DEPLOY_HOST ls -d $DEPLOY_PATH || { $FAIL_CMD; FAILED=1; }
 set -o pipefail
 
 
