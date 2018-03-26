@@ -372,7 +372,7 @@ if [ $BUILD_MAC == 1 ]; then
 		else
 			echo 'Not building on Mac; creating Mac distribution as a zip file'
 			rm -f "$DIST_DIR/Jurism_mac.zip"
-			cd "$STAGE_DIR" && zip -rqX "$DIST_DIR/jurism-for-mac-all-$VERSION.zip" Jurism.app
+			cd "$STAGE_DIR" && zip -rqX "$DIST_DIR/Jurism-for-mac-all-$VERSION.zip" Jurism.app
 		fi
 	fi
 fi
