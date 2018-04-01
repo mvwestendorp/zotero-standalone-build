@@ -26,11 +26,14 @@ echo -n "Checking for deployer script: "
 ls $SCRIPT_DIR/../deployer/bin/deployer || { $FAIL_CMD; FAILED=1; }
 
 echo -n "Checking for GitHub release access: "
-$SCRIPT_DIR/../deployer/bin/deployer -q -v || { $FAIL_CMD; FAILED=1; }
-
+if [ "$OSTYPE" == "cygwin" ]; then
+    node $(cygpath -am $SCRIPT_DIR/../deployer/index.js) -q -v || { $FAIL_CMD; FAILED=1; }
+else
+    node $SCRIPT_DIR/../deployer/index.js -q -v || { $FAIL_CMD; FAILED=1; }
+fi
 echo -n "Checking for deploy host directory access: "
 set +o pipefail
-ssh $DEPLOY_HOST ls -d $DEPLOY_PATH || { $FAIL_CMD; FAILED=1; }
+ssh $DEPLOY_HOST ls -d "$DEPLOY_PATH" || { $FAIL_CMD; FAILED=1; }
 set -o pipefail
 
 
