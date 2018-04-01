@@ -61,7 +61,8 @@ if [ -z "$VERSION" ]; then
 fi
 
 # Build Zotero
-"$ROOT_DIR/build.sh" -d "$SOURCE_DIR" -p $PLATFORMS -c $CHANNEL -e
+echo "***** ===> $ROOT_DIR/build.sh" -d "$SOURCE_DIR" -p $PLATFORMS -c $CHANNEL
+"$ROOT_DIR/build.sh" -d "$SOURCE_DIR" -p $PLATFORMS -c $CHANNEL
 
 if [ "$CHANNEL" == "dev" ]; then
     echo Dev build terminating immediately, no online copy
@@ -116,7 +117,9 @@ do
 	INCREMENTALS="`\"$SCRIPT_DIR/manage_incrementals\" -c $CHANNEL -p ${PLATFORMS:i:1} -n $NUM_INCREMENTALS`"
 	echo "$INCREMENTALS"
 	echo
-	
+
+    echo AHA $INCREMENTALS
+    
 	for from in $INCREMENTALS; do
 		echo "Building incremental update for $platform_name from $from to $VERSION"
 		"$ROOT_DIR/update-packaging/build_autoupdate.sh" -i "$from" -c "$CHANNEL" -p ${PLATFORMS:i:1} -l $VERSION
@@ -124,8 +127,12 @@ do
 	done
 done
 
-# Upload builds to S3
+
+
+# Upload builds to GitHub
+echo "$SCRIPT_DIR/upload_builds" $CHANNEL $VERSION
 "$SCRIPT_DIR/upload_builds" $CHANNEL $VERSION
+echo done
 
 # Upload file lists for each platform
 channel_deploy_path="$DEPLOY_PATH/$CHANNEL"
@@ -133,7 +140,8 @@ mkdir "$TEMP_DIR/version_info"
 chmod g+ws "$TEMP_DIR/version_info"
 cp "$DIST_DIR"/files-* "$TEMP_DIR/version_info"
 chmod g+w "$TEMP_DIR"/version_info/files-*
-rsync -rv "$TEMP_DIR/version_info/" $DEPLOY_HOST:"$channel_deploy_path/$VERSION/"
+
+rsync -rv "$TEMP_DIR/version_info/" "$DEPLOY_HOST:$channel_deploy_path/$VERSION/"
 
 # Download updates JSON for each platform, update it, and reupload it
 for i in `seq 0 1 $((${#PLATFORMS}-1))`
@@ -153,10 +161,17 @@ do
 	for arch in $architectures;
 	do
 		jsonfile="updates-$arch.json"
-		
-		scp $DEPLOY_HOST:"$channel_deploy_path/$jsonfile" "$TEMP_DIR/$jsonfile"
-		"$ROOT_DIR/update-packaging/add_version_info" -f "$TEMP_DIR/$jsonfile" -v $VERSION -b $BUILD_ID
-		scp "$TEMP_DIR/$jsonfile" $DEPLOY_HOST:"$channel_deploy_path/$jsonfile"
+		if [ "$OSTYPE" == "cygwin" ]; then
+			scp "$DEPLOY_HOST:$channel_deploy_path/$jsonfile" $(cygpath -u "$TEMP_DIR/$jsonfile")
+			echo PATH "$TEMP_DIR/$jsonfile"
+			cat "$TEMP_DIR/$jsonfile"
+			"$ROOT_DIR/update-packaging/add_version_info" -f "$TEMP_DIR/$jsonfile" -v $VERSION -b $BUILD_ID
+			scp $(cygpath -u "$TEMP_DIR/$jsonfile") "${DEPLOY_HOST}:$channel_deploy_path/$jsonfile"
+		else
+			scp $DEPLOY_HOST:"$channel_deploy_path/$jsonfile" "$TEMP_DIR/$jsonfile"
+			"$ROOT_DIR/update-packaging/add_version_info" -f "$TEMP_DIR/$jsonfile" -v $VERSION -b $BUILD_ID
+			scp "$TEMP_DIR/$jsonfile" "${DEPLOY_HOST}:$channel_deploy_path/$jsonfile"
+		fi
 	done
 done
 
@@ -167,6 +182,8 @@ do
 	"$SCRIPT_DIR/manage_incrementals" -c $CHANNEL -p ${PLATFORMS:i:1} -a $VERSION
 done
 
-$DEPLOY_CMD
+#$DEPLOY_CMD
 
 rm -rf "$STAGE_DIR"/*
+
+echo Done!

@@ -178,11 +178,16 @@ for version in "$FROM" "$TO"; do
 		# URL-encode '+' in beta version numbers
 		ENCODED_VERSION=`urlencode $version`
 		ENCODED_ARCHIVE=`urlencode $archive`
-		URL="https://$S3_BUCKET.s3.amazonaws.com/$S3_DIST_PATH/$CHANNEL/$ENCODED_VERSION/$ENCODED_ARCHIVE"
+		URL="https://github.com/Juris-M/assets/releases/download/$S3_DIST_PATH/$CHANNEL/$ENCODED_VERSION/$ENCODED_ARCHIVE"
 		echo "Fetching $URL"
 		set +e
 		# Cached version is available
 		if [ -n "$ETAG" ]; then
+            
+            # If-None-Match does not work against GitHub release objects
+            # Do a HEAD request first, then request body if required
+            # Irrelevant to deployer.js
+            
 			NEW_ETAG=$(wget -nv -S --header "If-None-Match: $ETAG" $URL 2>&1 | awk '/ *ETag: */ {print $2}')
 			
 			# If ETag didn't match, cache newly downloaded version

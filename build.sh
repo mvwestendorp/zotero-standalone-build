@@ -459,7 +459,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 
 	if [ $PACKAGE == 1 ]; then
 		if [ $WIN_NATIVE == 1 ]; then
-			INSTALLER_PATH="$DIST_DIR/Jurism-for-windows-all-${VERSION}_setup.exe"
+			INSTALLER_PATH="$DIST_DIR/Jurism-${VERSION}_setup.exe"
 			
 			echo 'Creating Windows installer'
 			# Copy installer files
@@ -538,7 +538,7 @@ if [ $BUILD_WIN32 == 1 ]; then
 		else
 			echo 'Not building on Windows; only building zip file'
 		fi
-		cd "$STAGE_DIR" && zip -rqX "$DIST_DIR/jurism-for-windows-all-${VERSION}_win32.zip" Jurism_win32
+		cd "$STAGE_DIR" && zip -rqX "$DIST_DIR/Jurism-${VERSION}_win32.zip" Jurism_win32
 	fi
 fi
 

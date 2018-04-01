@@ -16,12 +16,14 @@ if [ $WIN_NATIVE == 1 ]; then
 	echo -n "Checking for uuidgen: "
 	which uuidgen || { $FAIL_CMD; FAILED=1; }
 	
-	echo -n "Checking for signtool: "
-	if [ -x "`cygpath -u \"$SIGNTOOL\"`" ]; then
-		echo "`cygpath -u \"$SIGNTOOL\"`"
-	else
-		$FAIL_CMD
-		FAILED=1
+	if [ $SIGN -gt 0 ]; then
+		echo -n "Checking for signtool: "
+		if [ -x "`cygpath -u \"$SIGNTOOL\"`" ]; then
+			echo "`cygpath -u \"$SIGNTOOL\"`"
+		else
+			$FAIL_CMD
+			FAILED=1
+		fi
 	fi
 	
 	echo -n "Checking for Unicode NSIS: "

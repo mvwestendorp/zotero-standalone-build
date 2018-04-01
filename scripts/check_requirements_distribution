@@ -22,19 +22,26 @@ which rsync || { $FAIL_CMD; FAILED=1; }
 echo -n "Checking for sha512sum/shasum: "
 which sha512sum 2>/dev/null || which shasum 2>/dev/null || { $FAIL_CMD; FAILED=1; }
 
-echo -n "Checking for AWS CLI: "
-which aws || { $FAIL_CMD; FAILED=1; }
+echo -n "Checking for deployer script: "
+ls $SCRIPT_DIR/../deployer/bin/deployer || { $FAIL_CMD; FAILED=1; }
 
-echo -n "Checking for AWS S3 access: "
-aws s3 ls $S3_BUCKET/$S3_DIST_PATH | sed 's/^[[:blank:]]*//' || { $FAIL_CMD; FAILED=1; }
-
+echo -n "Checking for GitHub release access: "
+if [ "$OSTYPE" == "cygwin" ]; then
+    node $(cygpath -am $SCRIPT_DIR/../deployer/index.js) -q -v || { $FAIL_CMD; FAILED=1; }
+    echo ""
+else
+    node $SCRIPT_DIR/../deployer/index.js -q -v || { $FAIL_CMD; FAILED=1; }
+    echo ""
+fi
 echo -n "Checking for deploy host directory access: "
-set +o pipefail
-ssh $DEPLOY_HOST ls -d $DEPLOY_PATH || { $FAIL_CMD; FAILED=1; }
-set -o pipefail
-
-
+ssh "$DEPLOY_HOST" ls -d $(cygpath -u "$DEPLOY_PATH")
+if [ $? -gt 0 ]; then
+  FAILED=1;
+else
+  FAILED=0;
+fi
 
 if [ "$1" != "continue" ]; then
+  echo "Exit code $FAILED"
   exit $FAILED
 fi
