@@ -61,7 +61,8 @@ if [ -z "$VERSION" ]; then
 fi
 
 # Build Zotero
-"$ROOT_DIR/build.sh" -d "$SOURCE_DIR" -p $PLATFORMS -c $CHANNEL -e
+echo "***** ===> $ROOT_DIR/build.sh" -d "$SOURCE_DIR" -p $PLATFORMS -c $CHANNEL
+"$ROOT_DIR/build.sh" -d "$SOURCE_DIR" -p $PLATFORMS -c $CHANNEL
 
 if [ "$CHANNEL" == "dev" ]; then
     echo Dev build terminating immediately, no online copy
@@ -116,7 +117,9 @@ do
 	INCREMENTALS="`\"$SCRIPT_DIR/manage_incrementals\" -c $CHANNEL -p ${PLATFORMS:i:1} -n $NUM_INCREMENTALS`"
 	echo "$INCREMENTALS"
 	echo
-	
+
+    echo AHA $INCREMENTALS
+    
 	for from in $INCREMENTALS; do
 		echo "Building incremental update for $platform_name from $from to $VERSION"
 		"$ROOT_DIR/update-packaging/build_autoupdate.sh" -i "$from" -c "$CHANNEL" -p ${PLATFORMS:i:1} -l $VERSION
@@ -124,8 +127,12 @@ do
 	done
 done
 
-# Upload builds to S3
+
+
+# Upload builds to GitHub
+echo "$SCRIPT_DIR/upload_builds" $CHANNEL $VERSION
 "$SCRIPT_DIR/upload_builds" $CHANNEL $VERSION
+echo done
 
 # Upload file lists for each platform
 channel_deploy_path="$DEPLOY_PATH/$CHANNEL"
@@ -167,6 +174,8 @@ do
 	"$SCRIPT_DIR/manage_incrementals" -c $CHANNEL -p ${PLATFORMS:i:1} -a $VERSION
 done
 
-$DEPLOY_CMD
+#$DEPLOY_CMD
 
 rm -rf "$STAGE_DIR"/*
+
+echo Done!
