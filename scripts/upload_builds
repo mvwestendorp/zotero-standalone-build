@@ -24,4 +24,8 @@ fi
 # aws s3 sync --exclude "files-*" --exclude build_id "$DIST_DIR" $url
 
 echo node ../deployer/index.js -q -u --exclude "files-*" --exclude build_id "$DIST_DIR" "$S3_DIST_PATH/$CHANNEL/$VERSION/"
-node ../deployer/index.js -q -u --exclude "files-*" --exclude build_id "$DIST_DIR" "$S3_DIST_PATH/$CHANNEL/$VERSION/"
+if [ "$OSTYPE" == "cygwin" ]; then
+  node $(cygpath -am ../deployer/index.js) -q -u --exclude "files-*" --exclude build_id "$DIST_DIR" "$S3_DIST_PATH/$CHANNEL/$VERSION/"
+else
+  node ../deployer/index.js -q -u --exclude "files-*" --exclude build_id "$DIST_DIR" "$S3_DIST_PATH/$CHANNEL/$VERSION/"
+fi
