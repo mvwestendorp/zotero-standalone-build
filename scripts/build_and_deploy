@@ -140,7 +140,8 @@ mkdir "$TEMP_DIR/version_info"
 chmod g+ws "$TEMP_DIR/version_info"
 cp "$DIST_DIR"/files-* "$TEMP_DIR/version_info"
 chmod g+w "$TEMP_DIR"/version_info/files-*
-rsync -rv "$TEMP_DIR/version_info/" $DEPLOY_HOST:"$channel_deploy_path/$VERSION/"
+
+rsync -rv "$TEMP_DIR/version_info/" "$DEPLOY_HOST:$channel_deploy_path/$VERSION/"
 
 # Download updates JSON for each platform, update it, and reupload it
 for i in `seq 0 1 $((${#PLATFORMS}-1))`
@@ -160,10 +161,17 @@ do
 	for arch in $architectures;
 	do
 		jsonfile="updates-$arch.json"
-		
-		scp $DEPLOY_HOST:"$channel_deploy_path/$jsonfile" "$TEMP_DIR/$jsonfile"
-		"$ROOT_DIR/update-packaging/add_version_info" -f "$TEMP_DIR/$jsonfile" -v $VERSION -b $BUILD_ID
-		scp "$TEMP_DIR/$jsonfile" $DEPLOY_HOST:"$channel_deploy_path/$jsonfile"
+		if [ "$OSTYPE" == "cygwin" ]; then
+			scp "$DEPLOY_HOST:$channel_deploy_path/$jsonfile" $(cygpath -u "$TEMP_DIR/$jsonfile")
+			echo PATH "$TEMP_DIR/$jsonfile"
+			cat "$TEMP_DIR/$jsonfile"
+			"$ROOT_DIR/update-packaging/add_version_info" -f "$TEMP_DIR/$jsonfile" -v $VERSION -b $BUILD_ID
+			scp $(cygpath -u "$TEMP_DIR/$jsonfile") "${DEPLOY_HOST}:$channel_deploy_path/$jsonfile"
+		else
+			scp $DEPLOY_HOST:"$channel_deploy_path/$jsonfile" "$TEMP_DIR/$jsonfile"
+			"$ROOT_DIR/update-packaging/add_version_info" -f "$TEMP_DIR/$jsonfile" -v $VERSION -b $BUILD_ID
+			scp "$TEMP_DIR/$jsonfile" "${DEPLOY_HOST}:$channel_deploy_path/$jsonfile"
+		fi
 	done
 done
 
