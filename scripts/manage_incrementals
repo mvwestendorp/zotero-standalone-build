@@ -79,7 +79,11 @@ fi
 # Add version to file and reupload
 if [ "$VERSION" ]; then
 	echo "Adding $VERSION to incrementals-$PLATFORM"
-	echo $VERSION >> $(cygpath -u "$INCR_PATH")
+    if [ "$OSTYPE" == "cygwin" ]; then
+		echo $VERSION >> $(cygpath -u "$INCR_PATH")
+    else
+		echo $VERSION >> "$INCR_PATH"
+    fi
 	# aws s3 cp $INCR_PATH $S3_URL
 
 	if [ "$OSTYPE" == "cygwin" ]; then
