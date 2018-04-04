@@ -34,7 +34,11 @@ else
     echo ""
 fi
 echo -n "Checking for deploy host directory access: "
-ssh "$DEPLOY_HOST" ls -d $(cygpath -u "$DEPLOY_PATH")
+if [ "$OSTYPE" == "cygwin" ]; then
+    ssh "$DEPLOY_HOST" ls -d $(cygpath -u "$DEPLOY_PATH")
+else
+    ssh "$DEPLOY_HOST" ls -d "$DEPLOY_PATH"
+fi
 if [ $? -gt 0 ]; then
   FAILED=1;
 else
