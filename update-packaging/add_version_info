@@ -11,7 +11,7 @@ import traceback
 
 DETAILS_URLS = {
     '4.0': 'https://our.law.nagoya-u.ac.jp/support/4.0_changelog',
-    '5.0': 'https://our.law.nagoya-u.ac.jp/support/5.0_changelog',
+    '5.0': 'https://our.law.nagoya-u.ac.jp/alumni/tag/changelog/',
 }
 MAJOR = False
 
