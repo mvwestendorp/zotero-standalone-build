@@ -366,13 +366,13 @@ if [ $BUILD_MAC == 1 ]; then
 		if [ $MAC_NATIVE == 1 ]; then
 			echo 'Creating Mac installer'
 			"$CALLDIR/mac/pkg-dmg" --source "$STAGE_DIR/Jurism.app" \
-				--target "$DIST_DIR/Jurism-for-mac-all-$VERSION.dmg" \
+				--target "$DIST_DIR/Jurism-$VERSION.dmg" \
 				--sourcefile --volname Jurism --copy "$CALLDIR/mac/DSStore:/.DS_Store" \
 				--symlink /Applications:"/Drag Here to Install" > /dev/null
 		else
 			echo 'Not building on Mac; creating Mac distribution as a zip file'
 			rm -f "$DIST_DIR/Jurism_mac.zip"
-			cd "$STAGE_DIR" && zip -rqX "$DIST_DIR/Jurism-for-mac-all-$VERSION.zip" Jurism.app
+			cd "$STAGE_DIR" && zip -rqX "$DIST_DIR/Jurism-$VERSION.zip" Jurism.app
 		fi
 	fi
 fi
