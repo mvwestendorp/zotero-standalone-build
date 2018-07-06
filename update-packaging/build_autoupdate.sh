@@ -213,7 +213,7 @@ for version in "$FROM" "$TO"; do
 	done
 	
 	# Delete cached files older than 14 days
-	find "$CACHE_DIR" -ctime +14 -delete
+	find "$CACHE_DIR" -mindepth 1 -ctime +14 -delete
 	
 	# Unpack Jurism.app
 	if [ $BUILD_MAC == 1 ]; then
