@@ -23,4 +23,4 @@
 	url = https://github.com/Juris-M/zotero-odf-scan-plugin.git
 [submodule "deployer"]
 	path = deployer
-	url = git@github.com:Juris-M/deployer.git
+	url = https://github.com/Juris-M/deployer.git
